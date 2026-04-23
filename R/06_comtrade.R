@@ -31,22 +31,22 @@ FIGS  <- file.path(BASE, "output/figures")
 # -----------------------------------------------------------------------------
 
 key_available <- tryCatch({
-  # comtradr 1.0.x reads COMTRADE_PRIMARY from .Renviron automatically;
-  # calling set_primary_comtrade_key() overrides for the session.
-  # If the key is already set, ct_get_data() will use it.
-  k <- Sys.getenv("COMTRADE_PRIMARY")
-  nchar(k) > 0
+  k <- get_primary_comtrade_key()  # returns key or throws error if not set
+  !is.null(k) && nchar(k) > 0
 }, error = function(e) FALSE)
 
 if (!key_available) {
   stop(
     "\n\n",
-    "  No Comtrade+ API key found.\n",
+    "  No Comtrade+ API key found. Steps to fix:\n\n",
     "  1. Register (free) at: https://comtradeplus.un.org/\n",
-    "  2. Copy your Primary Key from your profile page.\n",
-    "  3. Add to .Renviron (run usethis::edit_r_environ()):\n",
-    "        COMTRADE_PRIMARY=paste_your_key_here\n",
-    "  4. Restart R and re-run this script.\n\n"
+    "  2. Log in → click your name (top right) → 'My Keys'\n",
+    "  3. Copy the Primary Key value\n",
+    "  4. In R, run:\n",
+    "        comtradr::set_primary_comtrade_key('paste_key_here')\n",
+    "     To make it permanent, add this line to .Renviron\n",
+    "     (run usethis::edit_r_environ(), add, save, restart R):\n",
+    "        COMTRADE_PRIMARY=paste_key_here\n\n"
   )
 }
 
