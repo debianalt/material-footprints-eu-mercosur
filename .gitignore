@@ -1,0 +1,31 @@
+# R session artifacts
+.Rhistory
+.Rapp.history
+.RData
+.Ruserdata
+.Rproj.user/
+*.Rproj
+
+# Large cached model objects (re-generate with 03_hmm.R)
+data/processed/hmm_models_pooled.rds
+data/processed/*.rds
+
+# Raw GMFD data — not redistributable (download from resourcepanel.org)
+data/raw/
+
+# High-resolution TIFF figures — too large for git; PNGs are in output/figures/
+output/figures/*.tiff
+output/figures/*.tif
+
+# Comtrade cache
+data/processed/comtrade_*.rds
+
+# OS noise
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.bak
+~$*

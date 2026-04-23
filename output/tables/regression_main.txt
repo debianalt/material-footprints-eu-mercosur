@@ -1,0 +1,45 @@
+                                m1        m2        m3
+Dependent Var.:          d_gap_rel d_gap_rel d_gap_rel
+                                                      
+tapio_f = SD               -2.81*   -11.5***          
+                           (1.20)    (2.99)           
+tapio_f = WD               -0.360    -1.83            
+                           (0.736)   (1.54)           
+tapio_f = END               1.02      2.36            
+                           (0.771)   (1.85)           
+tapio_f = RD               -1.39     -4.90*           
+                           (1.43)    (1.95)           
+tapio_f = RC               -1.28     -4.68            
+                           (1.25)    (2.44)           
+tapio_f = RND              -2.11    -11.6**           
+                           (1.74)    (3.90)           
+tapio_f = SND               1.43     -4.43            
+                           (1.38)    (2.94)           
+eu_dummy x tapio_f = SD               9.81**          
+                                     (3.24)           
+eu_dummy x tapio_f = WD               1.63            
+                                     (1.74)           
+eu_dummy x tapio_f = END             -1.56            
+                                     (1.94)           
+eu_dummy x tapio_f = RD               5.13            
+                                     (3.64)           
+eu_dummy x tapio_f = RC               4.41            
+                                     (3.66)           
+eu_dummy x tapio_f = RND             12.0**           
+                                     (4.37)           
+eu_dummy x tapio_f = SND              6.75            
+                                     (3.81)           
+env_plus                                       -10.8**
+                                                (3.16)
+env_plus x eu_dummy                              8.89*
+                                                (3.33)
+Fixed-Effects:           --------- --------- ---------
+iso3                           Yes       Yes       Yes
+year                           Yes       Yes       Yes
+________________________ _________ _________ _________
+S.E.: Clustered           by: iso3  by: iso3  by: iso3
+Observations                   899       899       899
+R2                         0.13424   0.18965   0.16886
+Within R2                  0.04655   0.10757   0.08468
+---
+Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
