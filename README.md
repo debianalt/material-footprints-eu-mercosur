@@ -18,7 +18,8 @@ replication_repo/
 │   ├── 02_tapio.R          ← Tapio (2005) taxonomy, descriptive analysis
 │   ├── 03_hmm.R            ← HMM K selection (K=2,3,4) + K=3 main model
 │   ├── 04_gap_regression.R ← fixed-effects panel regression (fixest)
-│   └── 05_figures.R        ← all figures (ggplot2 + patchwork)
+│   ├── 05_figures.R        ← all figures (ggplot2 + patchwork)
+│   └── 06_comtrade.R       ← Fig 8: MERCOSUR→EU bilateral flows (httr2 + public API v1)
 ├── data/
 │   └── processed/
 │       ├── panel_main.csv      ← 31 countries × 1994–2024; MF, DMC, GDP, gap_rel
@@ -50,8 +51,11 @@ source("R/01_data_prep.R")      # builds data/processed/panel_main.csv
 source("R/02_tapio.R")          # Tapio classification + tables
 source("R/03_hmm.R")            # HMM models; slow (~10 min with 30 restarts)
 source("R/04_gap_regression.R") # regression tables
-source("R/05_figures.R")        # all figures
+source("R/05_figures.R")        # all figures (Fig 1–7, 9–10)
+source("R/06_comtrade.R")       # Fig 8: MERCOSUR→EU bilateral flows (~40 min)
 ```
+
+`06_comtrade.R` uses the UN Comtrade public API v1 (no key required). It loops 24 years × 29 HS chapters = 696 API calls and caches each response in `data/processed/comtrade_cache/`. Interrupted runs resume from cache automatically.
 
 The HMM models are cached in `data/processed/hmm_models_pooled.rds` after first run. Delete this file to re-estimate from scratch.
 
@@ -87,10 +91,9 @@ The HMM models are cached in `data/processed/hmm_models_pooled.rds` after first 
 | `Fig5_transition_heatmap.png` | Fig. 5: Transition probability heatmaps |
 | `Fig6_gap_trajectories.png` | Fig. 6: Externalization gap trajectories |
 | `Fig7_typology_scatter.png` | Fig. 7: Country typology scatter (4 quadrants) |
+| `Fig8_comtrade_flows.png` | Fig. 8: MERCOSUR→EU-27 raw material exports |
 | `Fig9_regression_coefs.png` | Fig. 9: Regression coefficient plot |
 | `Fig10_S_robustness_hmm.png` | Fig. S1: Robustness HMMs comparison |
-
-Fig. 8 (EU–MERCOSUR bilateral trade flows) is not included pending Comtrade data access.
 
 ---
 
@@ -100,7 +103,7 @@ Fig. 8 (EU–MERCOSUR bilateral trade flows) is not included pending Comtrade da
 |---|---|---|
 | Global Material Flows Database (GMFD) | UNEP IRP, 2024 edition | https://www.resourcepanel.org/global-material-flows-database |
 | World Bank GDP (NY.GDP.MKTP.KD) | World Development Indicators | `WDI::WDI()` R package |
-| UN Comtrade bilateral flows | UN Statistics Division | https://comtradeplus.un.org (pending) |
+| UN Comtrade bilateral flows | UN Statistics Division | https://comtradeapi.un.org/public/v1 (free, no key required) |
 
 ---
 

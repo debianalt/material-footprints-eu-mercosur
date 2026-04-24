@@ -11,7 +11,8 @@ required_packages <- c(
   "patchwork",    # figure composition
   "ggrepel",      # non-overlapping text labels
   "WDI",          # World Bank data API
-  "broom"         # tidy model outputs
+  "broom",        # tidy model outputs
+  "httr2"         # HTTP requests for Comtrade public API (06_comtrade.R)
 )
 
 missing <- required_packages[!required_packages %in% installed.packages()[, "Package"]]
