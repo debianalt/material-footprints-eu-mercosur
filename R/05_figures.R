@@ -123,21 +123,21 @@ save_fig(fig2, "Fig2_rolling_shares", w = 10, h = 5)
 # =============================================================================
 
 fig3 <- model_sel %>%
-  select(K, AIC, BIC) %>%
-  pivot_longer(c(AIC, BIC), names_to = "criterion", values_to = "value") %>%
+  select(K, AIC, BIC, ICL) %>%
+  pivot_longer(c(AIC, BIC, ICL), names_to = "criterion", values_to = "value") %>%
   ggplot(aes(x = K, y = value, color = criterion, shape = criterion)) +
   geom_line(linewidth = 1) +
   geom_point(size = 4) +
-  scale_x_continuous(breaks = 2:4) +
-  scale_color_manual(values = c(AIC = "#2166AC", BIC = "#D6604D")) +
+  scale_x_continuous(breaks = 2:5) +
+  scale_color_manual(values = c(AIC = "#2166AC", BIC = "#D6604D", ICL = "#4DAC26")) +
   labs(
     x = "Number of latent regimes (K)",
     y = "Information criterion value",
     color = NULL, shape = NULL,
-    title = "HMM model selection: AIC and BIC across K = 2, 3, 4",
-    subtitle = paste0("Preferred K = ",
-                      model_sel$K[which.min(model_sel$BIC)],
-                      " (minimum BIC)")
+    title = "HMM model selection: AIC, BIC, and ICL across K = 2–5",
+    subtitle = paste0("BIC minimum: K = ", model_sel$K[which.min(model_sel$BIC)],
+                      "  |  ICL minimum: K = ", model_sel$K[which.min(model_sel$ICL)],
+                      "  |  Adopted: K = 3")
   ) +
   theme_bw(base_size = 11) +
   theme(legend.position = "top")

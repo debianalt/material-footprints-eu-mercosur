@@ -1,565 +1,565 @@
-reporter_iso3,year,material_cat,value_musd
-ARG,2000,Agricultural biomass,1459.240841
-ARG,2000,Forest products,48.22177
-ARG,2000,Fossil fuels,19.692008
-ARG,2000,Metal ores & minerals,111.042256
-ARG,2000,Processed foods/beverages,1511.845268
-ARG,2001,Agricultural biomass,1449.633228
-ARG,2001,Forest products,35.322165
-ARG,2001,Fossil fuels,43.139631
-ARG,2001,Metal ores & minerals,151.48647200000002
-ARG,2001,Processed foods/beverages,1673.4749550000001
-ARG,2002,Agricultural biomass,1676.608919
-ARG,2002,Forest products,31.744701000000003
-ARG,2002,Fossil fuels,50.110219
-ARG,2002,Metal ores & minerals,264.473378
-ARG,2002,Processed foods/beverages,1798.96391
-ARG,2003,Agricultural biomass,1839.598134
-ARG,2003,Forest products,45.37862
-ARG,2003,Fossil fuels,55.469222
-ARG,2003,Metal ores & minerals,240.611767
-ARG,2003,Processed foods/beverages,2219.1564439999997
-ARG,2004,Agricultural biomass,1829.2075260000001
-ARG,2004,Forest products,57.232952
-ARG,2004,Fossil fuels,31.025013
-ARG,2004,Metal ores & minerals,396.461492
-ARG,2004,Processed foods/beverages,2371.203668
-ARG,2005,Agricultural biomass,1997.518939
-ARG,2005,Forest products,36.769211
-ARG,2005,Fossil fuels,44.836127000000005
-ARG,2005,Metal ores & minerals,393.428576
-ARG,2005,Processed foods/beverages,2578.675394
-ARG,2006,Agricultural biomass,2199.588712
-ARG,2006,Forest products,42.330461
-ARG,2006,Fossil fuels,69.665583
-ARG,2006,Metal ores & minerals,731.889241
-ARG,2006,Processed foods/beverages,2952.231606
-ARG,2007,Agricultural biomass,2743.474056
-ARG,2007,Forest products,51.911257
-ARG,2007,Fossil fuels,28.300566
-ARG,2007,Metal ores & minerals,528.4452679999999
-ARG,2007,Processed foods/beverages,3699.401497
-ARG,2008,Agricultural biomass,4478.998174
-ARG,2008,Forest products,50.594066
-ARG,2008,Fossil fuels,55.929339
-ARG,2008,Metal ores & minerals,549.460486
-ARG,2008,Processed foods/beverages,4558.048082
-ARG,2009,Agricultural biomass,2287.689229
-ARG,2009,Forest products,47.995691
-ARG,2009,Fossil fuels,14.603672
-ARG,2009,Metal ores & minerals,480.210465
-ARG,2009,Processed foods/beverages,4376.713774
-ARG,2010,Agricultural biomass,2512.86973
-ARG,2010,Forest products,39.720798
-ARG,2010,Fossil fuels,18.103399999999997
-ARG,2010,Metal ores & minerals,786.246785
-ARG,2010,Processed foods/beverages,4008.902651
-ARG,2011,Agricultural biomass,2903.007742
-ARG,2011,Forest products,36.43649
-ARG,2011,Fossil fuels,70.299887
-ARG,2011,Metal ores & minerals,836.560281
-ARG,2011,Processed foods/beverages,4704.157645
-ARG,2012,Agricultural biomass,2307.653166
-ARG,2012,Forest products,21.588988
-ARG,2012,Fossil fuels,36.515098
-ARG,2012,Metal ores & minerals,847.233192
-ARG,2012,Processed foods/beverages,3979.424166
-ARG,2013,Agricultural biomass,2021.216577
-ARG,2013,Forest products,16.867119
-ARG,2013,Fossil fuels,70.334778
-ARG,2013,Metal ores & minerals,864.779277
-ARG,2013,Processed foods/beverages,3990.649812
-ARG,2014,Agricultural biomass,4017.53129116
-ARG,2014,Forest products,30.104765139999998
-ARG,2014,Fossil fuels,148.98424284
-ARG,2014,Metal ores & minerals,1501.26702592
-ARG,2014,Processed foods/beverages,8040.59541386
-ARG,2015,Agricultural biomass,1794.87352603
-ARG,2015,Forest products,11.88279797
-ARG,2015,Fossil fuels,8.22946047
-ARG,2015,Metal ores & minerals,481.52113964
-ARG,2015,Processed foods/beverages,3634.61069725
-ARG,2016,Agricultural biomass,2106.90778807
-ARG,2016,Forest products,11.01165616
-ARG,2016,Fossil fuels,10.632693249999999
-ARG,2016,Metal ores & minerals,612.52777399
-ARG,2016,Processed foods/beverages,3611.24160986
-ARG,2017,Agricultural biomass,2032.49935169
-ARG,2017,Forest products,8.29051469
-ARG,2017,Fossil fuels,22.30252711
-ARG,2017,Metal ores & minerals,478.23967594
-ARG,2017,Processed foods/beverages,3477.7350465600002
-ARG,2018,Agricultural biomass,4176.61484974
-ARG,2018,Forest products,17.4620164
-ARG,2018,Fossil fuels,298.30553812
-ARG,2018,Metal ores & minerals,363.51700736
-ARG,2018,Processed foods/beverages,6199.54284636
-ARG,2019,Agricultural biomass,1976.25625233
-ARG,2019,Forest products,9.34378166
-ARG,2019,Fossil fuels,263.13034803
-ARG,2019,Metal ores & minerals,160.44029848
-ARG,2019,Processed foods/beverages,2695.28014773
-ARG,2020,Agricultural biomass,2043.87644591
-ARG,2020,Forest products,8.46975351
-ARG,2020,Fossil fuels,210.69551253999998
-ARG,2020,Metal ores & minerals,0.32883546
-ARG,2020,Processed foods/beverages,2411.36134113
-ARG,2021,Agricultural biomass,2550.82958591
-ARG,2021,Forest products,7.51510578
-ARG,2021,Fossil fuels,376.64025570999996
-ARG,2021,Metal ores & minerals,0.11688126
-ARG,2021,Processed foods/beverages,2881.1084025
-ARG,2022,Agricultural biomass,2528.16357556
-ARG,2022,Forest products,4.44075
-ARG,2022,Fossil fuels,496.47656487
-ARG,2022,Metal ores & minerals,0.75922282
-ARG,2022,Processed foods/beverages,4007.89556462
-ARG,2023,Agricultural biomass,2407.37302235
-ARG,2023,Forest products,5.83563509
-ARG,2023,Fossil fuels,226.62702441
-ARG,2023,Metal ores & minerals,0.49219448
-ARG,2023,Processed foods/beverages,2112.72192302
-BRA,2000,Agricultural biomass,5937.297296
-BRA,2000,Forest products,1716.345368
-BRA,2000,Fossil fuels,148.09629
-BRA,2000,Metal ores & minerals,2461.103942
-BRA,2000,Processed foods/beverages,4132.24878
-BRA,2001,Agricultural biomass,6897.868414
-BRA,2001,Forest products,1307.735264
-BRA,2001,Fossil fuels,204.036788
-BRA,2001,Metal ores & minerals,2105.125386
-BRA,2001,Processed foods/beverages,4882.033734
-BRA,2002,Agricultural biomass,6525.357582
-BRA,2002,Forest products,1349.902672
-BRA,2002,Fossil fuels,711.970582
-BRA,2002,Metal ores & minerals,2053.703244
-BRA,2002,Processed foods/beverages,5101.812736
-BRA,2003,Agricultural biomass,8859.04073
-BRA,2003,Forest products,1925.587266
-BRA,2003,Fossil fuels,634.564704
-BRA,2003,Metal ores & minerals,2344.600224
-BRA,2003,Processed foods/beverages,6018.980524
-BRA,2004,Agricultural biomass,11253.96747
-BRA,2004,Forest products,2410.1344559999998
-BRA,2004,Fossil fuels,911.1388059999999
-BRA,2004,Metal ores & minerals,3170.593346
-BRA,2004,Processed foods/beverages,6812.019362
-BRA,2005,Agricultural biomass,11912.445846
-BRA,2005,Forest products,2702.086426
-BRA,2005,Fossil fuels,1516.781684
-BRA,2005,Metal ores & minerals,4367.07512
-BRA,2005,Processed foods/beverages,6809.687314
-BRA,2006,Agricultural biomass,12812.740888
-BRA,2006,Forest products,3167.612262
-BRA,2006,Fossil fuels,2198.780646
-BRA,2006,Metal ores & minerals,5087.63569
-BRA,2006,Processed foods/beverages,7672.42568
-BRA,2007,Agricultural biomass,16992.101436
-BRA,2007,Forest products,4366.375666
-BRA,2007,Fossil fuels,3692.331714
-BRA,2007,Metal ores & minerals,6327.231398
-BRA,2007,Processed foods/beverages,10332.32758
-BRA,2008,Agricultural biomass,18412.109482
-BRA,2008,Forest products,4994.691318
-BRA,2008,Fossil fuels,4701.749132
-BRA,2008,Metal ores & minerals,9123.04987
-BRA,2008,Processed foods/beverages,13317.294966
-BRA,2009,Agricultural biomass,13926.887136000001
-BRA,2009,Forest products,3083.625804
-BRA,2009,Fossil fuels,2837.970702
-BRA,2009,Metal ores & minerals,3840.123658
-BRA,2009,Processed foods/beverages,12251.524756
-BRA,2010,Agricultural biomass,13751.417054
-BRA,2010,Forest products,4814.948318
-BRA,2010,Fossil fuels,4575.860334
-BRA,2010,Metal ores & minerals,10745.121522
-BRA,2010,Processed foods/beverages,13003.897442
-BRA,2011,Agricultural biomass,17778.965366
-BRA,2011,Forest products,4838.33492
-BRA,2011,Fossil fuels,6368.700086
-BRA,2011,Metal ores & minerals,15197.851190000001
-BRA,2011,Processed foods/beverages,15182.830988
-BRA,2012,Agricultural biomass,15087.000442
-BRA,2012,Forest products,4395.568642
-BRA,2012,Fossil fuels,7944.979378
-BRA,2012,Metal ores & minerals,10965.487098
-BRA,2012,Processed foods/beverages,16059.39286
-BRA,2013,Agricultural biomass,14952.811534
-BRA,2013,Forest products,4323.3665359999995
-BRA,2013,Fossil fuels,6874.47121
-BRA,2013,Metal ores & minerals,11868.408092
-BRA,2013,Processed foods/beverages,15954.961966
-BRA,2014,Agricultural biomass,16423.286326
-BRA,2014,Forest products,4445.888626
-BRA,2014,Fossil fuels,5454.337944
-BRA,2014,Metal ores & minerals,9254.9273
-BRA,2014,Processed foods/beverages,13453.770872000001
-BRA,2015,Agricultural biomass,13315.971003999999
-BRA,2015,Forest products,4487.178226
-BRA,2015,Fossil fuels,2473.999518
-BRA,2015,Metal ores & minerals,6400.641376
-BRA,2015,Processed foods/beverages,11192.355044
-BRA,2016,Agricultural biomass,12034.736182
-BRA,2016,Forest products,3800.830288
-BRA,2016,Fossil fuels,2288.88786
-BRA,2016,Metal ores & minerals,5754.444288
-BRA,2016,Processed foods/beverages,10498.557544
-BRA,2017,Agricultural biomass,12679.814342
-BRA,2017,Forest products,4077.747188
-BRA,2017,Fossil fuels,3823.48368
-BRA,2017,Metal ores & minerals,7729.429186
-BRA,2017,Processed foods/beverages,10216.55723
-BRA,2018,Agricultural biomass,12452.64825
-BRA,2018,Forest products,5487.820066
-BRA,2018,Fossil fuels,6890.977836
-BRA,2018,Metal ores & minerals,8355.049566
-BRA,2018,Processed foods/beverages,10834.409452
-BRA,2019,Agricultural biomass,12214.833091999999
-BRA,2019,Forest products,4304.026736
-BRA,2019,Fossil fuels,4873.218498
-BRA,2019,Metal ores & minerals,6687.38065
-BRA,2019,Processed foods/beverages,10527.453094
-BRA,2020,Agricultural biomass,14318.512372
-BRA,2020,Forest products,2984.133798
-BRA,2020,Fossil fuels,6836.60072
-BRA,2020,Metal ores & minerals,5893.968846
-BRA,2020,Processed foods/beverages,9296.579106
-BRA,2021,Agricultural biomass,17563.387146
-BRA,2021,Forest products,4189.532628
-BRA,2021,Fossil fuels,9894.617724
-BRA,2021,Metal ores & minerals,10249.782522
-BRA,2021,Processed foods/beverages,10154.871746
-BRA,2022,Agricultural biomass,25328.076218
-BRA,2022,Forest products,5279.9438820000005
-BRA,2022,Fossil fuels,21492.101354000002
-BRA,2022,Metal ores & minerals,8297.787278
-BRA,2022,Processed foods/beverages,15357.158694
-BRA,2023,Agricultural biomass,17761.596272
-BRA,2023,Forest products,3979.26578
-BRA,2023,Fossil fuels,21663.6271
-BRA,2023,Metal ores & minerals,8689.020404
-BRA,2023,Processed foods/beverages,16815.342316
-PRY,2000,Agricultural biomass,64.431523
-PRY,2000,Forest products,7.775536
-PRY,2000,Processed foods/beverages,3.74675
-PRY,2001,Agricultural biomass,45.235312
-PRY,2001,Forest products,7.662418
-PRY,2001,Processed foods/beverages,6.040117
-PRY,2002,Agricultural biomass,19.349303
-PRY,2002,Forest products,8.375762
-PRY,2002,Processed foods/beverages,6.410092
-PRY,2003,Agricultural biomass,26.236855
-PRY,2003,Forest products,8.649222
-PRY,2003,Metal ores & minerals,0.00382
-PRY,2003,Processed foods/beverages,5.912647
-PRY,2004,Agricultural biomass,40.194368
-PRY,2004,Forest products,12.238665
-PRY,2004,Metal ores & minerals,0.001021
-PRY,2004,Processed foods/beverages,6.78772
-PRY,2005,Agricultural biomass,51.880244
-PRY,2005,Forest products,16.086305
-PRY,2005,Metal ores & minerals,0.002345
-PRY,2005,Processed foods/beverages,6.595369
-PRY,2006,Agricultural biomass,61.196942
-PRY,2006,Forest products,15.768002
-PRY,2006,Metal ores & minerals,0.037919
-PRY,2006,Processed foods/beverages,9.41543
-PRY,2007,Agricultural biomass,401.930654
-PRY,2007,Forest products,24.644155
-PRY,2007,Metal ores & minerals,0.016029
-PRY,2007,Processed foods/beverages,34.619057
-PRY,2008,Agricultural biomass,389.022716
-PRY,2008,Forest products,27.212591
-PRY,2008,Metal ores & minerals,0.027341
-PRY,2008,Processed foods/beverages,115.297141
-PRY,2009,Agricultural biomass,341.676192
-PRY,2009,Forest products,32.486668
-PRY,2009,Processed foods/beverages,96.421429
-PRY,2010,Agricultural biomass,985.998682
-PRY,2010,Forest products,26.617316
-PRY,2010,Metal ores & minerals,0.018452
-PRY,2010,Processed foods/beverages,67.73398800000001
-PRY,2011,Agricultural biomass,1311.415136
-PRY,2011,Forest products,27.916405
-PRY,2011,Metal ores & minerals,0.025448
-PRY,2011,Processed foods/beverages,59.792976
-PRY,2012,Agricultural biomass,858.517416
-PRY,2012,Forest products,21.324981
-PRY,2012,Fossil fuels,3.8e-5
-PRY,2012,Metal ores & minerals,0.055314
-PRY,2012,Processed foods/beverages,86.786639
-PRY,2013,Agricultural biomass,933.867757
-PRY,2013,Forest products,22.040048
-PRY,2013,Processed foods/beverages,227.119769
-PRY,2014,Agricultural biomass,603.5078
-PRY,2014,Forest products,18.75182
-PRY,2014,Metal ores & minerals,0.08065000000000001
-PRY,2014,Processed foods/beverages,484.749865
-PRY,2015,Agricultural biomass,601.053672
-PRY,2015,Forest products,14.520737
-PRY,2015,Metal ores & minerals,0.120243
-PRY,2015,Processed foods/beverages,462.952277
-PRY,2016,Agricultural biomass,1102.83319274
-PRY,2016,Forest products,25.33348174
-PRY,2016,Metal ores & minerals,0.249846
-PRY,2016,Processed foods/beverages,743.61810486
-PRY,2017,Agricultural biomass,638.7506979999999
-PRY,2017,Forest products,13.095435
-PRY,2017,Fossil fuels,1.44e-4
-PRY,2017,Metal ores & minerals,0.29174300000000003
-PRY,2017,Processed foods/beverages,282.44942499999996
-PRY,2018,Agricultural biomass,279.576293
-PRY,2018,Forest products,12.674966
-PRY,2018,Metal ores & minerals,0.315106
-PRY,2018,Processed foods/beverages,332.27948200000003
-PRY,2019,Agricultural biomass,225.638551
-PRY,2019,Forest products,8.815916999999999
-PRY,2019,Metal ores & minerals,0.095862
-PRY,2019,Processed foods/beverages,192.802207
-PRY,2020,Agricultural biomass,133.445279
-PRY,2020,Forest products,9.944077
-PRY,2020,Metal ores & minerals,0.090654
-PRY,2020,Processed foods/beverages,191.252451
-PRY,2021,Agricultural biomass,122.984857
-PRY,2021,Forest products,11.591589
-PRY,2021,Metal ores & minerals,0.49207199999999995
-PRY,2021,Processed foods/beverages,281.30901700000004
-PRY,2022,Agricultural biomass,224.9468006
-PRY,2022,Forest products,41.907827680000004
-PRY,2022,Metal ores & minerals,4.1985988800000005
-PRY,2022,Processed foods/beverages,458.70350457999996
-PRY,2023,Agricultural biomass,204.72115482
-PRY,2023,Forest products,37.48849804
-PRY,2023,Metal ores & minerals,2.59978582
-PRY,2023,Processed foods/beverages,631.11924858
-URY,2000,Agricultural biomass,141.207749
-URY,2000,Forest products,29.361755
-URY,2000,Metal ores & minerals,0.104212
-URY,2000,Processed foods/beverages,7.104567
-URY,2001,Agricultural biomass,145.615914
-URY,2001,Forest products,29.703278
-URY,2001,Metal ores & minerals,0.002484
-URY,2001,Processed foods/beverages,9.519586
-URY,2002,Agricultural biomass,167.451621
-URY,2002,Forest products,32.214094
-URY,2002,Metal ores & minerals,0.072091
-URY,2002,Processed foods/beverages,9.194388
-URY,2003,Agricultural biomass,189.75881
-URY,2003,Forest products,40.416053
-URY,2003,Metal ores & minerals,0.051455
-URY,2003,Processed foods/beverages,7.27557
-URY,2004,Agricultural biomass,238.991798
-URY,2004,Forest products,50.498424
-URY,2004,Fossil fuels,0.617608
-URY,2004,Metal ores & minerals,0.186058
-URY,2004,Processed foods/beverages,9.9038
-URY,2005,Agricultural biomass,245.112038
-URY,2005,Forest products,62.587837
-URY,2005,Metal ores & minerals,0.103834
-URY,2005,Processed foods/beverages,13.664226
-URY,2006,Agricultural biomass,304.525176
-URY,2006,Forest products,63.856556999999995
-URY,2006,Metal ores & minerals,0.47564100000000004
-URY,2006,Processed foods/beverages,14.311434
-URY,2007,Agricultural biomass,367.41035
-URY,2007,Forest products,92.702872
-URY,2007,Fossil fuels,1.8e-4
-URY,2007,Metal ores & minerals,0.121441
-URY,2007,Processed foods/beverages,19.492763
-URY,2008,Agricultural biomass,661.755938
-URY,2008,Forest products,111.924986
-URY,2008,Fossil fuels,1.8e-4
-URY,2008,Metal ores & minerals,0.302853
-URY,2008,Processed foods/beverages,16.390321
-URY,2009,Agricultural biomass,472.018677
-URY,2009,Forest products,60.760894
-URY,2009,Metal ores & minerals,0.161403
-URY,2009,Processed foods/beverages,11.901431
-URY,2010,Agricultural biomass,546.671063
-URY,2010,Forest products,120.426396
-URY,2010,Metal ores & minerals,0.9251229999999999
-URY,2010,Processed foods/beverages,17.579876
-URY,2011,Agricultural biomass,607.0429
-URY,2011,Forest products,141.946756
-URY,2011,Fossil fuels,1.48e-4
-URY,2011,Metal ores & minerals,0.612227
-URY,2011,Processed foods/beverages,12.092899
-URY,2012,Agricultural biomass,508.063318
-URY,2012,Forest products,76.987184
-URY,2012,Metal ores & minerals,0.577104
-URY,2012,Processed foods/beverages,7.976201
-URY,2013,Agricultural biomass,637.270936
-URY,2013,Forest products,80.32856100000001
-URY,2013,Fossil fuels,8.55e-4
-URY,2013,Metal ores & minerals,0.776451
-URY,2013,Processed foods/beverages,6.562623
-URY,2014,Agricultural biomass,561.163058
-URY,2014,Forest products,72.819155
-URY,2014,Fossil fuels,0.004975
-URY,2014,Metal ores & minerals,1.027156
-URY,2014,Processed foods/beverages,6.393306
-URY,2015,Agricultural biomass,496.177369
-URY,2015,Forest products,61.415411
-URY,2015,Fossil fuels,4e-6
-URY,2015,Metal ores & minerals,0.47633600000000004
-URY,2015,Processed foods/beverages,6.632052
-URY,2016,Agricultural biomass,518.686263
-URY,2016,Forest products,83.64361000000001
-URY,2016,Fossil fuels,3e-5
-URY,2016,Metal ores & minerals,0.50723
-URY,2016,Processed foods/beverages,8.99813
-URY,2017,Agricultural biomass,2053.18012
-URY,2017,Forest products,292.94890399999997
-URY,2017,Fossil fuels,9.6e-5
-URY,2017,Metal ores & minerals,1.958928
-URY,2017,Processed foods/beverages,31.78118
-URY,2018,Agricultural biomass,1819.556444
-URY,2018,Forest products,419.510796
-URY,2018,Fossil fuels,3.04e-4
-URY,2018,Metal ores & minerals,0.64642
-URY,2018,Processed foods/beverages,26.510504
-URY,2019,Agricultural biomass,1670.97192
-URY,2019,Forest products,445.55552
-URY,2019,Fossil fuels,0.002264
-URY,2019,Metal ores & minerals,1.348732
-URY,2019,Processed foods/beverages,13.93524
-URY,2020,Agricultural biomass,1534.0973960000001
-URY,2020,Forest products,132.440472
-URY,2020,Fossil fuels,0.007828
-URY,2020,Metal ores & minerals,2.2220880000000003
-URY,2020,Processed foods/beverages,14.95018
-URY,2021,Agricultural biomass,1919.585384
-URY,2021,Forest products,231.163368
-URY,2021,Fossil fuels,0.007228
-URY,2021,Metal ores & minerals,1.783948
-URY,2021,Processed foods/beverages,17.275280000000002
-URY,2022,Agricultural biomass,2254.172728
-URY,2022,Forest products,545.184092
-URY,2022,Fossil fuels,1e-4
-URY,2022,Metal ores & minerals,3.62052
-URY,2022,Processed foods/beverages,20.132740000000002
-URY,2023,Agricultural biomass,2125.327224
-URY,2023,Forest products,436.439488
-URY,2023,Fossil fuels,1.24e-4
-URY,2023,Metal ores & minerals,2.396108
-URY,2023,Processed foods/beverages,20.032728
-MERCOSUR_total,2000,Agricultural biomass,7602.177409
-MERCOSUR_total,2000,Forest products,1801.704429
-MERCOSUR_total,2000,Fossil fuels,167.788298
-MERCOSUR_total,2000,Metal ores & minerals,2572.25041
-MERCOSUR_total,2000,Processed foods/beverages,5654.945365
-MERCOSUR_total,2001,Agricultural biomass,8538.352868
-MERCOSUR_total,2001,Forest products,1380.423125
-MERCOSUR_total,2001,Fossil fuels,247.176419
-MERCOSUR_total,2001,Metal ores & minerals,2256.614342
-MERCOSUR_total,2001,Processed foods/beverages,6571.068392
-MERCOSUR_total,2002,Agricultural biomass,8388.767425
-MERCOSUR_total,2002,Forest products,1422.237229
-MERCOSUR_total,2002,Fossil fuels,762.0808010000001
-MERCOSUR_total,2002,Metal ores & minerals,2318.248713
-MERCOSUR_total,2002,Processed foods/beverages,6916.381126
-MERCOSUR_total,2003,Agricultural biomass,10914.634528999999
-MERCOSUR_total,2003,Forest products,2020.0311609999999
-MERCOSUR_total,2003,Fossil fuels,690.033926
-MERCOSUR_total,2003,Metal ores & minerals,2585.267266
-MERCOSUR_total,2003,Processed foods/beverages,8251.325185
-MERCOSUR_total,2004,Agricultural biomass,13362.361162
-MERCOSUR_total,2004,Forest products,2530.104497
-MERCOSUR_total,2004,Fossil fuels,942.781427
-MERCOSUR_total,2004,Metal ores & minerals,3567.241917
-MERCOSUR_total,2004,Processed foods/beverages,9199.91455
-MERCOSUR_total,2005,Agricultural biomass,14206.957067
-MERCOSUR_total,2005,Forest products,2817.529779
-MERCOSUR_total,2005,Fossil fuels,1561.617811
-MERCOSUR_total,2005,Metal ores & minerals,4760.609875
-MERCOSUR_total,2005,Processed foods/beverages,9408.622303
-MERCOSUR_total,2006,Agricultural biomass,15378.051718
-MERCOSUR_total,2006,Forest products,3289.567282
-MERCOSUR_total,2006,Fossil fuels,2268.446229
-MERCOSUR_total,2006,Metal ores & minerals,5820.038491
-MERCOSUR_total,2006,Processed foods/beverages,10648.38415
-MERCOSUR_total,2007,Agricultural biomass,20504.916496
-MERCOSUR_total,2007,Forest products,4535.63395
-MERCOSUR_total,2007,Fossil fuels,3720.63246
-MERCOSUR_total,2007,Metal ores & minerals,6855.814136
-MERCOSUR_total,2007,Processed foods/beverages,14085.840897
-MERCOSUR_total,2008,Agricultural biomass,23941.88631
-MERCOSUR_total,2008,Forest products,5184.422961
-MERCOSUR_total,2008,Fossil fuels,4757.678651
-MERCOSUR_total,2008,Metal ores & minerals,9672.840549999999
-MERCOSUR_total,2008,Processed foods/beverages,18007.03051
-MERCOSUR_total,2009,Agricultural biomass,17028.271234
-MERCOSUR_total,2009,Forest products,3224.869057
-MERCOSUR_total,2009,Fossil fuels,2852.5743740000003
-MERCOSUR_total,2009,Metal ores & minerals,4320.495526
-MERCOSUR_total,2009,Processed foods/beverages,16736.56139
-MERCOSUR_total,2010,Agricultural biomass,17796.956529
-MERCOSUR_total,2010,Forest products,5001.712828
-MERCOSUR_total,2010,Fossil fuels,4593.963734
-MERCOSUR_total,2010,Metal ores & minerals,11532.311882
-MERCOSUR_total,2010,Processed foods/beverages,17098.113957
-MERCOSUR_total,2011,Agricultural biomass,22600.431144
-MERCOSUR_total,2011,Forest products,5044.634571
-MERCOSUR_total,2011,Fossil fuels,6439.000121
-MERCOSUR_total,2011,Metal ores & minerals,16035.049146000001
-MERCOSUR_total,2011,Processed foods/beverages,19958.874508
-MERCOSUR_total,2012,Agricultural biomass,18761.234342
-MERCOSUR_total,2012,Forest products,4515.469795
-MERCOSUR_total,2012,Fossil fuels,7981.494514
-MERCOSUR_total,2012,Metal ores & minerals,11813.352708
-MERCOSUR_total,2012,Processed foods/beverages,20133.579866
-MERCOSUR_total,2013,Agricultural biomass,18545.166804
-MERCOSUR_total,2013,Forest products,4442.602264
-MERCOSUR_total,2013,Fossil fuels,6944.806842999999
-MERCOSUR_total,2013,Metal ores & minerals,12733.96382
-MERCOSUR_total,2013,Processed foods/beverages,20179.29417
-MERCOSUR_total,2014,Agricultural biomass,21605.48847516
-MERCOSUR_total,2014,Forest products,4567.56436614
-MERCOSUR_total,2014,Fossil fuels,5603.32716184
-MERCOSUR_total,2014,Metal ores & minerals,10757.30213192
-MERCOSUR_total,2014,Processed foods/beverages,21985.50945686
-MERCOSUR_total,2015,Agricultural biomass,16208.07557103
-MERCOSUR_total,2015,Forest products,4574.99717197
-MERCOSUR_total,2015,Fossil fuels,2482.22898247
-MERCOSUR_total,2015,Metal ores & minerals,6882.75909464
-MERCOSUR_total,2015,Processed foods/beverages,15296.55007025
-MERCOSUR_total,2016,Agricultural biomass,15763.16342581
-MERCOSUR_total,2016,Forest products,3920.8190359
-MERCOSUR_total,2016,Fossil fuels,2299.52058325
-MERCOSUR_total,2016,Metal ores & minerals,6367.72913799
-MERCOSUR_total,2016,Processed foods/beverages,14862.415388720001
-MERCOSUR_total,2017,Agricultural biomass,17404.24451169
-MERCOSUR_total,2017,Forest products,4392.08204169
-MERCOSUR_total,2017,Fossil fuels,3845.7864471099997
-MERCOSUR_total,2017,Metal ores & minerals,8209.919532939999
-MERCOSUR_total,2017,Processed foods/beverages,14008.52288156
-MERCOSUR_total,2018,Agricultural biomass,18728.39583674
-MERCOSUR_total,2018,Forest products,5937.4678444
-MERCOSUR_total,2018,Fossil fuels,7189.28367812
-MERCOSUR_total,2018,Metal ores & minerals,8719.52809936
-MERCOSUR_total,2018,Processed foods/beverages,17392.74228436
-MERCOSUR_total,2019,Agricultural biomass,16087.69981533
-MERCOSUR_total,2019,Forest products,4767.74195466
-MERCOSUR_total,2019,Fossil fuels,5136.35111003
-MERCOSUR_total,2019,Metal ores & minerals,6849.26554248
-MERCOSUR_total,2019,Processed foods/beverages,13429.47068873
-MERCOSUR_total,2020,Agricultural biomass,18029.93149291
-MERCOSUR_total,2020,Forest products,3134.98810051
-MERCOSUR_total,2020,Fossil fuels,7047.30406054
-MERCOSUR_total,2020,Metal ores & minerals,5896.61042346
-MERCOSUR_total,2020,Processed foods/beverages,11914.14307813
-MERCOSUR_total,2021,Agricultural biomass,22156.78697291
-MERCOSUR_total,2021,Forest products,4439.80269078
-MERCOSUR_total,2021,Fossil fuels,10271.26520771
-MERCOSUR_total,2021,Metal ores & minerals,10252.17542326
-MERCOSUR_total,2021,Processed foods/beverages,13334.5644455
-MERCOSUR_total,2022,Agricultural biomass,30335.35932216
-MERCOSUR_total,2022,Forest products,5871.47655168
-MERCOSUR_total,2022,Fossil fuels,21988.57801887
-MERCOSUR_total,2022,Metal ores & minerals,8306.3656197
-MERCOSUR_total,2022,Processed foods/beverages,19843.8905032
-MERCOSUR_total,2023,Agricultural biomass,22499.01767317
-MERCOSUR_total,2023,Forest products,4459.02940113
-MERCOSUR_total,2023,Fossil fuels,21890.25424841
-MERCOSUR_total,2023,Metal ores & minerals,8694.5084923
-MERCOSUR_total,2023,Processed foods/beverages,19579.2162156
+reporter_iso3,year,material_cat,value_musd,value_const_musd,weight_kt
+ARG,2000,Agricultural biomass,1459.240841,2009.9736101928377,NA
+ARG,2000,Forest products,48.22177,66.42117079889807,NA
+ARG,2000,Fossil fuels,19.692008,27.12397796143251,NA
+ARG,2000,Metal ores & minerals,111.042256,152.95076584022038,NA
+ARG,2000,Processed foods/beverages,1511.845268,2082.4314986225895,NA
+ARG,2001,Agricultural biomass,1449.633228,1940.6067309236948,NA
+ARG,2001,Forest products,35.322165,47.28536144578313,NA
+ARG,2001,Fossil fuels,43.139631,57.75051004016064,NA
+ARG,2001,Metal ores & minerals,151.48647200000002,202.79313520749668,NA
+ARG,2001,Processed foods/beverages,1673.4749550000001,2240.2609839357433,NA
+ARG,2002,Agricultural biomass,1676.608919,2208.970907773386,NA
+ARG,2002,Forest products,31.744701000000003,41.82437549407115,NA
+ARG,2002,Fossil fuels,50.110219,66.02136890645586,NA
+ARG,2002,Metal ores & minerals,264.473378,348.4497733860342,NA
+ARG,2002,Processed foods/beverages,1798.96391,2370.1764295125167,NA
+ARG,2003,Agricultural biomass,1839.598134,2370.6161520618557,NA
+ARG,2003,Forest products,45.37862,58.47760309278351,NA
+ARG,2003,Fossil fuels,55.469222,71.48095618556701,NA
+ARG,2003,Metal ores & minerals,240.611767,310.0667100515464,NA
+ARG,2003,Processed foods/beverages,2219.1564439999997,2859.7376855670104,NA
+ARG,2004,Agricultural biomass,1829.2075260000001,2295.1160928481804,NA
+ARG,2004,Forest products,57.232952,71.81047929736512,NA
+ARG,2004,Fossil fuels,31.025013,38.92724341279799,NA
+ARG,2004,Metal ores & minerals,396.461492,497.4422735257214,NA
+ARG,2004,Processed foods/beverages,2371.203668,2975.1614404015054,NA
+ARG,2005,Agricultural biomass,1997.518939,2424.173469660194,NA
+ARG,2005,Forest products,36.769211,44.62282888349514,NA
+ARG,2005,Fossil fuels,44.836127000000005,54.412775485436896,NA
+ARG,2005,Metal ores & minerals,393.428576,477.4618640776699,NA
+ARG,2005,Processed foods/beverages,2578.675394,3129.46042961165,NA
+ARG,2006,Agricultural biomass,2199.588712,2587.751425882353,NA
+ARG,2006,Forest products,42.330461,49.80054235294118,NA
+ARG,2006,Fossil fuels,69.665583,81.95950941176471,NA
+ARG,2006,Metal ores & minerals,731.889241,861.046165882353,NA
+ARG,2006,Processed foods/beverages,2952.231606,3473.2136541176474,NA
+ARG,2007,Agricultural biomass,2743.474056,3135.398921142857,NA
+ARG,2007,Forest products,51.911257,59.327150857142854,NA
+ARG,2007,Fossil fuels,28.300566,32.343504,NA
+ARG,2007,Metal ores & minerals,528.4452679999999,603.9374491428572,NA
+ARG,2007,Processed foods/beverages,3699.401497,4227.887425142857,NA
+ARG,2008,Agricultural biomass,4478.998174,4932.817372246696,NA
+ARG,2008,Forest products,50.594066,55.72033700440529,NA
+ARG,2008,Fossil fuels,55.929339,61.59618832599119,NA
+ARG,2008,Metal ores & minerals,549.460486,605.1326938325992,NA
+ARG,2008,Processed foods/beverages,4558.048082,5019.8767422907495,NA
+ARG,2009,Agricultural biomass,2287.689229,2527.833402209945,NA
+ARG,2009,Forest products,47.995691,53.03391270718232,NA
+ARG,2009,Fossil fuels,14.603672,16.136654143646407,NA
+ARG,2009,Metal ores & minerals,480.210465,530.6192983425414,NA
+ARG,2009,Processed foods/beverages,4376.713774,4836.147816574586,NA
+ARG,2010,Agricultural biomass,2512.86973,2731.3801413043475,NA
+ARG,2010,Forest products,39.720798,43.174780434782605,NA
+ARG,2010,Fossil fuels,18.103399999999997,19.67760869565217,NA
+ARG,2010,Metal ores & minerals,786.246785,854.6160706521739,NA
+ARG,2010,Processed foods/beverages,4008.902651,4357.502881521739,NA
+ARG,2011,Agricultural biomass,2903.007742,3059.0176417281345,NA
+ARG,2011,Forest products,36.43649,38.39461538461538,NA
+ARG,2011,Fossil fuels,70.299887,74.07785774499472,NA
+ARG,2011,Metal ores & minerals,836.560281,881.5176828240252,NA
+ARG,2011,Processed foods/beverages,4704.157645,4956.96274499473,NA
+ARG,2012,Agricultural biomass,2307.653166,2383.9392210743804,NA
+ARG,2012,Forest products,21.588988,22.30267355371901,NA
+ARG,2012,Fossil fuels,36.515098,37.722208677685956,NA
+ARG,2012,Metal ores & minerals,847.233192,875.2409008264464,NA
+ARG,2012,Processed foods/beverages,3979.424166,4110.975378099173,NA
+ARG,2013,Agricultural biomass,2021.216577,2056.171492370295,NA
+ARG,2013,Forest products,16.867119,17.158818921668363,NA
+ARG,2013,Fossil fuels,70.334778,71.55114750762971,NA
+ARG,2013,Metal ores & minerals,864.779277,879.7347680569685,NA
+ARG,2013,Processed foods/beverages,3990.649812,4059.6641017294,NA
+ARG,2014,Agricultural biomass,4017.53129116,4021.5528440040034,NA
+ARG,2014,Forest products,30.104765139999998,30.134900040040037,NA
+ARG,2014,Fossil fuels,148.98424284,149.13337621621622,NA
+ARG,2014,Metal ores & minerals,1501.26702592,1502.7697957157156,NA
+ARG,2014,Processed foods/beverages,8040.59541386,8048.644057917917,NA
+ARG,2015,Agricultural biomass,1794.87352603,1794.87352603,NA
+ARG,2015,Forest products,11.88279797,11.88279797,NA
+ARG,2015,Fossil fuels,8.22946047,8.22946047,NA
+ARG,2015,Metal ores & minerals,481.52113964,481.52113964,NA
+ARG,2015,Processed foods/beverages,3634.61069725,3634.61069725,NA
+ARG,2016,Agricultural biomass,2106.90778807,2079.869484768016,NA
+ARG,2016,Forest products,11.01165616,10.870341717670287,NA
+ARG,2016,Fossil fuels,10.632693249999999,10.49624210266535,NA
+ARG,2016,Metal ores & minerals,612.52777399,604.667101668312,NA
+ARG,2016,Processed foods/beverages,3611.24160986,3564.8979366831195,NA
+ARG,2017,Agricultural biomass,2032.49935169,1965.666684419729,NA
+ARG,2017,Forest products,8.29051469,8.017905889748548,NA
+ARG,2017,Fossil fuels,22.30252711,21.56917515473888,NA
+ARG,2017,Metal ores & minerals,478.23967594,462.5141933655706,NA
+ARG,2017,Processed foods/beverages,3477.7350465600002,3363.380122398453,NA
+ARG,2018,Agricultural biomass,4176.61484974,3943.9233708593006,NA
+ARG,2018,Forest products,17.4620164,16.48915618508026,NA
+ARG,2018,Fossil fuels,298.30553812,281.68606054768645,NA
+ARG,2018,Metal ores & minerals,363.51700736,343.2644073276675,NA
+ARG,2018,Processed foods/beverages,6199.54284636,5854.148107988668,NA
+ARG,2019,Agricultural biomass,1976.25625233,1831.5627917794254,NA
+ARG,2019,Forest products,9.34378166,8.659667896200185,NA
+ARG,2019,Fossil fuels,263.13034803,243.8650120759963,NA
+ARG,2019,Metal ores & minerals,160.44029848,148.69351110287303,NA
+ARG,2019,Processed foods/beverages,2695.28014773,2497.942676302132,NA
+ARG,2020,Agricultural biomass,2043.87644591,1871.6817270238093,NA
+ARG,2020,Forest products,8.46975351,7.7561845329670325,NA
+ARG,2020,Fossil fuels,210.69551253999998,192.9446085531135,NA
+ARG,2020,Metal ores & minerals,0.32883546,0.3011313736263736,NA
+ARG,2020,Processed foods/beverages,2411.36134113,2208.206356346154,NA
+ARG,2021,Agricultural biomass,2550.82958591,2231.6969255555555,NA
+ARG,2021,Forest products,7.51510578,6.574895695538058,NA
+ARG,2021,Fossil fuels,376.64025570999996,329.51903386701656,NA
+ARG,2021,Metal ores & minerals,0.11688126,0.10225832020997375,NA
+ARG,2021,Processed foods/beverages,2881.1084025,2520.6547703412075,NA
+ARG,2022,Agricultural biomass,2528.16357556,2048.7549234683956,NA
+ARG,2022,Forest products,4.44075,3.5986628849270668,NA
+ARG,2022,Fossil fuels,496.47656487,402.33108984602916,NA
+ARG,2022,Metal ores & minerals,0.75922282,0.6152535008103728,NA
+ARG,2022,Processed foods/beverages,4007.89556462,3247.889436482982,NA
+ARG,2023,Agricultural biomass,2407.37302235,1873.4420407392997,NA
+ARG,2023,Forest products,5.83563509,4.54135026459144,NA
+ARG,2023,Fossil fuels,226.62702441,176.36344312062258,NA
+ARG,2023,Metal ores & minerals,0.49219448,0.3830307237354086,NA
+ARG,2023,Processed foods/beverages,2112.72192302,1644.1415743346304,NA
+BRA,2000,Agricultural biomass,5937.297296,8178.095449035813,NA
+BRA,2000,Forest products,1716.345368,2364.112077134986,NA
+BRA,2000,Fossil fuels,148.09629,203.98938016528928,NA
+BRA,2000,Metal ores & minerals,2461.103942,3389.9503333333337,NA
+BRA,2000,Processed foods/beverages,4132.24878,5691.802727272728,NA
+BRA,2001,Agricultural biomass,6897.868414,9234.094262382865,NA
+BRA,2001,Forest products,1307.735264,1750.6496171352076,NA
+BRA,2001,Fossil fuels,204.036788,273.1416171352075,NA
+BRA,2001,Metal ores & minerals,2105.125386,2818.1062730923695,NA
+BRA,2001,Processed foods/beverages,4882.033734,6535.520393574297,NA
+BRA,2002,Agricultural biomass,6525.357582,8597.309067193675,NA
+BRA,2002,Forest products,1349.902672,1778.5278945981554,NA
+BRA,2002,Fossil fuels,711.970582,938.0376574440053,NA
+BRA,2002,Metal ores & minerals,2053.703244,2705.801375494071,NA
+BRA,2002,Processed foods/beverages,5101.812736,6721.755910408432,NA
+BRA,2003,Agricultural biomass,8859.04073,11416.289600515465,NA
+BRA,2003,Forest products,1925.587266,2481.426889175258,NA
+BRA,2003,Fossil fuels,634.564704,817.7380206185568,NA
+BRA,2003,Metal ores & minerals,2344.600224,3021.392041237114,NA
+BRA,2003,Processed foods/beverages,6018.980524,7756.418201030929,NA
+BRA,2004,Agricultural biomass,11253.96747,14120.4108782936,NA
+BRA,2004,Forest products,2410.1344559999998,3024.008100376411,NA
+BRA,2004,Fossil fuels,911.1388059999999,1143.2105470514427,NA
+BRA,2004,Metal ores & minerals,3170.593346,3978.1597816813046,NA
+BRA,2004,Processed foods/beverages,6812.019362,8547.075736511919,NA
+BRA,2005,Agricultural biomass,11912.445846,14456.851754854368,NA
+BRA,2005,Forest products,2702.086426,3279.2310995145626,NA
+BRA,2005,Fossil fuels,1516.781684,1840.7544708737862,NA
+BRA,2005,Metal ores & minerals,4367.07512,5299.848446601942,NA
+BRA,2005,Processed foods/beverages,6809.687314,8264.183633495146,NA
+BRA,2006,Agricultural biomass,12812.740888,15073.812809411766,NA
+BRA,2006,Forest products,3167.612262,3726.6026611764705,NA
+BRA,2006,Fossil fuels,2198.780646,2586.80076,NA
+BRA,2006,Metal ores & minerals,5087.63569,5985.453752941176,NA
+BRA,2006,Processed foods/beverages,7672.42568,9026.383152941176,NA
+BRA,2007,Agricultural biomass,16992.101436,19419.544498285715,NA
+BRA,2007,Forest products,4366.375666,4990.143618285714,NA
+BRA,2007,Fossil fuels,3692.331714,4219.807673142857,NA
+BRA,2007,Metal ores & minerals,6327.231398,7231.121597714286,NA
+BRA,2007,Processed foods/beverages,10332.32758,11808.374377142856,NA
+BRA,2008,Agricultural biomass,18412.109482,20277.65361453745,NA
+BRA,2008,Forest products,4994.691318,5500.761363436124,NA
+BRA,2008,Fossil fuels,4701.749132,5178.137810572688,NA
+BRA,2008,Metal ores & minerals,9123.04987,10047.411751101323,NA
+BRA,2008,Processed foods/beverages,13317.294966,14666.624411894274,NA
+BRA,2009,Agricultural biomass,13926.887136000001,15388.825564640883,NA
+BRA,2009,Forest products,3083.625804,3407.32133038674,NA
+BRA,2009,Fossil fuels,2837.970702,3135.8792287292817,NA
+BRA,2009,Metal ores & minerals,3840.123658,4243.230561325967,NA
+BRA,2009,Processed foods/beverages,12251.524756,13537.596415469612,NA
+BRA,2010,Agricultural biomass,13751.417054,14947.192449999999,NA
+BRA,2010,Forest products,4814.948318,5233.639476086956,NA
+BRA,2010,Fossil fuels,4575.860334,4973.7612326086955,NA
+BRA,2010,Metal ores & minerals,10745.121522,11679.479915217391,NA
+BRA,2010,Processed foods/beverages,13003.897442,14134.671132608695,NA
+BRA,2011,Agricultural biomass,17778.965366,18734.42082824025,NA
+BRA,2011,Forest products,4838.33492,5098.3508113804,NA
+BRA,2011,Fossil fuels,6368.700086,6710.958994731296,NA
+BRA,2011,Metal ores & minerals,15197.851190000001,16014.595563751316,NA
+BRA,2011,Processed foods/beverages,15182.830988,15998.76816438356,NA
+BRA,2012,Agricultural biomass,15087.000442,15585.744258264463,NA
+BRA,2012,Forest products,4395.568642,4540.876696280991,NA
+BRA,2012,Fossil fuels,7944.979378,8207.623324380165,NA
+BRA,2012,Metal ores & minerals,10965.487098,11327.982539256198,NA
+BRA,2012,Processed foods/beverages,16059.39286,16590.28188016529,NA
+BRA,2013,Agricultural biomass,14952.811534,15211.405426246185,NA
+BRA,2013,Forest products,4323.3665359999995,4398.1348280773145,NA
+BRA,2013,Fossil fuels,6874.47121,6993.358301119023,NA
+BRA,2013,Metal ores & minerals,11868.408092,12073.660317395728,NA
+BRA,2013,Processed foods/beverages,15954.961966,16230.88704577823,NA
+BRA,2014,Agricultural biomass,16423.286326,16439.72605205205,NA
+BRA,2014,Forest products,4445.888626,4450.338964964964,NA
+BRA,2014,Fossil fuels,5454.337944,5459.797741741741,NA
+BRA,2014,Metal ores & minerals,9254.9273,9264.19149149149,NA
+BRA,2014,Processed foods/beverages,13453.770872000001,13467.23811011011,NA
+BRA,2015,Agricultural biomass,13315.971003999999,13315.971003999999,NA
+BRA,2015,Forest products,4487.178226,4487.178226,NA
+BRA,2015,Fossil fuels,2473.999518,2473.999518,NA
+BRA,2015,Metal ores & minerals,6400.641376,6400.641376,NA
+BRA,2015,Processed foods/beverages,11192.355044,11192.355044,NA
+BRA,2016,Agricultural biomass,12034.736182,11880.292381046398,NA
+BRA,2016,Forest products,3800.830288,3752.0535913129324,NA
+BRA,2016,Fossil fuels,2288.88786,2259.514175715696,NA
+BRA,2016,Metal ores & minerals,5754.444288,5680.596533070089,NA
+BRA,2016,Processed foods/beverages,10498.557544,10363.827782823299,NA
+BRA,2017,Agricultural biomass,12679.814342,12262.876539651837,NA
+BRA,2017,Forest products,4077.747188,3943.662657640232,NA
+BRA,2017,Fossil fuels,3823.48368,3697.7598452611214,NA
+BRA,2017,Metal ores & minerals,7729.429186,7475.270005802708,NA
+BRA,2017,Processed foods/beverages,10216.55723,9880.616276595745,NA
+BRA,2018,Agricultural biomass,12452.64825,11758.874645892349,NA
+BRA,2018,Forest products,5487.820066,5182.077493862133,NA
+BRA,2018,Fossil fuels,6890.977836,6507.061223796033,NA
+BRA,2018,Metal ores & minerals,8355.049566,7889.56521813031,NA
+BRA,2018,Processed foods/beverages,10834.409452,10230.792683663833,NA
+BRA,2019,Agricultural biomass,12214.833091999999,11320.512596848934,NA
+BRA,2019,Forest products,4304.026736,3988.90336978684,NA
+BRA,2019,Fossil fuels,4873.218498,4516.42122150139,NA
+BRA,2019,Metal ores & minerals,6687.38065,6197.757784986098,NA
+BRA,2019,Processed foods/beverages,10527.453094,9756.675712696942,NA
+BRA,2020,Agricultural biomass,14318.512372,13112.190816849816,NA
+BRA,2020,Forest products,2984.133798,2732.7232582417582,NA
+BRA,2020,Fossil fuels,6836.60072,6260.623369963369,NA
+BRA,2020,Metal ores & minerals,5893.968846,5397.407368131868,NA
+BRA,2020,Processed foods/beverages,9296.579106,8513.35082967033,NA
+BRA,2021,Agricultural biomass,17563.387146,15366.042997375327,NA
+BRA,2021,Forest products,4189.532628,3665.38287664042,NA
+BRA,2021,Fossil fuels,9894.617724,8656.708419947507,NA
+BRA,2021,Metal ores & minerals,10249.782522,8967.438776902887,NA
+BRA,2021,Processed foods/beverages,10154.871746,8884.402227471566,NA
+BRA,2022,Agricultural biomass,25328.076218,20525.183320907618,NA
+BRA,2022,Forest products,5279.9438820000005,4278.722756888169,NA
+BRA,2022,Fossil fuels,21492.101354000002,17416.61373905997,NA
+BRA,2022,Metal ores & minerals,8297.787278,6724.300873581848,NA
+BRA,2022,Processed foods/beverages,15357.158694,12445.023252836305,NA
+BRA,2023,Agricultural biomass,17761.596272,13822.253908171208,NA
+BRA,2023,Forest products,3979.26578,3096.7048871595334,NA
+BRA,2023,Fossil fuels,21663.6271,16858.853774319068,NA
+BRA,2023,Metal ores & minerals,8689.020404,6761.883582879378,NA
+BRA,2023,Processed foods/beverages,16815.342316,13085.869506614787,NA
+PRY,2000,Agricultural biomass,64.431523,88.74865426997246,NA
+PRY,2000,Forest products,7.775536,10.710104683195592,NA
+PRY,2000,Processed foods/beverages,3.74675,5.160812672176308,NA
+PRY,2001,Agricultural biomass,45.235312,60.55597322623829,NA
+PRY,2001,Forest products,7.662418,10.257587684069613,NA
+PRY,2001,Processed foods/beverages,6.040117,8.08583266398929,NA
+PRY,2002,Agricultural biomass,19.349303,25.49315283267457,NA
+PRY,2002,Forest products,8.375762,11.035259552042161,NA
+PRY,2002,Processed foods/beverages,6.410092,8.445444005270092,NA
+PRY,2003,Agricultural biomass,26.236855,33.81038015463918,NA
+PRY,2003,Forest products,8.649222,11.145904639175258,NA
+PRY,2003,Metal ores & minerals,0.00382,0.004922680412371134,NA
+PRY,2003,Processed foods/beverages,5.912647,7.619390463917527,NA
+PRY,2004,Agricultural biomass,40.194368,50.43208030112923,NA
+PRY,2004,Forest products,12.238665,15.355915934755332,NA
+PRY,2004,Metal ores & minerals,0.001021,0.0012810539523212044,NA
+PRY,2004,Processed foods/beverages,6.78772,8.516587202007528,NA
+PRY,2005,Agricultural biomass,51.880244,62.96146116504854,NA
+PRY,2005,Forest products,16.086305,19.52221480582524,NA
+PRY,2005,Metal ores & minerals,0.002345,0.0028458737864077667,NA
+PRY,2005,Processed foods/beverages,6.595369,8.004088592233009,NA
+PRY,2006,Agricultural biomass,61.196942,71.99640235294117,NA
+PRY,2006,Forest products,15.768002,18.550590588235295,NA
+PRY,2006,Metal ores & minerals,0.037919,0.04461058823529412,NA
+PRY,2006,Processed foods/beverages,9.41543,11.076976470588235,NA
+PRY,2007,Agricultural biomass,401.930654,459.34931885714286,NA
+PRY,2007,Forest products,24.644155,28.16474857142857,NA
+PRY,2007,Metal ores & minerals,0.016029,0.018318857142857144,NA
+PRY,2007,Processed foods/beverages,34.619057,39.56463657142857,NA
+PRY,2008,Agricultural biomass,389.022716,428.439114537445,NA
+PRY,2008,Forest products,27.212591,29.969813876651983,NA
+PRY,2008,Metal ores & minerals,0.027341,0.030111233480176216,NA
+PRY,2008,Processed foods/beverages,115.297141,126.97923017621147,NA
+PRY,2009,Agricultural biomass,341.676192,377.5427535911602,NA
+PRY,2009,Forest products,32.486668,35.896870718232044,NA
+PRY,2009,Processed foods/beverages,96.421429,106.54301546961325,NA
+PRY,2010,Agricultural biomass,985.998682,1071.737697826087,NA
+PRY,2010,Forest products,26.617316,28.931865217391305,NA
+PRY,2010,Metal ores & minerals,0.018452,0.020056521739130435,NA
+PRY,2010,Processed foods/beverages,67.73398800000001,73.6239,NA
+PRY,2011,Agricultural biomass,1311.415136,1381.8916080084298,NA
+PRY,2011,Forest products,27.916405,29.416654373024233,NA
+PRY,2011,Metal ores & minerals,0.025448,0.026815595363540567,NA
+PRY,2011,Processed foods/beverages,59.792976,63.00629715489989,NA
+PRY,2012,Agricultural biomass,858.517416,886.8981570247934,NA
+PRY,2012,Forest products,21.324981,22.02993904958678,NA
+PRY,2012,Fossil fuels,3.8e-5,3.925619834710744e-5,NA
+PRY,2012,Metal ores & minerals,0.055314,0.05714256198347108,NA
+PRY,2012,Processed foods/beverages,86.786639,89.65561880165289,NA
+PRY,2013,Agricultural biomass,933.867757,950.0180640895219,NA
+PRY,2013,Forest products,22.040048,22.421208545269582,NA
+PRY,2013,Processed foods/beverages,227.119769,231.04757782299083,NA
+PRY,2014,Agricultural biomass,603.5078,604.1119119119119,NA
+PRY,2014,Forest products,18.75182,18.770590590590587,NA
+PRY,2014,Metal ores & minerals,0.08065000000000001,0.08073073073073073,NA
+PRY,2014,Processed foods/beverages,484.749865,485.23510010010006,NA
+PRY,2015,Agricultural biomass,601.053672,601.053672,NA
+PRY,2015,Forest products,14.520737,14.520737,NA
+PRY,2015,Metal ores & minerals,0.120243,0.120243,NA
+PRY,2015,Processed foods/beverages,462.952277,462.952277,NA
+PRY,2016,Agricultural biomass,1102.83319274,1088.6803482132282,NA
+PRY,2016,Forest products,25.33348174,25.008372892398818,NA
+PRY,2016,Metal ores & minerals,0.249846,0.24663968410661408,NA
+PRY,2016,Processed foods/beverages,743.61810486,734.0751281934848,NA
+PRY,2017,Agricultural biomass,638.7506979999999,617.7472901353965,NA
+PRY,2017,Forest products,13.095435,12.664830754352032,NA
+PRY,2017,Fossil fuels,1.44e-4,1.3926499032882012e-4,NA
+PRY,2017,Metal ores & minerals,0.29174300000000003,0.28214990328820116,NA
+PRY,2017,Processed foods/beverages,282.44942499999996,273.16191972920694,NA
+PRY,2018,Agricultural biomass,279.576293,264.0002766761095,NA
+PRY,2018,Forest products,12.674966,11.968806421152028,NA
+PRY,2018,Metal ores & minerals,0.315106,0.29755051935788474,NA
+PRY,2018,Processed foods/beverages,332.27948200000003,313.76721624173746,NA
+PRY,2019,Agricultural biomass,225.638551,209.1182122335496,NA
+PRY,2019,Forest products,8.815916999999999,8.170451343836886,NA
+PRY,2019,Metal ores & minerals,0.095862,0.0888433734939759,NA
+PRY,2019,Processed foods/beverages,192.802207,178.6860120481928,NA
+PRY,2020,Agricultural biomass,133.445279,122.20263644688643,NA
+PRY,2020,Forest products,9.944077,9.106297619047618,NA
+PRY,2020,Metal ores & minerals,0.090654,0.08301648351648351,NA
+PRY,2020,Processed foods/beverages,191.252451,175.13960714285713,NA
+PRY,2021,Agricultural biomass,122.984857,107.59830008748906,NA
+PRY,2021,Forest products,11.591589,10.141372703412074,NA
+PRY,2021,Metal ores & minerals,0.49207199999999995,0.430509186351706,NA
+PRY,2021,Processed foods/beverages,281.30901700000004,246.11462554680665,NA
+PRY,2022,Agricultural biomass,224.9468006,182.29076223662886,NA
+PRY,2022,Forest products,41.907827680000004,33.96096246353323,NA
+PRY,2022,Metal ores & minerals,4.1985988800000005,3.4024302106969206,NA
+PRY,2022,Processed foods/beverages,458.70350457999996,371.72083029173416,NA
+PRY,2023,Agricultural biomass,204.72115482,159.31607378988326,NA
+PRY,2023,Forest products,37.48849804,29.173928435797666,NA
+PRY,2023,Metal ores & minerals,2.59978582,2.023179626459144,NA
+PRY,2023,Processed foods/beverages,631.11924858,491.1433841089495,NA
+URY,2000,Agricultural biomass,141.207749,194.50103168044078,NA
+URY,2000,Forest products,29.361755,40.44318870523416,NA
+URY,2000,Metal ores & minerals,0.104212,0.1435426997245179,NA
+URY,2000,Processed foods/beverages,7.104567,9.785904958677687,NA
+URY,2001,Agricultural biomass,145.615914,194.9342891566265,NA
+URY,2001,Forest products,29.703278,39.76342436412316,NA
+URY,2001,Metal ores & minerals,0.002484,0.003325301204819277,NA
+URY,2001,Processed foods/beverages,9.519586,12.743756358768406,NA
+URY,2002,Agricultural biomass,167.451621,220.621371541502,NA
+URY,2002,Forest products,32.214094,42.4428115942029,NA
+URY,2002,Metal ores & minerals,0.072091,0.09498155467720684,NA
+URY,2002,Processed foods/beverages,9.194388,12.113818181818182,NA
+URY,2003,Agricultural biomass,189.75881,244.53454896907218,NA
+URY,2003,Forest products,40.416053,52.082542525773206,NA
+URY,2003,Metal ores & minerals,0.051455,0.06630798969072166,NA
+URY,2003,Processed foods/beverages,7.27557,9.375734536082476,NA
+URY,2004,Agricultural biomass,238.991798,299.8642383939774,NA
+URY,2004,Forest products,50.498424,63.36063237139272,NA
+URY,2004,Fossil fuels,0.617608,0.7749159347553325,NA
+URY,2004,Metal ores & minerals,0.186058,0.23344792973651188,NA
+URY,2004,Processed foods/beverages,9.9038,12.426348808030113,NA
+URY,2005,Agricultural biomass,245.112038,297.46606553398055,NA
+URY,2005,Forest products,62.587837,75.95611286407767,NA
+URY,2005,Metal ores & minerals,0.103834,0.1260121359223301,NA
+URY,2005,Processed foods/beverages,13.664226,16.58279854368932,NA
+URY,2006,Agricultural biomass,304.525176,358.2649129411765,NA
+URY,2006,Forest products,63.856556999999995,75.12536117647058,NA
+URY,2006,Metal ores & minerals,0.47564100000000004,0.5595776470588235,NA
+URY,2006,Processed foods/beverages,14.311434,16.836981176470587,NA
+URY,2007,Agricultural biomass,367.41035,419.89754285714287,NA
+URY,2007,Forest products,92.702872,105.94613942857143,NA
+URY,2007,Fossil fuels,1.8e-4,2.0571428571428572e-4,NA
+URY,2007,Metal ores & minerals,0.121441,0.1387897142857143,NA
+URY,2007,Processed foods/beverages,19.492763,22.27744342857143,NA
+URY,2008,Agricultural biomass,661.755938,728.8060991189428,NA
+URY,2008,Forest products,111.924986,123.26540308370045,NA
+URY,2008,Fossil fuels,1.8e-4,1.982378854625551e-4,NA
+URY,2008,Metal ores & minerals,0.302853,0.33353854625550666,NA
+URY,2008,Processed foods/beverages,16.390321,18.05101431718062,NA
+URY,2009,Agricultural biomass,472.018677,521.5675988950276,NA
+URY,2009,Forest products,60.760894,67.1391093922652,NA
+URY,2009,Metal ores & minerals,0.161403,0.17834585635359115,NA
+URY,2009,Processed foods/beverages,11.901431,13.150752486187844,NA
+URY,2010,Agricultural biomass,546.671063,594.207677173913,NA
+URY,2010,Forest products,120.426396,130.8982565217391,NA
+URY,2010,Metal ores & minerals,0.9251229999999999,1.0055684782608694,NA
+URY,2010,Processed foods/beverages,17.579876,19.108560869565217,NA
+URY,2011,Agricultural biomass,607.0429,639.6658587987355,NA
+URY,2011,Forest products,141.946756,149.57508535300315,NA
+URY,2011,Fossil fuels,1.48e-4,1.5595363540569018e-4,NA
+URY,2011,Metal ores & minerals,0.612227,0.6451285563751317,NA
+URY,2011,Processed foods/beverages,12.092899,12.742780821917806,NA
+URY,2012,Agricultural biomass,508.063318,524.8587995867769,NA
+URY,2012,Forest products,76.987184,79.53221487603307,NA
+URY,2012,Metal ores & minerals,0.577104,0.5961818181818183,NA
+URY,2012,Processed foods/beverages,7.976201,8.239877066115703,NA
+URY,2013,Agricultural biomass,637.270936,648.2918982706002,NA
+URY,2013,Forest products,80.32856100000001,81.71776297049848,NA
+URY,2013,Fossil fuels,8.55e-4,8.697863682604272e-4,NA
+URY,2013,Metal ores & minerals,0.776451,0.7898789420142421,NA
+URY,2013,Processed foods/beverages,6.562623,6.676116988809766,NA
+URY,2014,Agricultural biomass,561.163058,561.7247827827828,NA
+URY,2014,Forest products,72.819155,72.89204704704704,NA
+URY,2014,Fossil fuels,0.004975,0.00497997997997998,NA
+URY,2014,Metal ores & minerals,1.027156,1.0281841841841841,NA
+URY,2014,Processed foods/beverages,6.393306,6.3997057057057045,NA
+URY,2015,Agricultural biomass,496.177369,496.177369,NA
+URY,2015,Forest products,61.415411,61.415411,NA
+URY,2015,Fossil fuels,4e-6,4e-6,NA
+URY,2015,Metal ores & minerals,0.47633600000000004,0.47633600000000004,NA
+URY,2015,Processed foods/beverages,6.632052,6.632052,NA
+URY,2016,Agricultural biomass,518.686263,512.0298746298124,NA
+URY,2016,Forest products,83.64361000000001,82.57019743336625,NA
+URY,2016,Fossil fuels,3e-5,2.9615004935834158e-5,NA
+URY,2016,Metal ores & minerals,0.50723,0.500720631786772,NA
+URY,2016,Processed foods/beverages,8.99813,8.882655478775915,NA
+URY,2017,Agricultural biomass,2053.18012,1985.6674274661507,NA
+URY,2017,Forest products,292.94890399999997,283.31615473887814,NA
+URY,2017,Fossil fuels,9.6e-5,9.284332688588008e-5,NA
+URY,2017,Metal ores & minerals,1.958928,1.894514506769826,NA
+URY,2017,Processed foods/beverages,31.78118,30.73615087040619,NA
+URY,2018,Agricultural biomass,1819.556444,1718.1836109537296,NA
+URY,2018,Forest products,419.510796,396.13861756373933,NA
+URY,2018,Fossil fuels,3.04e-4,2.870632672332389e-4,NA
+URY,2018,Metal ores & minerals,0.64642,0.6104060434372048,NA
+URY,2018,Processed foods/beverages,26.510504,25.033525967894235,NA
+URY,2019,Agricultural biomass,1670.97192,1548.6301390176088,NA
+URY,2019,Forest products,445.55552,412.93375347544026,NA
+URY,2019,Fossil fuels,0.002264,0.002098239110287303,NA
+URY,2019,Metal ores & minerals,1.348732,1.2499833178869324,NA
+URY,2019,Processed foods/beverages,13.93524,12.914958294717332,NA
+URY,2020,Agricultural biomass,1534.0973960000001,1404.851095238095,NA
+URY,2020,Forest products,132.440472,121.28248351648351,NA
+URY,2020,Fossil fuels,0.007828,0.007168498168498168,NA
+URY,2020,Metal ores & minerals,2.2220880000000003,2.034879120879121,NA
+URY,2020,Processed foods/beverages,14.95018,13.690641025641025,NA
+URY,2021,Agricultural biomass,1919.585384,1679.4272825896762,NA
+URY,2021,Forest products,231.163368,202.24266666666665,NA
+URY,2021,Fossil fuels,0.007228,0.006323709536307961,NA
+URY,2021,Metal ores & minerals,1.783948,1.5607594050743656,NA
+URY,2021,Processed foods/beverages,17.275280000000002,15.113980752405949,NA
+URY,2022,Agricultural biomass,2254.172728,1826.7202009724474,NA
+URY,2022,Forest products,545.184092,441.80234359805513,NA
+URY,2022,Fossil fuels,1e-4,8.103727714748785e-5,NA
+URY,2022,Metal ores & minerals,3.62052,2.933970826580227,NA
+URY,2022,Processed foods/beverages,20.132740000000002,16.315024311183144,NA
+URY,2023,Agricultural biomass,2125.327224,1653.9511470817122,NA
+URY,2023,Forest products,436.439488,339.6416249027238,NA
+URY,2023,Fossil fuels,1.24e-4,9.649805447470817e-5,NA
+URY,2023,Metal ores & minerals,2.396108,1.864675486381323,NA
+URY,2023,Processed foods/beverages,20.032728,15.58967159533074,NA
+MERCOSUR_total,2000,Agricultural biomass,7602.177409,10471.318745179064,NA
+MERCOSUR_total,2000,Forest products,1801.704429,2481.686541322314,NA
+MERCOSUR_total,2000,Fossil fuels,167.788298,231.11335812672178,NA
+MERCOSUR_total,2000,Metal ores & minerals,2572.25041,3543.0446418732786,NA
+MERCOSUR_total,2000,Processed foods/beverages,5654.945365,7789.180943526171,NA
+MERCOSUR_total,2001,Agricultural biomass,8538.352868,11430.191255689424,NA
+MERCOSUR_total,2001,Forest products,1380.423125,1847.9559906291834,NA
+MERCOSUR_total,2001,Fossil fuels,247.176419,330.89212717536816,NA
+MERCOSUR_total,2001,Metal ores & minerals,2256.614342,3020.902733601071,NA
+MERCOSUR_total,2001,Processed foods/beverages,6571.068392,8796.610966532797,NA
+MERCOSUR_total,2002,Agricultural biomass,8388.767425,11052.394499341239,NA
+MERCOSUR_total,2002,Forest products,1422.237229,1873.8303412384716,NA
+MERCOSUR_total,2002,Fossil fuels,762.0808010000001,1004.0590263504611,NA
+MERCOSUR_total,2002,Metal ores & minerals,2318.248713,3054.3461304347825,NA
+MERCOSUR_total,2002,Processed foods/beverages,6916.381126,9112.491602108037,NA
+MERCOSUR_total,2003,Agricultural biomass,10914.634528999999,14065.250681701033,NA
+MERCOSUR_total,2003,Forest products,2020.0311609999999,2603.13293943299,NA
+MERCOSUR_total,2003,Fossil fuels,690.033926,889.2189768041238,NA
+MERCOSUR_total,2003,Metal ores & minerals,2585.267266,3331.5299819587635,NA
+MERCOSUR_total,2003,Processed foods/beverages,8251.325185,10633.15101159794,NA
+MERCOSUR_total,2004,Agricultural biomass,13362.361162,16765.823289836888,NA
+MERCOSUR_total,2004,Forest products,2530.104497,3174.5351279799247,NA
+MERCOSUR_total,2004,Fossil fuels,942.781427,1182.912706398996,NA
+MERCOSUR_total,2004,Metal ores & minerals,3567.241917,4475.836784190715,NA
+MERCOSUR_total,2004,Processed foods/beverages,9199.91455,11543.180112923463,NA
+MERCOSUR_total,2005,Agricultural biomass,14206.957067,17241.45275121359,NA
+MERCOSUR_total,2005,Forest products,2817.529779,3419.3322560679608,NA
+MERCOSUR_total,2005,Fossil fuels,1561.617811,1895.167246359223,NA
+MERCOSUR_total,2005,Metal ores & minerals,4760.609875,5777.4391686893205,NA
+MERCOSUR_total,2005,Processed foods/beverages,9408.622303,11418.230950242718,NA
+MERCOSUR_total,2006,Agricultural biomass,15378.051718,18091.825550588237,NA
+MERCOSUR_total,2006,Forest products,3289.567282,3870.0791552941178,NA
+MERCOSUR_total,2006,Fossil fuels,2268.446229,2668.760269411765,NA
+MERCOSUR_total,2006,Metal ores & minerals,5820.038491,6847.1041070588235,NA
+MERCOSUR_total,2006,Processed foods/beverages,10648.38415,12527.510764705883,NA
+MERCOSUR_total,2007,Agricultural biomass,20504.916496,23434.190281142855,NA
+MERCOSUR_total,2007,Forest products,4535.63395,5183.581657142857,NA
+MERCOSUR_total,2007,Fossil fuels,3720.63246,4252.151382857143,NA
+MERCOSUR_total,2007,Metal ores & minerals,6855.814136,7835.216155428571,NA
+MERCOSUR_total,2007,Processed foods/beverages,14085.840897,16098.103882285714,NA
+MERCOSUR_total,2008,Agricultural biomass,23941.88631,26367.716200440533,NA
+MERCOSUR_total,2008,Forest products,5184.422961,5709.716917400881,NA
+MERCOSUR_total,2008,Fossil fuels,4757.678651,5239.734197136564,NA
+MERCOSUR_total,2008,Metal ores & minerals,9672.840549999999,10652.908094713657,NA
+MERCOSUR_total,2008,Processed foods/beverages,18007.03051,19831.531398678417,NA
+MERCOSUR_total,2009,Agricultural biomass,17028.271234,18815.769319337018,NA
+MERCOSUR_total,2009,Forest products,3224.869057,3563.39122320442,NA
+MERCOSUR_total,2009,Fossil fuels,2852.5743740000003,3152.015882872928,NA
+MERCOSUR_total,2009,Metal ores & minerals,4320.495526,4774.028205524862,NA
+MERCOSUR_total,2009,Processed foods/beverages,16736.56139,18493.438,NA
+MERCOSUR_total,2010,Agricultural biomass,17796.956529,19344.517966304345,NA
+MERCOSUR_total,2010,Forest products,5001.712828,5436.644378260869,NA
+MERCOSUR_total,2010,Fossil fuels,4593.963734,4993.438841304348,NA
+MERCOSUR_total,2010,Metal ores & minerals,11532.311882,12535.121610869564,NA
+MERCOSUR_total,2010,Processed foods/beverages,17098.113957,18584.906475,NA
+MERCOSUR_total,2011,Agricultural biomass,22600.431144,23814.99593677555,NA
+MERCOSUR_total,2011,Forest products,5044.634571,5315.737166491042,NA
+MERCOSUR_total,2011,Fossil fuels,6439.000121,6785.037008429926,NA
+MERCOSUR_total,2011,Metal ores & minerals,16035.049146000001,16896.78519072708,NA
+MERCOSUR_total,2011,Processed foods/beverages,19958.874508,21031.47998735511,NA
+MERCOSUR_total,2012,Agricultural biomass,18761.234342,19381.440435950415,NA
+MERCOSUR_total,2012,Forest products,4515.469795,4664.741523760331,NA
+MERCOSUR_total,2012,Fossil fuels,7981.494514,8245.345572314049,NA
+MERCOSUR_total,2012,Metal ores & minerals,11813.352708,12203.87676446281,NA
+MERCOSUR_total,2012,Processed foods/beverages,20133.579866,20799.152754132232,NA
+MERCOSUR_total,2013,Agricultural biomass,18545.166804,18865.886880976603,NA
+MERCOSUR_total,2013,Forest products,4442.602264,4519.432618514751,NA
+MERCOSUR_total,2013,Fossil fuels,6944.806842999999,7064.910318413021,NA
+MERCOSUR_total,2013,Metal ores & minerals,12733.96382,12954.18496439471,NA
+MERCOSUR_total,2013,Processed foods/beverages,20179.29417,20528.27484231943,NA
+MERCOSUR_total,2014,Agricultural biomass,21605.48847516,21627.11559075075,NA
+MERCOSUR_total,2014,Forest products,4567.56436614,4572.136502642642,NA
+MERCOSUR_total,2014,Fossil fuels,5603.32716184,5608.936097937937,NA
+MERCOSUR_total,2014,Metal ores & minerals,10757.30213192,10768.07020212212,NA
+MERCOSUR_total,2014,Processed foods/beverages,21985.50945686,22007.51697383383,NA
+MERCOSUR_total,2015,Agricultural biomass,16208.07557103,16208.07557103,NA
+MERCOSUR_total,2015,Forest products,4574.99717197,4574.99717197,NA
+MERCOSUR_total,2015,Fossil fuels,2482.22898247,2482.22898247,NA
+MERCOSUR_total,2015,Metal ores & minerals,6882.75909464,6882.75909464,NA
+MERCOSUR_total,2015,Processed foods/beverages,15296.55007025,15296.55007025,NA
+MERCOSUR_total,2016,Agricultural biomass,15763.16342581,15560.872088657454,NA
+MERCOSUR_total,2016,Forest products,3920.8190359,3870.5025033563675,NA
+MERCOSUR_total,2016,Fossil fuels,2299.52058325,2270.0104474333666,NA
+MERCOSUR_total,2016,Metal ores & minerals,6367.72913799,6286.010995054295,NA
+MERCOSUR_total,2016,Processed foods/beverages,14862.415388720001,14671.68350317868,NA
+MERCOSUR_total,2017,Agricultural biomass,17404.24451169,16831.957941673114,NA
+MERCOSUR_total,2017,Forest products,4392.08204169,4247.661549023211,NA
+MERCOSUR_total,2017,Fossil fuels,3845.7864471099997,3719.3292525241777,NA
+MERCOSUR_total,2017,Metal ores & minerals,8209.919532939999,7939.960863578336,NA
+MERCOSUR_total,2017,Processed foods/beverages,14008.52288156,13547.89446959381,NA
+MERCOSUR_total,2018,Agricultural biomass,18728.39583674,17684.98190438149,NA
+MERCOSUR_total,2018,Forest products,5937.4678444,5606.674074032105,NA
+MERCOSUR_total,2018,Fossil fuels,7189.28367812,6788.747571406987,NA
+MERCOSUR_total,2018,Metal ores & minerals,8719.52809936,8233.737582020773,NA
+MERCOSUR_total,2018,Processed foods/beverages,17392.74228436,16423.741533862132,NA
+MERCOSUR_total,2019,Agricultural biomass,16087.69981533,14909.823739879519,NA
+MERCOSUR_total,2019,Forest products,4767.74195466,4418.667242502317,NA
+MERCOSUR_total,2019,Fossil fuels,5136.35111003,4760.288331816497,NA
+MERCOSUR_total,2019,Metal ores & minerals,6849.26554248,6347.790122780352,NA
+MERCOSUR_total,2019,Processed foods/beverages,13429.47068873,12446.219359341983,NA
+MERCOSUR_total,2020,Agricultural biomass,18029.93149291,16510.926275558606,NA
+MERCOSUR_total,2020,Forest products,3134.98810051,2870.8682239102563,NA
+MERCOSUR_total,2020,Fossil fuels,7047.30406054,6453.5751470146515,NA
+MERCOSUR_total,2020,Metal ores & minerals,5896.61042346,5399.82639510989,NA
+MERCOSUR_total,2020,Processed foods/beverages,11914.14307813,10910.38743418498,NA
+MERCOSUR_total,2021,Agricultural biomass,22156.78697291,19384.765505608048,NA
+MERCOSUR_total,2021,Forest products,4439.80269078,3884.3418117060364,NA
+MERCOSUR_total,2021,Fossil fuels,10271.26520771,8986.23377752406,NA
+MERCOSUR_total,2021,Metal ores & minerals,10252.17542326,8969.532303814523,NA
+MERCOSUR_total,2021,Processed foods/beverages,13334.5644455,11666.285604111985,NA
+MERCOSUR_total,2022,Agricultural biomass,30335.35932216,24582.94920758509,NA
+MERCOSUR_total,2022,Forest products,5871.47655168,4758.084725834684,NA
+MERCOSUR_total,2022,Fossil fuels,21988.57801887,17818.944909943275,NA
+MERCOSUR_total,2022,Metal ores & minerals,8306.3656197,6731.252528119935,NA
+MERCOSUR_total,2022,Processed foods/beverages,19843.8905032,16080.948543922204,NA
+MERCOSUR_total,2023,Agricultural biomass,22499.01767317,17508.963169782102,NA
+MERCOSUR_total,2023,Forest products,4459.02940113,3470.061790762646,NA
+MERCOSUR_total,2023,Fossil fuels,21890.25424841,17035.217313937745,NA
+MERCOSUR_total,2023,Metal ores & minerals,8694.5084923,6766.154468715954,NA
+MERCOSUR_total,2023,Processed foods/beverages,19579.2162156,15236.744136653697,NA

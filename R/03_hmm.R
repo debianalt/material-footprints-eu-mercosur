@@ -51,9 +51,10 @@ fit_hmm_best <- function(data, K, n_restarts = N_RESTARTS) {
     tapio_f = factor(data_sorted$tapio, levels = TAPIO_LEVELS)
   )
 
-  best_mod <- NULL
-  best_ll  <- -Inf
-  n_failed <- 0
+  best_mod   <- NULL
+  best_ll    <- -Inf
+  n_failed   <- 0
+  ll_history <- numeric(0)  # log-likelihoods of all successful restarts
 
   for (i in seq_len(n_restarts)) {
     set.seed(i * 137 + K * 1000)
@@ -73,50 +74,72 @@ fit_hmm_best <- function(data, K, n_restarts = N_RESTARTS) {
     )
     if (!is.null(fitted)) {
       ll <- as.numeric(logLik(fitted))
-      if (is.finite(ll) && ll > best_ll) {
-        best_ll  <- ll
-        best_mod <- fitted
+      if (is.finite(ll)) {
+        ll_history <- c(ll_history, ll)
+        if (ll > best_ll) {
+          best_ll  <- ll
+          best_mod <- fitted
+        }
       }
     }
   }
 
   if (is.null(best_mod)) stop(paste("HMM K=", K, "no converge."))
-  cat(sprintf("K=%d: logLik=%.2f  AIC=%.1f  BIC=%.1f  (fallos: %d/%d)\n",
-              K, best_ll, AIC(best_mod), BIC(best_mod), n_failed, n_restarts))
+
+  # Attach convergence diagnostics as attributes
+  attr(best_mod, "ll_history")      <- ll_history
+  attr(best_mod, "n_restarts_ok")   <- length(ll_history)
+  attr(best_mod, "n_restarts_fail") <- n_failed
+
+  n_at_opt <- sum(abs(ll_history - best_ll) < 0.01)
+  cat(sprintf("K=%d: logLik=%.2f  AIC=%.1f  BIC=%.1f  convergencia: %d/%d  (fallos: %d/%d)\n",
+              K, best_ll, AIC(best_mod), BIC(best_mod),
+              n_at_opt, n_restarts, n_failed, n_restarts))
   best_mod
 }
 
 # -----------------------------------------------------------------------------
-# 2. Selección de K (K = 2, 3, 4)
+# 2. Selección de K (K = 2, 3, 4, 5)
 # -----------------------------------------------------------------------------
 
 cat("=== Selección de K — modelo pooled ===\n")
 
 # Caché de modelos para evitar re-ajuste (guardar/cargar .rds)
 cache_dir  <- file.path(BASE, "data/processed")
-cache_file <- file.path(cache_dir, "hmm_models_pooled.rds")
+cache_file <- file.path(cache_dir, "hmm_models_pooled_k5.rds")
 
 if (file.exists(cache_file)) {
   cat("Cargando modelos desde caché...\n")
   models_pooled <- readRDS(cache_file)
 } else {
-  models_pooled <- lapply(2:4, function(k) {
+  models_pooled <- lapply(2:5, function(k) {
     cat(sprintf("\nAjustando K=%d con %d reinicios...\n", k, N_RESTARTS))
     fit_hmm_best(panel_tapio, K = k)
   })
-  names(models_pooled) <- paste0("K", 2:4)
+  names(models_pooled) <- paste0("K", 2:5)
   saveRDS(models_pooled, cache_file)
   cat("Modelos guardados en caché.\n")
 }
 
+# ICL = BIC + 2 * classification entropy (H = -sum z_ik * log z_ik)
+compute_icl <- function(fitted_mod) {
+  post_probs <- posterior(fitted_mod)
+  state_cols <- grep("^S[0-9]", names(post_probs), value = TRUE)
+  p_mat      <- as.matrix(post_probs[, state_cols])
+  H          <- -sum(p_mat * log(p_mat + 1e-300))
+  BIC(fitted_mod) + 2 * H
+}
+
 model_sel <- tibble(
-  K         = 2:4,
+  K         = 2:5,
   logLik    = sapply(models_pooled, function(m) round(as.numeric(logLik(m)), 2)),
   npar      = sapply(models_pooled, npar),
   AIC       = sapply(models_pooled, function(m) round(AIC(m), 1)),
   BIC       = sapply(models_pooled, function(m) round(BIC(m), 1)),
+  ICL       = round(sapply(models_pooled, compute_icl), 1),
   delta_AIC = round(sapply(models_pooled, AIC) - min(sapply(models_pooled, AIC)), 1),
-  delta_BIC = round(sapply(models_pooled, BIC) - min(sapply(models_pooled, BIC)), 1)
+  delta_BIC = round(sapply(models_pooled, BIC) - min(sapply(models_pooled, BIC)), 1),
+  delta_ICL = round(sapply(models_pooled, compute_icl) - min(sapply(models_pooled, compute_icl)), 1)
 )
 
 cat("\n=== Tabla de selección de modelo (reportar en el paper) ===\n")
@@ -130,6 +153,12 @@ cat("Modelo adoptado para análisis principal: K=3 (ver justificación en cabece
 
 K_main <- 3
 model_best <- models_pooled[["K3"]]
+
+# Report K=3 convergence stability for manuscript §2.3
+lls_k3      <- attr(model_best, "ll_history")
+n_converged <- sum(abs(lls_k3 - max(lls_k3)) < 0.01)
+cat(sprintf("\n>>> CONVERGENCIA K=3 (para §2.3): %d/%d restarts dentro de 0.01 de logLik=%.2f\n",
+            n_converged, length(lls_k3), max(lls_k3)))
 
 # -----------------------------------------------------------------------------
 # 3. Función de extracción de resultados
@@ -270,6 +299,26 @@ res_eu15 <- extract_hmm_results(
 )
 
 # -----------------------------------------------------------------------------
+# 6b. Robustez: MERCOSUR leave-one-out
+# Responde a Reviewer 3 punto 2: membership alternativo.
+# Bolivia/Venezuela no tienen datos GMFD completos para 1994-2024.
+# Como proxy de sensibilidad a la composición, excluimos un país fundador por vez.
+# -----------------------------------------------------------------------------
+
+cat("\n=== Robustez: MERCOSUR leave-one-out ===\n")
+loo_results <- lapply(MERCOSUR4, function(drop_iso) {
+  panel_loo <- panel_tapio %>% filter(!(iso3 == drop_iso & bloc == "MERCOSUR"))
+  label     <- paste0("MERCOSUR_loo_drop_", drop_iso)
+  cat(sprintf("\nLeave-one-out: excluyendo %s\n", drop_iso))
+  extract_hmm_results(
+    fit_hmm_best(panel_loo, K = K_main),
+    panel_loo, K_main, label
+  )
+})
+loo_summary <- bind_rows(lapply(loo_results, `[[`, "summary"))
+cat("\nResumen leave-one-out MERCOSUR:\n"); print(loo_summary)
+
+# -----------------------------------------------------------------------------
 # 7. Guardar todos los outputs
 # -----------------------------------------------------------------------------
 
@@ -289,11 +338,12 @@ as.data.frame(res_pooled$emission) %>%
 
 write_csv(regime_summary, file.path(TABS, "hmm_regime_summary.csv"))
 
-# Resumen de robustez
+# Resumen de robustez (EU-only, MERCOSUR-only, EU-15, + 4 leave-one-out)
 bind_rows(
   res_eu_sep$summary,
   res_mcs_sep$summary,
-  res_eu15$summary
+  res_eu15$summary,
+  loo_summary
 ) %>% write_csv(file.path(TABS, "hmm_robustness_summary.csv"))
 
 # Comparación semántica entre modelos
