@@ -253,6 +253,15 @@ while i < len(src_lines):
         i += 1
         continue
 
+    # --- Author-identity block: omitted from the manuscript file ---
+    #     Ecological Economics is single-anonymized but requires a SEPARATE
+    #     title page; the manuscript file must not carry the author block.
+    #     (Author/affiliation/ORCID/corresponding-author live in 03_Title_Page.)
+    if re.match(r"^\*\*(Authors?|Affiliation|Corresponding author|ORCID)\b",
+                line.strip()):
+        i += 1
+        continue
+
     # --- Horizontal rule ---
     if re.match(r"^-{3,}$", line.strip()):
         if in_table:
