@@ -29,17 +29,17 @@ eu_dummy x tapio_f = RND             12.0**
                                      (4.37)           
 eu_dummy x tapio_f = SND              6.75            
                                      (3.81)           
-env_plus                                       -10.8**
-                                                (3.16)
-env_plus x eu_dummy                              8.89*
-                                                (3.33)
+env_plus                                        -3.29 
+                                                (1.67)
+env_plus x eu_dummy                              1.35 
+                                                (1.77)
 Fixed-Effects:           --------- --------- ---------
 iso3                           Yes       Yes       Yes
 year                           Yes       Yes       Yes
 ________________________ _________ _________ _________
 S.E.: Clustered           by: iso3  by: iso3  by: iso3
 Observations                   899       899       899
-R2                         0.13424   0.18965   0.16886
-Within R2                  0.04655   0.10757   0.08468
+R2                         0.13424   0.18965   0.11088
+Within R2                  0.04655   0.10757   0.02082
 ---
 Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

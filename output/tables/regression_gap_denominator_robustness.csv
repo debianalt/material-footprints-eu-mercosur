@@ -1,0 +1,4 @@
+dv,sd_mercosur,sd_mercosur_se,sd_mercosur_p,sd_eu_offset,sd_eu_offset_p,sd_eu_net
+"d_gap_rel (denominador MF, referencia)",-11.517,2.99,5.72e-4,9.813,0.00507,-1.703
+"d_gap_abs (Mt, sin denominador)",-30.277,24.341,0.223,23.466,0.345,-6.81
+d_gap_dmc (denominador DMC),-4.4,1.606,0.0102,0.96,0.715,-3.441

@@ -18,7 +18,9 @@
 library(tidyverse)
 library(depmixS4)
 
-BASE <- "C:/Users/ant/OneDrive/articles_1_/material footprints/new submision EE"
+# BASE derivado de la ubicación de este script (rename-proof)
+.a <- commandArgs(FALSE); .f <- sub("^--file=", "", .a[grep("^--file=", .a)])
+BASE <- if (length(.f)) normalizePath(file.path(dirname(.f), "..")) else normalizePath("..")
 PROC <- file.path(BASE, "data/processed")
 TABS <- file.path(BASE, "output/tables")
 
@@ -270,6 +272,57 @@ regime_summary <- regime_by_bloc %>%
 cat("\nResumen final con CIs:\n")
 print(dplyr::select(regime_summary, bloc, regime_viterbi, dominant_tapio,
                     pct, ci_lower, ci_upper, mean_dwell_time))
+
+# -----------------------------------------------------------------------------
+# 4b. Invariancia de K — robustez K=2 (partición preferida por BIC e ICL)
+#
+# Responde a Reviewer 3 punto 4. BIC e ICL seleccionan K=2; adoptamos K=3 por
+# interpretabilidad. Para demostrar que el contraste estructural EU vs MERCOSUR
+# (Hallazgo 1) NO depende de adoptar K=3, extraemos también el modelo K=2
+# (óptimo BIC/ICL) y verificamos que la asignación de regímenes sigue
+# difiriendo por bloque en la misma dirección. La paradoja SD-gap se identifica
+# en una regresión sobre estados Tapio (04_gap_regression.R), no sobre
+# regímenes HMM, por lo que es K-independiente por construcción.
+# -----------------------------------------------------------------------------
+
+cat("\n=== Invariancia de K: extrayendo K=2 (óptimo BIC/ICL) ===\n")
+res_k2 <- extract_hmm_results(models_pooled[["K2"]], panel_tapio, 2, "pooled_K2")
+
+regime_by_bloc_k2 <- res_k2$panel %>%
+  group_by(bloc, regime_viterbi) %>%
+  summarise(n = n(), .groups = "drop") %>%
+  group_by(bloc) %>%
+  mutate(pct = round(n / sum(n) * 100, 1)) %>%
+  ungroup() %>%
+  left_join(res_k2$summary, by = c("regime_viterbi" = "regime")) %>%
+  dplyr::select(bloc, regime_viterbi, dominant_tapio, pct,
+                mean_dwell_time, p_self_transition)
+
+cat("\nK=2 — distribución de regímenes por bloque (estado Tapio dominante):\n")
+print(regime_by_bloc_k2)
+
+# Chi-cuadrado: ¿la asignación de régimen K=2 difiere por bloque?
+k2_tab  <- table(res_k2$panel$bloc, res_k2$panel$regime_viterbi)
+k2_chsq <- suppressWarnings(chisq.test(k2_tab))
+cat(sprintf("\nK=2  bloc × régimen:  chi2 = %.1f, df = %d, p = %.3g\n",
+            k2_chsq$statistic, k2_chsq$parameter, k2_chsq$p.value))
+
+# Cuota por bloque en el régimen K=2 de orientación eficiente (dom. SD/WD/EC)
+eff_states    <- c("SD", "WD", "EC")
+k2_eff_regime <- res_k2$summary$regime[res_k2$summary$dominant_tapio %in% eff_states]
+if (length(k2_eff_regime) >= 1) {
+  cat(sprintf("\nK=2 — cuota por bloque en el régimen eficiente (R%d, dom. %s):\n",
+              k2_eff_regime[1],
+              res_k2$summary$dominant_tapio[res_k2$summary$regime == k2_eff_regime[1]]))
+  print(regime_by_bloc_k2 %>% filter(regime_viterbi == k2_eff_regime[1]))
+}
+
+cat("\nMatriz de transición K=2:\n"); print(round(res_k2$trans, 3))
+
+write_csv(regime_by_bloc_k2, file.path(TABS, "hmm_k2_robustness.csv"))
+write_csv(res_k2$panel %>% dplyr::select(iso3, year, bloc, tapio, regime_viterbi),
+          file.path(PROC, "panel_regimes_k2.csv"))
+cat("K=2 robustez guardada: output/tables/hmm_k2_robustness.csv\n")
 
 # -----------------------------------------------------------------------------
 # 5. Robustez: HMMs separados EU y MERCOSUR

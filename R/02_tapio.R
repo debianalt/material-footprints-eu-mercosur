@@ -5,7 +5,9 @@
 
 library(tidyverse)
 
-BASE <- "C:/Users/ant/OneDrive/articles_1_/material footprints/new submision EE"
+# BASE derivado de la ubicación de este script (rename-proof)
+.a <- commandArgs(FALSE); .f <- sub("^--file=", "", .a[grep("^--file=", .a)])
+BASE <- if (length(.f)) normalizePath(file.path(dirname(.f), "..")) else normalizePath("..")
 PROC <- file.path(BASE, "data/processed")
 TABS <- file.path(BASE, "output/tables")
 

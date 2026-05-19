@@ -16,7 +16,7 @@ replication_repo/
 │   ├── 00_setup.R          ← install packages, define paths
 │   ├── 01_data_prep.R      ← download GMFD + World Bank GDP; build panel
 │   ├── 02_tapio.R          ← Tapio (2005) taxonomy, descriptive analysis
-│   ├── 03_hmm.R            ← HMM K selection (K=2,3,4) + K=3 main model
+│   ├── 03_hmm.R            ← HMM K selection (K=2–5) + K=3 main + K=2 robustness
 │   ├── 04_gap_regression.R ← fixed-effects panel regression (fixest)
 │   ├── 05_figures.R        ← all figures (ggplot2 + patchwork)
 │   └── 06_comtrade.R       ← Fig 8: MERCOSUR→EU bilateral flows (httr2 + public API v1)
@@ -68,7 +68,8 @@ The HMM models are cached in `data/processed/hmm_models_pooled.rds` after first 
 | `tapio_state_distribution.csv` | Tapio state frequency by bloc (n, %, CI) |
 | `tapio_country_summary.csv` | Country-level % SD+WD, median gap_rel, median elasticity |
 | `tapio_rolling_shares.csv` | Rolling 5-yr SD/END shares by bloc and year |
-| `hmm_model_selection.csv` | K=2,3,4 AIC/BIC/logLik (Table 1 in paper) |
+| `hmm_model_selection.csv` | K=2–5 AIC/BIC/ICL/logLik (Table 1 in paper) |
+| `hmm_k2_robustness.csv` | K=2 regime shares by bloc — K-invariance check (Table S5) |
 | `hmm_emission_matrix.csv` | P(Tapio state \| regime) for K=3 pooled model |
 | `hmm_transition_matrix.csv` | Transition probabilities for K=3 pooled model |
 | `hmm_regime_summary.csv` | Regime shares + bootstrap CIs by bloc (Table 4) |
@@ -76,6 +77,7 @@ The HMM models are cached in `data/processed/hmm_models_pooled.rds` after first 
 | `regression_main.txt` | Formatted regression output (M1, M2, M3) |
 | `regression_coefficients.csv` | Tidy coefficient table for M1 and M2 |
 | `regression_robustness.csv` | EU-only and MERCOSUR-only sub-sample regressions |
+| `regression_gap_denominator_robustness.csv` | SD effect under DMC-normalised and absolute-Mt gap (Table S4) |
 | `fig7_quadrant_thresholds.csv` | Sample median thresholds used in Fig. 7 |
 
 ---

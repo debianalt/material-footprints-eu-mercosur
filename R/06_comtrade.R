@@ -23,10 +23,13 @@ library(tidyverse)
 library(httr2)
 library(patchwork)
 
-BASE      <- "C:/Users/ant/OneDrive/articles_1_/material footprints/new submision EE"
+# BASE derivado de la ubicación de este script (rename-proof)
+.a <- commandArgs(FALSE); .f <- sub("^--file=", "", .a[grep("^--file=", .a)])
+BASE      <- if (length(.f)) normalizePath(file.path(dirname(.f), "..")) else normalizePath("..")
 PROC      <- file.path(BASE, "data/processed")
 TABS      <- file.path(BASE, "output/tables")
 FIGS      <- file.path(BASE, "output/figures")
+source(file.path(BASE, "R", "_paper_theme.R"))   # theme_paper(), LBL, WIDTH_IN, save_fig()
 CACHE_DIR <- file.path(PROC, "comtrade_cache")
 dir.create(CACHE_DIR, showWarnings = FALSE, recursive = TRUE)
 
@@ -438,10 +441,7 @@ p_a <- annual_total |>
   scale_y_continuous(labels = scales::comma,
                      name   = "Export value (billion 2015 USD)") +
   labs(x = NULL, title = "A. By commodity category") +
-  theme_bw(base_size = 11) +
-  theme(legend.position  = "bottom",
-        legend.text      = element_text(size = 8),
-        legend.key.size  = unit(0.4, "cm"))
+  theme_paper()
 
 # Panel B: total constant USD trend with ribbon
 p_b <- comtrade_summary |>
@@ -459,7 +459,7 @@ p_b <- comtrade_summary |>
   scale_y_continuous(labels = scales::comma,
                      name   = "Total (billion 2015 USD)") +
   labs(x = NULL, title = "B. Total MERCOSUR exports to EU-27") +
-  theme_bw(base_size = 11)
+  theme_paper()
 
 # Panel C: by exporting country (constant USD)
 p_c <- annual_by_country |>
@@ -480,8 +480,7 @@ p_c <- annual_by_country |>
   scale_y_continuous(labels = scales::comma,
                      name   = "Export value (billion 2015 USD)") +
   labs(x = NULL, title = "C. By exporting country") +
-  theme_bw(base_size = 11) +
-  theme(legend.position = "bottom")
+  theme_paper()
 
 # Panel D: export volume (bars) vs. material export intensity |gap_rel| (line)
 gap_mercosur <- panel_main |>
@@ -517,39 +516,38 @@ p_d <- overlay_data |>
     labels   = scales::comma,
     sec.axis = sec_axis(
       transform = ~ . / sf,
-      name      = "Material export intensity (mean |gap_rel|)",
+      name      = "Mean |gap_rel|",
       labels    = scales::number_format(accuracy = 0.01)
     )
   ) +
   labs(x = "Year",
-       title = "D. Export volume (bars) vs. material export intensity (line)") +
-  theme_bw(base_size = 11) +
+       title = "D. Export volume vs. material export intensity") +
+  theme_paper() +
   theme(
-    axis.title.y.right = element_text(colour = "#D6604D"),
-    axis.text.y.right  = element_text(colour = "#D6604D")
+    axis.title.y.right = element_text(colour = "#D6604D", size = 11),
+    axis.text.y.right  = element_text(colour = "#D6604D", size = 9.5)
   )
 
 fig8 <- (p_a | p_b) / (p_c | p_d) +
+  plot_layout(guides = "collect") &
+  theme(legend.position = "bottom",
+        legend.box      = "vertical",
+        legend.margin   = margin(2, 2, 2, 2),
+        plot.margin     = margin(6, 18, 6, 6))
+
+# Título descriptivo (sin prefijo "Figure 8." ni caption embebido: el caption
+# completo con fuentes/métodos vive en la sección "Figure captions" del
+# manuscrito, según convención Elsevier).
+fig8 <- fig8 +
   plot_annotation(
-    title = "Figure 8. MERCOSUR primary commodity exports to EU-27, 2000-2023",
-    caption = paste0(
-      "Sources: UN Comtrade public API v1 (UN Statistics Division, 2024); ",
-      "UNEP IRP Global Material Flows Database (2024). ",
-      "HS chapters 01-27 (primary commodities), 44, 47 (wood/pulp). ",
-      "Values deflated to constant 2015 USD using US BLS CPI-U (2015 = 100). ",
-      "Grey bands: 2008-2009 financial crisis and 2020 COVID-19 contraction. ",
-      "Panel D right axis: mean absolute value of gap_rel across 4 MERCOSUR members."
-    ),
+    title = "MERCOSUR primary commodity exports to EU-27, 2000–2023",
     theme = theme(
-      plot.title   = element_text(face = "bold", size = 12),
-      plot.caption = element_text(size = 7.5, hjust = 0, colour = "grey30")
+      plot.title = element_text(face = "bold", size = 13, family = "sans")
     )
   )
 
-ggsave(file.path(FIGS, "Fig8_comtrade_flows.tiff"),
-       fig8, width = 14, height = 9, dpi = 300, device = "tiff")
-ggsave(file.path(FIGS, "Fig8_comtrade_flows.png"),
-       fig8, width = 14, height = 9, dpi = 150)
+# Ancho único 190mm (= todas las figuras); alto 9.5in para los 4 paneles
+save_fig(fig8, "Fig8_comtrade_flows", h = 6.8)
 cat("Saved Fig8_comtrade_flows.tiff/.png\n")
 
 cat("\n06_comtrade.R completed.\n")

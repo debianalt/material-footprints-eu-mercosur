@@ -8,10 +8,15 @@ library(patchwork)
 library(scales)
 library(countrycode)
 
-BASE <- "C:/Users/ant/OneDrive/articles_1_/material footprints/new submision EE"
+# BASE derivado de la ubicación de este script (rename-proof)
+.a <- commandArgs(FALSE); .f <- sub("^--file=", "", .a[grep("^--file=", .a)])
+BASE <- if (length(.f)) normalizePath(file.path(dirname(.f), "..")) else normalizePath("..")
 PROC <- file.path(BASE, "data/processed")
 TABS <- file.path(BASE, "output/tables")
 FIGS <- file.path(BASE, "output/figures")
+
+# Tema + exportación unificados (theme_paper(), LBL, WIDTH_IN, save_fig())
+source(file.path(BASE, "R", "_paper_theme.R"))
 
 # Paleta de colores consistente en todo el paper
 COLS <- list(
@@ -36,14 +41,7 @@ TAPIO_LABELS <- c("Strong\nDecoupling", "Weak\nDecoupling", "Expansive\nCoupling
                   "Recessive\nCoupling", "Recessive Neg.\nDecoupling",
                   "Strong Neg.\nDecoupling")
 
-save_fig <- function(p, name, w = 8, h = 5.5) {
-  ggsave(file.path(FIGS, paste0(name, ".tiff")),
-         plot = p, device = "tiff", dpi = 300,
-         width = w, height = h, units = "in", compression = "lzw")
-  ggsave(file.path(FIGS, paste0(name, ".png")),
-         plot = p, dpi = 150, width = w, height = h, units = "in")
-  cat("Guardada:", name, "\n")
-}
+# save_fig() provisto por _paper_theme.R (ancho fijo 190mm, TIFF+PNG 300dpi)
 
 # Cargar datos
 panel_tapio  <- read_csv(file.path(PROC, "panel_tapio.csv"),   show_col_types = FALSE)
@@ -75,14 +73,10 @@ fig1 <- state_dist %>%
     title = "Distribution of Tapio decoupling states by bloc (1994–2024)",
     caption = "Error bars: 95% CIs. χ²(7) = 22.93, p < 0.01."
   ) +
-  theme_bw(base_size = 11) +
-  theme(
-    legend.position     = "top",
-    axis.text.x         = element_text(size = 8),
-    panel.grid.major.x  = element_blank()
-  )
+  theme_paper() +
+  theme(panel.grid.major.x = element_blank())
 
-save_fig(fig1, "Fig1_tapio_distribution", w = 9, h = 5.5)
+save_fig(fig1, "Fig1_tapio_distribution", h = 5.0)
 
 # =============================================================================
 # FIG 2: Rolling 5-year shares SD y END por bloque
@@ -113,10 +107,9 @@ fig2 <- fig2_data %>%
     color = NULL, linetype = NULL,
     title = "Rolling 5-year shares of Strong Decoupling (SD) and Expansive Negative Decoupling (END)"
   ) +
-  theme_bw(base_size = 11) +
-  theme(legend.position = "bottom", strip.background = element_blank())
+  theme_paper()
 
-save_fig(fig2, "Fig2_rolling_shares", w = 10, h = 5)
+save_fig(fig2, "Fig2_rolling_shares", h = 4.8)
 
 # =============================================================================
 # FIG 3: Selección de modelo HMM — BIC/AIC por K (NUEVA — responde R3.4)
@@ -139,10 +132,9 @@ fig3 <- model_sel %>%
                       "  |  ICL minimum: K = ", model_sel$K[which.min(model_sel$ICL)],
                       "  |  Adopted: K = 3")
   ) +
-  theme_bw(base_size = 11) +
-  theme(legend.position = "top")
+  theme_paper()
 
-save_fig(fig3, "Fig3_hmm_model_selection", w = 6, h = 4.5)
+save_fig(fig3, "Fig3_hmm_model_selection", h = 4.8)
 
 # =============================================================================
 # FIG 4: Regime shares por bloque con CIs bootstrap
@@ -169,10 +161,9 @@ fig4 <- fig4_data %>%
     title = "Regime distribution by bloc",
     caption = "Error bars: 95% bootstrap CIs (B = 200)"
   ) +
-  theme_bw(base_size = 11) +
-  theme(legend.position = "top")
+  theme_paper()
 
-save_fig(fig4, "Fig4_regime_shares", w = 7, h = 5)
+save_fig(fig4, "Fig4_regime_shares", h = 5.0)
 
 # =============================================================================
 # FIG 5: Heatmap de probabilidades de transición
@@ -181,7 +172,7 @@ save_fig(fig4, "Fig4_regime_shares", w = 7, h = 5)
 fig5 <- trans_mat %>%
   ggplot(aes(x = to, y = from, fill = prob)) +
   geom_tile(color = "white") +
-  geom_text(aes(label = sprintf("%.2f", prob)), size = 3.5) +
+  geom_text(aes(label = sprintf("%.2f", prob)), size = LBL) +
   scale_fill_gradient2(low = "white", mid = "#fee090", high = "#d73027",
                        midpoint = 0.3, limits = c(0, 1),
                        name = "Transition\nprobability") +
@@ -189,10 +180,12 @@ fig5 <- trans_mat %>%
     x = "To regime", y = "From regime",
     title = "Regime transition probability matrix (pooled HMM)"
   ) +
-  theme_bw(base_size = 11) +
-  theme(panel.grid = element_blank())
+  theme_paper() +
+  theme(panel.grid = element_blank(),
+        legend.position = "right",
+        legend.key.height = unit(1.4, "lines"))
 
-save_fig(fig5, "Fig5_transition_heatmap", w = 6, h = 5)
+save_fig(fig5, "Fig5_transition_heatmap", h = 5.2)
 
 # =============================================================================
 # FIG 6: Trayectorias del gap de externalización 1994-2024
@@ -222,10 +215,9 @@ fig6 <- gap_annual %>%
     subtitle = "Median ± IQR. Positive values: net material importer.",
     caption = "Source: UNEP GMFD (2024). Authors' calculation."
   ) +
-  theme_bw(base_size = 11) +
-  theme(legend.position = "top")
+  theme_paper()
 
-save_fig(fig6, "Fig6_gap_trajectories", w = 9, h = 5.5)
+save_fig(fig6, "Fig6_gap_trajectories", h = 5.0)
 
 # =============================================================================
 # FIG 7: Scatter eficiencia vs. gap (cuadrantes con medianas muestrales)
@@ -258,7 +250,8 @@ fig7 <- cty_summ %>%
   geom_hline(yintercept = threshold_y, linetype = "dotted", color = "grey40") +
   geom_hline(yintercept = 0, linetype = "dashed", color = "grey50", linewidth = 0.4) +
   geom_point(size = 3, alpha = 0.85) +
-  ggrepel::geom_text_repel(size = 2.8, max.overlaps = 20, show.legend = FALSE) +
+  ggrepel::geom_text_repel(size = LBL - 0.6, max.overlaps = 20,
+                           min.segment.length = 0, seed = 42, show.legend = FALSE) +
   scale_color_manual(values = c(EU = COLS$EU, MERCOSUR = COLS$MERCOSUR)) +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   labs(
@@ -271,8 +264,7 @@ fig7 <- cty_summ %>%
                      round(threshold_y * 100, 1), "pp). ",
                      "Positive y-axis = net material importer.")
   ) +
-  theme_bw(base_size = 11) +
-  theme(legend.position = "top")
+  theme_paper()
 
 # ggrepel necesario para etiquetas sin solapamiento
 if (!requireNamespace("ggrepel", quietly = TRUE)) {
@@ -293,7 +285,8 @@ fig7 <- cty_summ %>%
   geom_hline(yintercept = threshold_y, linetype = "dotted", color = "grey40") +
   geom_hline(yintercept = 0, linetype = "dashed", color = "grey50", linewidth = 0.4) +
   geom_point(size = 3, alpha = 0.85) +
-  ggrepel::geom_text_repel(size = 2.8, max.overlaps = 20, show.legend = FALSE) +
+  ggrepel::geom_text_repel(size = LBL - 0.6, max.overlaps = 20,
+                           min.segment.length = 0, seed = 42, show.legend = FALSE) +
   scale_color_manual(values = c(EU = COLS$EU, MERCOSUR = COLS$MERCOSUR)) +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   labs(
@@ -306,10 +299,9 @@ fig7 <- cty_summ %>%
                      scales::percent(threshold_y, accuracy = 0.1), "). ",
                      "Positive y = net material importer.")
   ) +
-  theme_bw(base_size = 11) +
-  theme(legend.position = "top")
+  theme_paper()
 
-save_fig(fig7, "Fig7_typology_scatter", w = 9, h = 6.5)
+save_fig(fig7, "Fig7_typology_scatter", h = 6.8)
 
 # Guardar umbrales usados (para reportar en el paper)
 write_csv(
@@ -320,34 +312,9 @@ write_csv(
 )
 
 # =============================================================================
-# FIG 8: Flujos comerciales EU-MERCOSUR (NUEVA — responde Reviewer 1)
+# FIG 8: Generada por 06_comtrade.R (4-panel figure con desglose por país y categoría)
 # =============================================================================
-
-comtrade_path <- file.path(TABS, "comtrade_summary.csv")
-
-if (file.exists(comtrade_path)) {
-  comtrade_sum <- read_csv(comtrade_path, show_col_types = FALSE)
-
-  fig8 <- comtrade_sum %>%
-    ggplot(aes(x = year, y = trade_bn_usd, color = category, linetype = category)) +
-    geom_line(linewidth = 1.1) +
-    geom_point(size = 1.5) +
-    scale_color_manual(values = c("Total" = "#2166AC",
-                                   "Primary commodities (HS 01-27)" = "#D6604D")) +
-    labs(
-      x = NULL, y = "Trade value (USD billion, current)",
-      color = NULL, linetype = NULL,
-      title = "EU imports from MERCOSUR, 2000–2023",
-      subtitle = "Total goods and primary commodities (HS chapters 01–27)",
-      caption = "Source: UN COMTRADE. EU imports (CIF). Authors' calculation."
-    ) +
-    theme_bw(base_size = 11) +
-    theme(legend.position = "bottom")
-
-  save_fig(fig8, "Fig8_comtrade_flows", w = 9, h = 5.5)
-} else {
-  cat("Fig8: datos COMTRADE no disponibles aún. Ejecutar 04_gap_regression.R primero.\n")
-}
+cat("Fig8: generada por R/06_comtrade.R — omitida aquí para evitar duplicación.\n")
 
 # =============================================================================
 # FIG 9: Coeficientes de regresión con intervalos de confianza
@@ -379,10 +346,9 @@ fig9 <- fig9_data %>%
     subtitle = "Ref. category: EC (Expansive Coupling). FE: country + year. SE clustered by country.",
     caption = "Positive = gap widens (more externalisation). Negative = gap narrows."
   ) +
-  theme_bw(base_size = 11) +
-  theme(legend.position = "bottom")
+  theme_paper()
 
-save_fig(fig9, "Fig9_regression_coefs", w = 9, h = 5.5)
+save_fig(fig9, "Fig9_regression_coefs", h = 5.0)
 
 # =============================================================================
 # FIG 10: Robustez HMMs separados (Supplementary Material)
@@ -406,10 +372,9 @@ if (file.exists(robustness_path)) {
       title = "Robustness: HMM estimated separately by bloc",
       subtitle = "Comparison of regime persistence with pooled model"
     ) +
-    theme_bw(base_size = 11) +
-    theme(legend.position = "top")
+    theme_paper()
 
-  save_fig(fig10, "Fig10_S_robustness_hmm", w = 7, h = 5)
+  save_fig(fig10, "Fig10_S_robustness_hmm", h = 4.8)
 }
 
 cat("\n05_figures.R completado.\n")

@@ -10,7 +10,9 @@ library(tidyverse)
 library(fixest)
 library(broom)
 
-BASE <- "C:/Users/ant/OneDrive/articles_1_/material footprints/new submision EE"
+# BASE derivado de la ubicación de este script (rename-proof)
+.a <- commandArgs(FALSE); .f <- sub("^--file=", "", .a[grep("^--file=", .a)])
+BASE <- if (length(.f)) normalizePath(file.path(dirname(.f), "..")) else normalizePath("..")
 PROC <- file.path(BASE, "data/processed")
 TABS <- file.path(BASE, "output/tables")
 RAW  <- file.path(BASE, "data/raw")
@@ -30,7 +32,13 @@ panel_reg <- panel_reg %>%
     d_gap_rel   = (gap_rel - lag(gap_rel)) * 100,  # en puntos porcentuales
     tapio_f     = factor(tapio, levels = TAPIO_LEVELS),
     eu_dummy    = as.integer(bloc == "EU"),
-    d_log_mf    = log(mf_mt / lag(mf_mt)) * 100
+    d_log_mf    = log(mf_mt / lag(mf_mt)) * 100,
+    # --- variables de robustez al "artefacto de denominador" (Threat B) ---
+    # gap_rel = (MF-DMC)/MF divide por MF; en años SD MF cae y el ratio puede
+    # ensancharse mecánicamente. Dos medidas que NO dividen por MF:
+    d_gap_abs   = gap_abs_mt - lag(gap_abs_mt),          # Mt (sin denominador)
+    gap_dmc     = (mf_mt - dmc_mt) / dmc_mt,             # normalizado por DMC
+    d_gap_dmc   = (gap_dmc - lag(gap_dmc)) * 100         # pp, denominador = DMC
   ) %>%
   ungroup() %>%
   filter(!is.na(d_gap_rel), !is.na(tapio_f))
@@ -63,9 +71,13 @@ m2 <- feols(
   data    = panel_reg
 )
 
-# M3: indicador compuesto envPlus (estados ambientalmente favorables)
+# M3: indicador compuesto de orientación eficiente (SD + WD + EC)
+# NB: definición alineada con el manuscrito §2.5 / Tabla 5
+# ("efficiency-oriented = SD, WD, EC"). La definición previa
+# (SD, RD, RC, RND) agrupaba estados recesivos y era incoherente
+# con el texto; corregida aquí para consistencia (espíritu de R3.3).
 panel_reg <- panel_reg %>%
-  mutate(env_plus = as.integer(tapio %in% c("SD", "RD", "RC", "RND")))
+  mutate(env_plus = as.integer(tapio %in% c("SD", "WD", "EC")))
 
 m3 <- feols(
   d_gap_rel ~ env_plus + eu_dummy:env_plus | iso3 + year,
@@ -100,6 +112,65 @@ bind_rows(coef_m1, coef_m2) %>%
   write_csv(file.path(TABS, "regression_coefficients.csv"))
 
 # -----------------------------------------------------------------------------
+# 2b. Robustez: ¿es la paradoja SD-gap un artefacto de denominador? (Threat B)
+#
+# gap_rel = (MF-DMC)/MF. En años SD de MERCOSUR, MF cae mientras DMC es
+# inercial; el ratio puede profundizarse en parte porque el DENOMINADOR (MF)
+# se contrae, no por un mecanismo comercial. Ningún reviewer lo planteó aún,
+# pero un revisor metodológico (R3) lo detectaría. Pre-empción: re-estimar la
+# especificación de interacción (Tapio × EU) con dos variables que NO dividen
+# por MF —el gap absoluto en Mt y el gap normalizado por DMC— y verificar que
+# el signo y la significación del efecto SD en MERCOSUR persisten.
+# -----------------------------------------------------------------------------
+
+run_interaction <- function(dv, data) {
+  feols(
+    as.formula(paste0(dv,
+      " ~ i(tapio_f, ref = 'EC') + i(tapio_f, eu_dummy, ref = 'EC') | iso3 + year")),
+    cluster = ~iso3, data = data
+  )
+}
+
+m_rel <- run_interaction("d_gap_rel", panel_reg)   # referencia (= M2)
+m_abs <- run_interaction("d_gap_abs", panel_reg)   # Mt, sin denominador
+m_dmc <- run_interaction("d_gap_dmc", panel_reg)   # pp, denominador = DMC
+
+cat("\n=== Robustez denominador — interacción Tapio × EU ===\n")
+cat("\n[DV = Δgap_rel (referencia, denominador = MF)]\n"); print(summary(m_rel))
+cat("\n[DV = Δgap_abs (Mt, SIN denominador)]\n");            print(summary(m_abs))
+cat("\n[DV = Δgap_dmc (pp, denominador = DMC)]\n");           print(summary(m_dmc))
+
+# Extraer el efecto SD para MERCOSUR (baseline) y el offset EU en cada métrica
+pick <- function(mod, dv_label) {
+  td <- tidy(mod)
+  base_sd <- td %>% filter(term == "tapio_f::SD")
+  off_sd  <- td %>% filter(grepl("tapio_f::SD:eu_dummy", term))
+  tibble(
+    dv              = dv_label,
+    sd_mercosur     = round(base_sd$estimate, 3),
+    sd_mercosur_se  = round(base_sd$std.error, 3),
+    sd_mercosur_p   = signif(base_sd$p.value, 3),
+    sd_eu_offset    = round(off_sd$estimate, 3),
+    sd_eu_offset_p  = signif(off_sd$p.value, 3),
+    sd_eu_net       = round(base_sd$estimate + off_sd$estimate, 3)
+  )
+}
+
+gap_denominator_robustness <- bind_rows(
+  pick(m_rel, "d_gap_rel (denominador MF, referencia)"),
+  pick(m_abs, "d_gap_abs (Mt, sin denominador)"),
+  pick(m_dmc, "d_gap_dmc (denominador DMC)")
+)
+
+cat("\n=== Resumen: efecto SD en MERCOSUR bajo métricas alternativas ===\n")
+print(gap_denominator_robustness)
+cat("\nLectura: si sd_mercosur conserva signo negativo y significación con\n")
+cat("d_gap_abs y d_gap_dmc, la paradoja NO es un artefacto del denominador MF.\n")
+
+write_csv(gap_denominator_robustness,
+          file.path(TABS, "regression_gap_denominator_robustness.csv"))
+
+# -----------------------------------------------------------------------------
 # 3. Robustez: solo EU / solo MERCOSUR por separado
 # -----------------------------------------------------------------------------
 
@@ -125,117 +196,53 @@ bind_rows(
   write_csv(file.path(TABS, "regression_robustness.csv"))
 
 # -----------------------------------------------------------------------------
-# 4. Datos COMTRADE — flujos comerciales EU↔MERCOSUR
+# 4. Modelo M4: MERCOSUR + log(trade_const_musd) como covariable
 #
-# REQUIERE API KEY de UN COMTRADE (gratuita):
-#   1. Registrarse en https://comtradeplus.un.org/
-#   2. Obtener API key (plan gratuito: 500 requests/mes)
-#   3. Ejecutar: comtradr::set_primary_comtrade_key("TU_API_KEY")
-#      (o poner la key en .Renviron como COMTRADE_PRIMARY=tu_key)
+# Pregunta: ¿el coeficiente negativo de SD sobre Δgap_rel en MERCOSUR persiste
+# al controlar por el volumen de exportaciones de materias primas hacia la UE?
+# Si sí, la asociación no es un artefacto de tendencias seculares en el comercio.
 #
-# Si no tenés la key, usamos el fallback con el archivo manual
+# Datos generados por 06_comtrade.R (debe correrse antes que este script
+# si comtrade_eu_mercosur.csv no existe).
 # -----------------------------------------------------------------------------
 
-comtrade_path <- file.path(RAW, "comtrade_eu_mercosur.csv")
+comtrade_path <- file.path(PROC, "comtrade_eu_mercosur.csv")  # data/processed, no data/raw
 
-if (!file.exists(comtrade_path)) {
-
-  api_key <- Sys.getenv("COMTRADE_PRIMARY")
-
-  if (nchar(api_key) > 0 && requireNamespace("comtradr", quietly = TRUE)) {
-    library(comtradr)
-    cat("\nDescargando datos COMTRADE...\n")
-
-    # Reporteros: EU-27 agregado (puede ser "EU" en COMTRADE)
-    # Partners: Argentina (ARG), Brasil (BRA), Paraguay (PRY), Uruguay (URY)
-    # Flow: M (imports) - perspectiva EU importando desde MERCOSUR
-    # Commodity: Total (AG6 = 'TOTAL') + HS secciones I-V (materias primas)
-
-    tryCatch({
-      ct_total <- ct_get_data(
-        reporter  = "EU",
-        partner   = c("ARG", "BRA", "PRY", "URY"),
-        flow_direction = "import",
-        commodity_code = "TOTAL",
-        start_date = "2000",
-        end_date   = "2023"
-      )
-
-      # Materias primas: HS capítulos 01-27 (animales, vegetales, minerales, energía)
-      ct_primary <- ct_get_data(
-        reporter  = "EU",
-        partner   = c("ARG", "BRA", "PRY", "URY"),
-        flow_direction = "import",
-        commodity_code = c("01","02","03","04","05","06","07","08","09","10",
-                           "11","12","13","14","15","16","17","18","19","20",
-                           "21","22","23","24","25","26","27"),
-        start_date = "2000",
-        end_date   = "2023"
-      )
-
-      comtrade <- bind_rows(
-        ct_total   %>% mutate(category = "Total"),
-        ct_primary %>% mutate(category = "Primary commodities (HS 01-27)")
-      ) %>%
-        select(year = period, partner = partnerDesc, category,
-               trade_value_usd = primaryValue) %>%
-        group_by(year, category) %>%
-        summarise(trade_value_usd = sum(trade_value_usd, na.rm = TRUE), .groups = "drop")
-
-      write_csv(comtrade, comtrade_path)
-      cat("Datos COMTRADE guardados:", nrow(comtrade), "obs\n")
-
-    }, error = function(e) {
-      cat("Error en COMTRADE API:", conditionMessage(e), "\n")
-      cat("Ver instrucciones en el script para configurar la API key.\n")
-      cat("Alternativamente, descargar manualmente desde:\n")
-      cat("https://comtradeplus.un.org/TradeFlow\n")
-      cat("y guardar como data/raw/comtrade_eu_mercosur.csv\n")
-    })
-
-  } else {
-    cat("\n--- COMTRADE API key no encontrada ---\n")
-    cat("Para obtener datos de flujos comerciales:\n")
-    cat("  1. Registrarse en https://comtradeplus.un.org/\n")
-    cat("  2. Agregar a .Renviron: COMTRADE_PRIMARY=tu_api_key\n")
-    cat("  3. Re-ejecutar este script\n\n")
-    cat("Alternativa: descargar manualmente y guardar como:\n")
-    cat("  data/raw/comtrade_eu_mercosur.csv\n")
-    cat("  Columnas: year, category, trade_value_usd\n\n")
-    cat("El análisis de COMTRADE se saltea por ahora.\n")
-  }
-}
-
-# Si el archivo existe (descargado o manual), procesarlo
 if (file.exists(comtrade_path)) {
-  comtrade <- read_csv(comtrade_path, show_col_types = FALSE)
 
-  comtrade_summary <- comtrade %>%
-    mutate(trade_bn_usd = trade_value_usd / 1e9) %>%
-    group_by(year, category) %>%
-    summarise(trade_bn_usd = sum(trade_bn_usd, na.rm = TRUE), .groups = "drop")
+  comtrade_annual <- read_csv(comtrade_path, show_col_types = FALSE) |>
+    filter(!reporter_iso3 %in% "MERCOSUR_total") |>
+    group_by(iso3 = reporter_iso3, year) |>
+    summarise(trade_const_musd = sum(value_const_musd, na.rm = TRUE), .groups = "drop") |>
+    filter(trade_const_musd > 0)
 
-  write_csv(comtrade_summary, file.path(TABS, "comtrade_summary.csv"))
+  panel_m4 <- panel_reg |>
+    filter(bloc == "MERCOSUR") |>
+    left_join(comtrade_annual, by = c("iso3", "year")) |>
+    filter(!is.na(trade_const_musd)) |>
+    mutate(log_trade = log(trade_const_musd))
 
-  # Correlación: años de SD alto en EU vs. volumen de importaciones desde MERCOSUR
-  eu_sd_annual <- read_csv(file.path(TABS, "tapio_rolling_shares.csv"),
-                           show_col_types = FALSE) %>%
-    filter(bloc == "EU") %>%
-    select(year, share_SD)
+  cat(sprintf("\nM4 sample: %d obs, %d countries, %d years\n",
+      nrow(panel_m4), n_distinct(panel_m4$iso3), n_distinct(panel_m4$year)))
 
-  corr_data <- comtrade_summary %>%
-    filter(category == "Primary commodities (HS 01-27)") %>%
-    inner_join(eu_sd_annual, by = "year")
+  m4 <- feols(
+    d_gap_rel ~ i(tapio_f, ref = "EC") + log_trade | iso3 + year,
+    cluster = ~iso3,
+    data    = panel_m4
+  )
 
-  if (nrow(corr_data) > 5) {
-    corr_test <- cor.test(corr_data$share_SD, corr_data$trade_bn_usd,
-                          method = "pearson")
-    cat("\nCorrelación EU SD-share vs importaciones primarias desde MERCOSUR:\n")
-    print(corr_test)
-    write_csv(corr_data, file.path(TABS, "sd_comtrade_correlation.csv"))
-  }
+  cat("\n=== M4: MERCOSUR solamente + log(trade_const_musd) ===\n")
+  print(summary(m4))
 
-  cat("Análisis COMTRADE completado.\n")
+  # Append M4 to regression_coefficients.csv
+  bind_rows(coef_m1, coef_m2,
+            tidy(m4, conf.int = TRUE) |> mutate(model = "M4_trade_MERCOSUR")) |>
+    write_csv(file.path(TABS, "regression_coefficients.csv"))
+
+  cat("M4 appended to regression_coefficients.csv\n")
+
+} else {
+  cat("\ncomtrade_eu_mercosur.csv not found — run 06_comtrade.R first to generate M4.\n")
 }
 
 cat("\n04_gap_regression.R completado.\n")

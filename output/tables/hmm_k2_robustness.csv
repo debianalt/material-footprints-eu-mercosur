@@ -1,0 +1,5 @@
+bloc,regime_viterbi,dominant_tapio,pct,mean_dwell_time,p_self_transition
+EU,1,RND,17.7,4.36,0.771
+EU,2,END,82.3,9.45,0.894
+MERCOSUR,1,RND,32.5,4.36,0.771
+MERCOSUR,2,END,67.5,9.45,0.894
