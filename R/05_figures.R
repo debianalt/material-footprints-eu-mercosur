@@ -339,8 +339,8 @@ fig9 <- fig9_data %>%
   geom_hline(yintercept = 0, linetype = "dashed", color = "grey50") +
   geom_pointrange(aes(ymin = conf.low, ymax = conf.high),
                   position = position_dodge(width = 0.45), linewidth = 0.7) +
-  scale_color_manual(values = c("MERCOSUR (baseline group)"          = COLS$MERCOSUR,
-                                 "EU (offset vs. MERCOSUR baseline)"  = COLS$EU)) +
+  scale_color_manual(values = c("MERCOSUR (baseline)" = COLS$MERCOSUR,
+                                 "EU (offset)"         = COLS$EU)) +
   scale_shape_manual(values = c("CI excludes 0" = 16, "CI includes 0" = 1)) +
   labs(
     x = "Tapio decoupling state",
