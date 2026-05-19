@@ -386,8 +386,9 @@ while i < len(src_lines):
         p.paragraph_format.left_indent = Cm(0.5)
         p.paragraph_format.space_after = Pt(4)
         inner = combined.strip().strip("*")
-        r = p.add_run(inner)
-        set_run_base(r, size=10, italic=True)
+        # parse subscripts/superscripts so g_MF, g_GDP, p_self render
+        # correctly in table notes (formula_mode keeps the note italic)
+        add_formula_runs(p, inner, body_size=10, formula_mode=True)
     else:
         p = doc.add_paragraph()
         set_para_normal(p)
