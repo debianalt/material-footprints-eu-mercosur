@@ -326,25 +326,41 @@ fig9_data <- reg_coefs %>%
   mutate(
     state      = str_extract(term, "SD|WD|EC|END|RD|RC|RND|SND"),
     state      = factor(state, levels = TAPIO_LEVELS),
-    type       = if_else(str_detect(term, "eu_dummy"), "EU interaction", "Main effect"),
-    sig        = if_else(p.value < 0.05, "p < 0.05", "p ≥ 0.05")
+    series     = if_else(str_detect(term, "eu_dummy"),
+                         "EU (offset vs. MERCOSUR baseline)",
+                         "MERCOSUR (baseline group)"),
+    series     = factor(series, levels = c("MERCOSUR (baseline group)",
+                                            "EU (offset vs. MERCOSUR baseline)")),
+    sig        = if_else(p.value < 0.05, "95% CI excludes 0", "95% CI includes 0")
   ) %>%
   filter(!is.na(state))
 
 fig9 <- fig9_data %>%
-  ggplot(aes(x = state, y = estimate, color = type, shape = sig)) +
+  ggplot(aes(x = state, y = estimate, color = series, shape = sig)) +
   geom_hline(yintercept = 0, linetype = "dashed", color = "grey50") +
   geom_pointrange(aes(ymin = conf.low, ymax = conf.high),
-                  position = position_dodge(width = 0.4), linewidth = 0.7) +
-  scale_color_manual(values = c("Main effect"       = COLS$EU,
-                                 "EU interaction"    = COLS$MERCOSUR)) +
-  scale_shape_manual(values = c("p < 0.05" = 16, "p ≥ 0.05" = 1)) +
+                  position = position_dodge(width = 0.45), linewidth = 0.7) +
+  scale_color_manual(values = c("MERCOSUR (baseline group)"          = COLS$MERCOSUR,
+                                 "EU (offset vs. MERCOSUR baseline)"  = COLS$EU)) +
+  scale_shape_manual(values = c("95% CI excludes 0" = 16,
+                                 "95% CI includes 0" = 1)) +
   labs(
-    x = "Tapio state", y = "Coefficient: Δgap_rel (percentage points)",
+    x = "Tapio decoupling state (reference state: EC)",
+    y = "Regression coefficient:\nannual change in externalisation gap vs. EC (percentage points)",
     color = NULL, shape = NULL,
-    title = "Panel regression: Tapio states and annual change in externalisation gap",
-    subtitle = "Ref. category: EC (Expansive Coupling). FE: country + year. SE clustered by country.",
-    caption = "Positive = gap widens (more externalisation). Negative = gap narrows."
+    title = "Figure 9. Panel-regression coefficients (model M2): how each Tapio state\nrelates to the annual change in the material externalisation gap",
+    subtitle = paste0(
+      "Points = coefficient estimates; bars = 95% CI (SE clustered by country; ",
+      "country + year fixed effects).\nMERCOSUR is the baseline group; the EU series ",
+      "is the OFFSET added to that baseline (EU effect = baseline + offset).\n",
+      "Not a country plot: individual countries are absorbed by country fixed effects ",
+      "(see Fig. 7 / Table S2 for country-level detail)."
+    ),
+    caption = paste0(
+      "A coefficient below 0 = gap moves more negative vs. EC. MERCOSUR holds ",
+      "negative gap baselines and the EU positive ones, so the same sign implies ",
+      "opposite structural readings (see Section 3.5)."
+    )
   ) +
   theme_paper()
 
