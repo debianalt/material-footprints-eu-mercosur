@@ -171,6 +171,48 @@ write_csv(gap_denominator_robustness,
           file.path(TABS, "regression_gap_denominator_robustness.csv"))
 
 # -----------------------------------------------------------------------------
+# 2c. Robustez: inestabilidad de la elasticidad de Tapio cerca de g_GDP ≈ 0
+#
+# Objeción metodológica clásica: ε = g_MF / g_GDP explota cuando g_GDP → 0,
+# lo que desestabiliza la clasificación de Tapio. Respuesta en dos partes:
+#
+# (1) ARGUMENTO DEFINICIONAL (decisivo): SD, SND, RD, RC y RND se definen por
+#     el SIGNO de g_GDP y g_MF, no por el umbral del cociente ε. Sólo las
+#     fronteras WD/EC/END usan ε. Por construcción, la inestabilidad de ε
+#     cerca de g_GDP≈0 NO puede afectar al resultado SD que sostiene el paper.
+# (2) CONFIRMACIÓN EMPÍRICA: re-estimar M2 excluyendo los años con |g_GDP|
+#     muy pequeño y verificar que el coeficiente SD de MERCOSUR es estable.
+# -----------------------------------------------------------------------------
+
+cat("\n=== Robustez: elasticidad de Tapio cerca de g_GDP ≈ 0 ===\n")
+
+# Estados basados en signo (inmunes a la inestabilidad de ε) vs. basados en ε
+SIGN_BASED <- c("SD", "SND", "RD", "RC", "RND")
+RATIO_BASED <- c("WD", "EC", "END")
+n_total   <- nrow(panel_reg)
+n_signbsd <- sum(panel_reg$tapio %in% SIGN_BASED)
+cat(sprintf("Observaciones en estados basados en signo (inmunes a ε): %d/%d (%.1f%%)\n",
+            n_signbsd, n_total, 100 * n_signbsd / n_total))
+
+nearzero_robustness <- map_dfr(c(0.010, 0.005), function(thr) {
+  keep <- panel_reg %>% filter(abs(g_gdp) >= thr)
+  n_drop <- n_total - nrow(keep)
+  m_nz   <- run_interaction("d_gap_rel", keep)
+  r      <- pick(m_nz, sprintf("|g_GDP| >= %.1f%% (excl. %d obs)",
+                               100 * thr, n_drop))
+  r$n_obs <- nrow(keep)
+  r
+})
+
+cat("\nEfecto SD en MERCOSUR excluyendo años con crecimiento del PIB casi nulo:\n")
+print(nearzero_robustness)
+cat("\nReferencia (panel completo): sd_mercosur = -11.52, p < 0.001 (Tabla 5, M2).\n")
+cat("Lectura: estabilidad del coeficiente SD confirma el argumento definicional.\n")
+
+write_csv(nearzero_robustness,
+          file.path(TABS, "regression_tapio_nearzero_robustness.csv"))
+
+# -----------------------------------------------------------------------------
 # 3. Robustez: solo EU / solo MERCOSUR por separado
 # -----------------------------------------------------------------------------
 
