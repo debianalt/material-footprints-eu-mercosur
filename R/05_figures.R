@@ -327,11 +327,10 @@ fig9_data <- reg_coefs %>%
     state      = str_extract(term, "SD|WD|EC|END|RD|RC|RND|SND"),
     state      = factor(state, levels = TAPIO_LEVELS),
     series     = if_else(str_detect(term, "eu_dummy"),
-                         "EU (offset vs. MERCOSUR baseline)",
-                         "MERCOSUR (baseline group)"),
-    series     = factor(series, levels = c("MERCOSUR (baseline group)",
-                                            "EU (offset vs. MERCOSUR baseline)")),
-    sig        = if_else(p.value < 0.05, "95% CI excludes 0", "95% CI includes 0")
+                         "EU (offset)", "MERCOSUR (baseline)"),
+    series     = factor(series, levels = c("MERCOSUR (baseline)",
+                                            "EU (offset)")),
+    sig        = if_else(p.value < 0.05, "CI excludes 0", "CI includes 0")
   ) %>%
   filter(!is.na(state))
 
@@ -342,25 +341,14 @@ fig9 <- fig9_data %>%
                   position = position_dodge(width = 0.45), linewidth = 0.7) +
   scale_color_manual(values = c("MERCOSUR (baseline group)"          = COLS$MERCOSUR,
                                  "EU (offset vs. MERCOSUR baseline)"  = COLS$EU)) +
-  scale_shape_manual(values = c("95% CI excludes 0" = 16,
-                                 "95% CI includes 0" = 1)) +
+  scale_shape_manual(values = c("CI excludes 0" = 16, "CI includes 0" = 1)) +
   labs(
-    x = "Tapio decoupling state (reference state: EC)",
-    y = "Regression coefficient:\nannual change in externalisation gap vs. EC (percentage points)",
+    x = "Tapio decoupling state",
+    y = "Coefficient (pp, vs. EC)",
     color = NULL, shape = NULL,
-    title = "Figure 9. Panel-regression coefficients (model M2): how each Tapio state\nrelates to the annual change in the material externalisation gap",
-    subtitle = paste0(
-      "Points = coefficient estimates; bars = 95% CI (SE clustered by country; ",
-      "country + year fixed effects).\nMERCOSUR is the baseline group; the EU series ",
-      "is the OFFSET added to that baseline (EU effect = baseline + offset).\n",
-      "Not a country plot: individual countries are absorbed by country fixed effects ",
-      "(see Fig. 7 / Table S2 for country-level detail)."
-    ),
-    caption = paste0(
-      "A coefficient below 0 = gap moves more negative vs. EC. MERCOSUR holds ",
-      "negative gap baselines and the EU positive ones, so the same sign implies ",
-      "opposite structural readings (see Section 3.5)."
-    )
+    title = "M2 panel regression: Tapio state vs. annual change in the externalisation gap",
+    subtitle = "MERCOSUR = baseline; EU = offset added to it. 95% CI; country + year FE, SE clustered by country.",
+    caption = "Sign is bloc-dependent (MERCOSUR negative gap baselines, EU positive) — see Section 3.5."
   ) +
   theme_paper()
 
