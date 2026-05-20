@@ -132,11 +132,14 @@ def is_sep_line(line):
     return bool(re.match(r"^\|[\s\-\|:]+\|$", line.strip()))
 
 def parse_table(lines):
+    # Split each row on unescaped `|`; treat `\|` as a literal pipe inside a cell
+    # (needed for math notation such as `\|ε − 1\| ≤ τ`).
     rows = []
     for ln in lines:
         if is_sep_line(ln):
             continue
-        cells = [c.strip() for c in ln.strip().strip("|").split("|")]
+        body = ln.strip().strip("|")
+        cells = [c.replace(r"\|", "|").strip() for c in re.split(r"(?<!\\)\|", body)]
         rows.append(cells)
     return rows
 
