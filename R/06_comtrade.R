@@ -8,7 +8,7 @@
 #   - Physical weight extracted from cache where isLeaf + netWgt reliable
 #   - USD deflated to constant 2015 prices (US BLS CPI-U, 2015 = 100)
 #   - Spearman rho correlation table (trade value vs. gap_rel, by country)
-#   - Fig 8 updated to 4 panels including material export intensity overlay (D)
+#   - Fig 9 updated to 4 panels including material export intensity overlay (D)
 #
 # All outputs generated from local cache — no new API calls if cache exists.
 #
@@ -16,7 +16,7 @@
 #   data/processed/comtrade_eu_mercosur.csv  — long, value + weight + const USD
 #   output/tables/comtrade_summary.csv        — annual totals (for 05_figures.R)
 #   output/tables/comtrade_gap_correlation.csv — Spearman rho by country
-#   output/figures/Fig8_comtrade_flows.tiff/.png — 4-panel figure
+#   output/figures/Fig9_comtrade_flows.tiff/.png — 4-panel figure
 # =============================================================================
 
 library(tidyverse)
@@ -407,7 +407,7 @@ cat("\nCorrelation table (trade flows vs. gap_rel):\n")
 print(corr_table, digits = 3)
 
 # =============================================================================
-# 11. Figure 8 — 4-panel: commodity composition + trends + country + overlay
+# 11. Figure 9 — 4-panel: commodity composition + trends + country + overlay
 # =============================================================================
 
 pal_cat <- c(
@@ -521,24 +521,27 @@ p_d <- overlay_data |>
     )
   ) +
   labs(x = "Year",
-       title = "D. Export volume vs. material export intensity") +
+       title = "D. Volume vs. material export intensity") +
   theme_paper() +
   theme(
     axis.title.y.right = element_text(colour = "#D6604D", size = 11),
     axis.text.y.right  = element_text(colour = "#D6604D", size = 9.5)
   )
 
-fig8 <- (p_a | p_b) / (p_c | p_d) +
+fig9 <- (p_a | p_b) / (p_c | p_d) +
   plot_layout(guides = "collect") &
-  theme(legend.position = "bottom",
-        legend.box      = "vertical",
-        legend.margin   = margin(2, 2, 2, 2),
-        plot.margin     = margin(6, 18, 6, 6))
+  theme(legend.position   = "bottom",
+        legend.box        = "vertical",
+        legend.margin     = margin(2, 2, 2, 2),
+        legend.box.margin = margin(t = 4, r = 14, b = 0, l = 14),
+        legend.key.width  = unit(14, "pt"),
+        legend.key.height = unit(10, "pt"),
+        plot.margin       = margin(6, 14, 6, 10))
 
-# Título descriptivo (sin prefijo "Figure 8." ni caption embebido: el caption
-# completo con fuentes/métodos vive en la sección "Figure captions" del
-# manuscrito, según convención Elsevier).
-fig8 <- fig8 +
+# Título descriptivo (sin prefijo "Figure 9." ni caption embebido: el caption
+# completo con fuentes/métodos vive inline en el manuscrito junto al embed,
+# según convención Elsevier).
+fig9 <- fig9 +
   plot_annotation(
     title = "MERCOSUR primary commodity exports to EU-27, 2000–2023",
     theme = theme(
@@ -546,8 +549,8 @@ fig8 <- fig8 +
     )
   )
 
-# Ancho único 190mm (= todas las figuras); alto 9.5in para los 4 paneles
-save_fig(fig8, "Fig8_comtrade_flows", h = 6.8)
-cat("Saved Fig8_comtrade_flows.tiff/.png\n")
+# Ancho único 190mm (= todas las figuras); alto 6.8in para los 4 paneles
+save_fig(fig9, "Fig9_comtrade_flows", h = 6.8)
+cat("Saved Fig9_comtrade_flows.tiff/.png\n")
 
 cat("\n06_comtrade.R completed.\n")

@@ -140,7 +140,7 @@ save_fig(fig3, "Fig3_hmm_model_selection", h = 4.8)
 # FIG 4: Regime shares por bloque con CIs bootstrap
 # =============================================================================
 
-fig4_data <- regime_sum %>%
+fig5_data <- regime_sum %>%
   select(bloc, regime_viterbi, dominant_tapio, pct, ci_lower, ci_upper, mean_dwell_time) %>%
   filter(!is.na(pct)) %>%
   mutate(
@@ -149,7 +149,7 @@ fig4_data <- regime_sum %>%
     dwell_label  = paste0("Dwell: ", round(mean_dwell_time, 1), " yr")
   )
 
-fig4 <- fig4_data %>%
+fig5 <- fig5_data %>%
   ggplot(aes(x = factor(regime_viterbi), y = pct, fill = bloc)) +
   geom_col(position = position_dodge(0.7), width = 0.6, alpha = 0.85) +
   geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper),
@@ -163,13 +163,13 @@ fig4 <- fig4_data %>%
   ) +
   theme_paper()
 
-save_fig(fig4, "Fig4_regime_shares", h = 5.0)
+save_fig(fig5, "Fig5_regime_shares", h = 5.0)
 
 # =============================================================================
 # FIG 5: Heatmap de probabilidades de transición
 # =============================================================================
 
-fig5 <- trans_mat %>%
+fig4 <- trans_mat %>%
   ggplot(aes(x = to, y = from, fill = prob)) +
   geom_tile(color = "white") +
   geom_text(aes(label = sprintf("%.2f", prob)), size = LBL) +
@@ -185,7 +185,7 @@ fig5 <- trans_mat %>%
         legend.position = "right",
         legend.key.height = unit(1.4, "lines"))
 
-save_fig(fig5, "Fig5_transition_heatmap", h = 5.2)
+save_fig(fig4, "Fig4_transition_heatmap", h = 5.2)
 
 # =============================================================================
 # FIG 6: Trayectorias del gap de externalización 1994-2024
@@ -312,15 +312,15 @@ write_csv(
 )
 
 # =============================================================================
-# FIG 8: Generada por 06_comtrade.R (4-panel figure con desglose por país y categoría)
+# FIG 9: Generada por 06_comtrade.R (4-panel figure con desglose por país y categoría)
 # =============================================================================
-cat("Fig8: generada por R/06_comtrade.R — omitida aquí para evitar duplicación.\n")
+cat("Fig9: generada por R/06_comtrade.R — omitida aquí para evitar duplicación.\n")
 
 # =============================================================================
-# FIG 9: Coeficientes de regresión con intervalos de confianza
+# FIG 8: Coeficientes de regresión con intervalos de confianza
 # =============================================================================
 
-fig9_data <- reg_coefs %>%
+fig8_data <- reg_coefs %>%
   filter(model == "M2_interaction") %>%
   filter(str_detect(term, "tapio_f")) %>%
   mutate(
@@ -334,7 +334,7 @@ fig9_data <- reg_coefs %>%
   ) %>%
   filter(!is.na(state))
 
-fig9 <- fig9_data %>%
+fig8 <- fig8_data %>%
   ggplot(aes(x = state, y = estimate, color = series, shape = sig)) +
   geom_hline(yintercept = 0, linetype = "dashed", color = "grey50") +
   geom_pointrange(aes(ymin = conf.low, ymax = conf.high),
@@ -352,7 +352,7 @@ fig9 <- fig9_data %>%
   ) +
   theme_paper()
 
-save_fig(fig9, "Fig9_regression_coefs", h = 5.0)
+save_fig(fig8, "Fig8_regression_coefs", h = 5.0)
 
 # =============================================================================
 # FIG 10: Robustez HMMs separados (Supplementary Material)

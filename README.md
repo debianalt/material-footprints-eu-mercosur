@@ -19,7 +19,7 @@ replication_repo/
 │   ├── 03_hmm.R            ← HMM K selection (K=2–5) + K=3 main + K=2 robustness
 │   ├── 04_gap_regression.R ← fixed-effects panel regression (fixest)
 │   ├── 05_figures.R        ← all figures (ggplot2 + patchwork)
-│   └── 06_comtrade.R       ← Fig 8: MERCOSUR→EU bilateral flows (httr2 + public API v1)
+│   └── 06_comtrade.R       ← Fig 9: MERCOSUR→EU bilateral flows (httr2 + public API v1)
 ├── data/
 │   └── processed/
 │       ├── panel_main.csv      ← 31 countries × 1994–2024; MF, DMC, GDP, gap_rel
@@ -51,8 +51,8 @@ source("R/01_data_prep.R")      # builds data/processed/panel_main.csv
 source("R/02_tapio.R")          # Tapio classification + tables
 source("R/03_hmm.R")            # HMM models; slow (~10 min with 30 restarts)
 source("R/04_gap_regression.R") # regression tables
-source("R/05_figures.R")        # all figures (Fig 1–7, 9–10)
-source("R/06_comtrade.R")       # Fig 8: MERCOSUR→EU bilateral flows (~40 min)
+source("R/05_figures.R")        # all figures (Fig 1–8, 10)
+source("R/06_comtrade.R")       # Fig 9: MERCOSUR→EU bilateral flows (~40 min)
 ```
 
 `06_comtrade.R` uses the UN Comtrade public API v1 (no key required). It loops 24 years × 29 HS chapters = 696 API calls and caches each response in `data/processed/comtrade_cache/`. Interrupted runs resume from cache automatically.
@@ -89,12 +89,12 @@ The HMM models are cached in `data/processed/hmm_models_pooled.rds` after first 
 | `Fig1_tapio_distribution.png` | Fig. 1: Tapio state distribution by bloc |
 | `Fig2_rolling_shares.png` | Fig. 2: Rolling 5-yr SD/END shares |
 | `Fig3_hmm_model_selection.png` | Fig. 3: HMM model selection (AIC/BIC) |
-| `Fig4_regime_shares.png` | Fig. 4: Regime time shares with CIs |
-| `Fig5_transition_heatmap.png` | Fig. 5: Transition probability heatmaps |
+| `Fig4_transition_heatmap.png` | Fig. 4: Regime transition probability matrix |
+| `Fig5_regime_shares.png` | Fig. 5: Regime time shares with CIs |
 | `Fig6_gap_trajectories.png` | Fig. 6: Externalization gap trajectories |
 | `Fig7_typology_scatter.png` | Fig. 7: Country typology scatter (4 quadrants) |
-| `Fig8_comtrade_flows.png` | Fig. 8: MERCOSUR→EU-27 raw material exports |
-| `Fig9_regression_coefs.png` | Fig. 9: Regression coefficient plot |
+| `Fig8_regression_coefs.png` | Fig. 8: Regression coefficient plot |
+| `Fig9_comtrade_flows.png` | Fig. 9: MERCOSUR→EU-27 raw material exports |
 | `Fig10_S_robustness_hmm.png` | Fig. S1: Robustness HMMs comparison |
 
 ---
