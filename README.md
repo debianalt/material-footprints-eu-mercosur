@@ -2,8 +2,8 @@
 
 **Paper:** "Latent Regimes in Material Footprint Decoupling: EU and MERCOSUR (1994–2024)"  
 **Journal:** *Ecological Economics* (resubmission)  
-**Authors:** [Author names]  
-**Affiliation:** CONICET / FHyCS-UNaM  
+**Authors:** Raimundo Elías Gómez, María Gabriela Miño  
+**Affiliations:** University of Porto (Institute of Sociology) — R.E. Gómez; CONICET (Posadas, Argentina) — both authors  
 
 ---
 
@@ -51,7 +51,7 @@ source("R/01_data_prep.R")      # builds data/processed/panel_main.csv
 source("R/02_tapio.R")          # Tapio classification + tables
 source("R/03_hmm.R")            # HMM models; slow (~10 min with 30 restarts)
 source("R/04_gap_regression.R") # regression tables
-source("R/05_figures.R")        # all figures (Fig 1–8, 10)
+source("R/05_figures.R")        # all figures (Fig 1–8)
 source("R/06_comtrade.R")       # Fig 9: MERCOSUR→EU bilateral flows (~40 min)
 ```
 
@@ -95,7 +95,6 @@ The HMM models are cached in `data/processed/hmm_models_pooled.rds` after first 
 | `Fig7_typology_scatter.png` | Fig. 7: Country typology scatter (4 quadrants) |
 | `Fig8_regression_coefs.png` | Fig. 8: Regression coefficient plot |
 | `Fig9_comtrade_flows.png` | Fig. 9: MERCOSUR→EU-27 raw material exports |
-| `Fig10_S_robustness_hmm.png` | Fig. S1: Robustness HMMs comparison |
 
 ---
 

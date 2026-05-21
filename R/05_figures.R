@@ -354,32 +354,5 @@ fig8 <- fig8_data %>%
 
 save_fig(fig8, "Fig8_regression_coefs", h = 5.0)
 
-# =============================================================================
-# FIG 10: Robustez HMMs separados (Supplementary Material)
-# =============================================================================
-
-robustness_path <- file.path(TABS, "hmm_robustness_summary.csv")
-if (file.exists(robustness_path)) {
-  robust_sum <- read_csv(robustness_path, show_col_types = FALSE)
-
-  fig10 <- robust_sum %>%
-    filter(model %in% c("EU_only", "MERCOSUR_only")) %>%
-    ggplot(aes(x = factor(regime), y = mean_dwell_time, fill = model)) +
-    geom_col(position = position_dodge(0.7), width = 0.6, alpha = 0.85) +
-    scale_fill_manual(values = c(EU_only       = COLS$EU,
-                                  MERCOSUR_only = COLS$MERCOSUR),
-                      labels = c(EU_only = "EU (separate HMM)",
-                                 MERCOSUR_only = "MERCOSUR (separate HMM)")) +
-    labs(
-      x = "Regime", y = "Mean dwell time (years)",
-      fill = NULL,
-      title = "Robustness: HMM estimated separately by bloc",
-      subtitle = "Comparison of regime persistence with pooled model"
-    ) +
-    theme_paper()
-
-  save_fig(fig10, "Fig10_S_robustness_hmm", h = 4.8)
-}
-
 cat("\n05_figures.R completado.\n")
 cat("Figuras guardadas en:", FIGS, "\n")
