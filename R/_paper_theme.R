@@ -44,11 +44,12 @@ theme_paper <- function(base = 11) {
     )
 }
 
-# Exportación uniforme: ancho fijo, alto por contenido. TIFF 300 dpi (envío)
-# + PNG 300 dpi (preview Obsidian nítido), mismas dimensiones.
+# Exportación uniforme: ancho fijo, alto por contenido. TIFF 500 dpi (envío:
+# Elsevier pide >=500 dpi para arte combinado línea+color) + PNG 300 dpi
+# (preview Obsidian nítido), mismas dimensiones físicas.
 save_fig <- function(p, name, h = 5) {
   ggsave(file.path(FIGS, paste0(name, ".tiff")),
-         plot = p, device = "tiff", dpi = 300,
+         plot = p, device = "tiff", dpi = 500,
          width = WIDTH_IN, height = h, units = "in", compression = "lzw")
   ggsave(file.path(FIGS, paste0(name, ".png")),
          plot = p, dpi = 300,

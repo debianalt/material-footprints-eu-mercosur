@@ -538,16 +538,8 @@ fig9 <- (p_a | p_b) / (p_c | p_d) +
         legend.key.height = unit(10, "pt"),
         plot.margin       = margin(6, 14, 6, 10))
 
-# Título descriptivo (sin prefijo "Figure 9." ni caption embebido: el caption
-# completo con fuentes/métodos vive inline en el manuscrito junto al embed,
-# según convención Elsevier).
-fig9 <- fig9 +
-  plot_annotation(
-    title = "MERCOSUR primary commodity exports to EU-27, 2000–2023",
-    theme = theme(
-      plot.title = element_text(face = "bold", size = 13, family = "sans")
-    )
-  )
+# Sin título embebido: el caption vive inline en el manuscrito junto al embed,
+# según convención Elsevier ("brief title, not on the figure itself").
 
 # Ancho único 190mm (= todas las figuras); alto 6.8in para los 4 paneles
 save_fig(fig9, "Fig9_comtrade_flows", h = 6.8)

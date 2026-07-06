@@ -69,9 +69,7 @@ fig1 <- state_dist %>%
   scale_color_manual(values = c(EU = COLS$EU, MERCOSUR = COLS$MERCOSUR)) +
   labs(
     x = NULL, y = "Frequency (%)",
-    fill = NULL, color = NULL,
-    title = "Distribution of Tapio decoupling states by bloc (1994–2024)",
-    caption = "Error bars: 95% CIs. χ²(7) = 22.93, p < 0.01."
+    fill = NULL, color = NULL
   ) +
   theme_paper() +
   theme(panel.grid.major.x = element_blank())
@@ -87,27 +85,26 @@ fig2_data <- rolling %>%
   pivot_longer(c(share_SD, share_END), names_to = "indicator", values_to = "share") %>%
   mutate(
     indicator = recode(indicator, share_SD = "Strong Decoupling",
-                                  share_END = "Expansive Neg. Decoupling"),
-    line_type = case_when(
-      indicator == "Strong Decoupling"        ~ "solid",
-      indicator == "Expansive Neg. Decoupling" ~ "dashed"
-    )
+                                  share_END = "Expansive Neg. Decoupling")
   )
 
+# Color EU/MERCOSUR sin leyenda (los strips ya titulan los paneles); la única
+# leyenda es linetype, con claves largas para que el guionado sea visible.
 fig2 <- fig2_data %>%
   ggplot(aes(x = year, y = share, color = bloc, linetype = indicator)) +
   geom_line(linewidth = 0.9) +
   geom_point(size = 1.2, alpha = 0.6) +
   facet_wrap(~bloc, ncol = 2) +
-  scale_color_manual(values = c(EU = COLS$EU, MERCOSUR = COLS$MERCOSUR)) +
+  scale_color_manual(values = c(EU = COLS$EU, MERCOSUR = COLS$MERCOSUR),
+                     guide = "none") +
   scale_linetype_manual(values = c("Strong Decoupling" = "solid",
                                     "Expansive Neg. Decoupling" = "dashed")) +
   labs(
     x = NULL, y = "5-year rolling share (%)",
-    color = NULL, linetype = NULL,
-    title = "Rolling 5-year shares of Strong Decoupling (SD) and Expansive Negative Decoupling (END)"
+    linetype = NULL
   ) +
-  theme_paper()
+  theme_paper() +
+  theme(legend.key.width = unit(2.5, "lines"))
 
 save_fig(fig2, "Fig2_rolling_shares", h = 4.8)
 
@@ -126,11 +123,7 @@ fig3 <- model_sel %>%
   labs(
     x = "Number of latent regimes (K)",
     y = "Information criterion value",
-    color = NULL, shape = NULL,
-    title = "HMM model selection: AIC, BIC, and ICL across K = 2–5",
-    subtitle = paste0("BIC minimum: K = ", model_sel$K[which.min(model_sel$BIC)],
-                      "  |  ICL minimum: K = ", model_sel$K[which.min(model_sel$ICL)],
-                      "  |  Adopted: K = 3")
+    color = NULL, shape = NULL
   ) +
   theme_paper()
 
@@ -157,9 +150,7 @@ fig5 <- fig5_data %>%
   scale_fill_manual(values = c(EU = COLS$EU, MERCOSUR = COLS$MERCOSUR)) +
   labs(
     x = "Latent regime", y = "Posterior-weighted share (%)",
-    fill = NULL,
-    title = "Regime distribution by bloc",
-    caption = "Error bars: 95% bootstrap CIs (B = 200)"
+    fill = NULL
   ) +
   theme_paper()
 
@@ -176,10 +167,7 @@ fig4 <- trans_mat %>%
   scale_fill_gradient2(low = "white", mid = "#fee090", high = "#d73027",
                        midpoint = 0.3, limits = c(0, 1),
                        name = "Transition\nprobability") +
-  labs(
-    x = "To regime", y = "From regime",
-    title = "Regime transition probability matrix (pooled HMM)"
-  ) +
+  labs(x = "To regime", y = "From regime") +
   theme_paper() +
   theme(panel.grid = element_blank(),
         legend.position = "right",
@@ -210,10 +198,7 @@ fig6 <- gap_annual %>%
   scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   labs(
     x = NULL, y = "Externalisation gap [(MF−DMC)/MF]",
-    color = NULL, fill = NULL,
-    title = "Material externalisation gap trajectories, 1994–2024",
-    subtitle = "Median ± IQR. Positive values: net material importer.",
-    caption = "Source: UNEP GMFD (2024). Authors' calculation."
+    color = NULL, fill = NULL
   ) +
   theme_paper()
 
@@ -236,36 +221,6 @@ cty_summ <- cty_summ %>%
     label = if_else(is.na(label), iso3, label)
   )
 
-fig7 <- cty_summ %>%
-  ggplot(aes(x = pct_R3, y = med_gap, color = bloc, label = label)) +
-  # Cuadrantes
-  annotate("rect", xmin = threshold_x, xmax = Inf,
-           ymin = threshold_y, ymax = Inf,
-           fill = "#EFF3FF", alpha = 0.5) +
-  annotate("rect", xmin = -Inf, xmax = threshold_x,
-           ymin = -Inf, ymax = threshold_y,
-           fill = "#FEE5D9", alpha = 0.5) +
-  # Líneas de umbral (medianas muestrales)
-  geom_vline(xintercept = threshold_x, linetype = "dotted", color = "grey40") +
-  geom_hline(yintercept = threshold_y, linetype = "dotted", color = "grey40") +
-  geom_hline(yintercept = 0, linetype = "dashed", color = "grey50", linewidth = 0.4) +
-  geom_point(size = 3, alpha = 0.85) +
-  ggrepel::geom_text_repel(size = LBL - 0.6, max.overlaps = 20,
-                           min.segment.length = 0, seed = 42, show.legend = FALSE) +
-  scale_color_manual(values = c(EU = COLS$EU, MERCOSUR = COLS$MERCOSUR)) +
-  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
-  labs(
-    x = "Time in efficiency-oriented regimes (SD+WD, % of years)",
-    y = "Median externalisation gap [(MF−DMC)/MF]",
-    color = NULL,
-    title = "Socio-metabolic typology: efficiency orientation vs. trade externalisation",
-    caption = paste0("Dashed lines: sample medians (x = ",
-                     round(threshold_x, 1), "%, y = ",
-                     round(threshold_y * 100, 1), "pp). ",
-                     "Positive y-axis = net material importer.")
-  ) +
-  theme_paper()
-
 # ggrepel necesario para etiquetas sin solapamiento
 if (!requireNamespace("ggrepel", quietly = TRUE)) {
   install.packages("ggrepel", repos = "https://cloud.r-project.org")
@@ -274,7 +229,6 @@ if (!requireNamespace("ggrepel", quietly = TRUE)) {
   library(ggrepel)
 }
 
-# Re-generar con ggrepel cargado
 fig7 <- cty_summ %>%
   ggplot(aes(x = pct_R3, y = med_gap, color = bloc, label = label)) +
   annotate("rect", xmin = threshold_x, xmax = Inf, ymin = threshold_y, ymax = Inf,
@@ -290,14 +244,9 @@ fig7 <- cty_summ %>%
   scale_color_manual(values = c(EU = COLS$EU, MERCOSUR = COLS$MERCOSUR)) +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   labs(
-    x = "Time in efficiency-oriented regimes (SD+WD, % of years)",
+    x = "Time in efficiency-oriented regimes (SD+WD), % of years 1995–2024",
     y = "Median externalisation gap [(MF−DMC)/MF]",
-    color = NULL,
-    title = "Socio-metabolic typology: efficiency orientation vs. trade externalisation",
-    caption = paste0("Quadrant boundaries: sample medians (x = ",
-                     round(threshold_x, 1), "%, y = ",
-                     scales::percent(threshold_y, accuracy = 0.1), "). ",
-                     "Positive y = net material importer.")
+    color = NULL
   ) +
   theme_paper()
 
@@ -345,14 +294,36 @@ fig8 <- fig8_data %>%
   labs(
     x = "Tapio decoupling state",
     y = "Coefficient (pp, vs. EC)",
-    color = NULL, shape = NULL,
-    title = "M2 panel regression: Tapio state vs. annual change in the externalisation gap",
-    subtitle = "MERCOSUR = baseline; EU = offset added to it. 95% CI; country + year FE, SE clustered by country.",
-    caption = "Sign is bloc-dependent (MERCOSUR negative gap baselines, EU positive) — see Section 3.5."
+    color = NULL, shape = NULL
   ) +
   theme_paper()
 
 save_fig(fig8, "Fig8_regression_coefs", h = 5.0)
+
+# =============================================================================
+# FIG 10: Robustez HMMs separados (Supplementary Material)
+# =============================================================================
+
+robustness_path <- file.path(TABS, "hmm_robustness_summary.csv")
+if (file.exists(robustness_path)) {
+  robust_sum <- read_csv(robustness_path, show_col_types = FALSE)
+
+  fig10 <- robust_sum %>%
+    filter(model %in% c("EU_only", "MERCOSUR_only")) %>%
+    ggplot(aes(x = factor(regime), y = mean_dwell_time, fill = model)) +
+    geom_col(position = position_dodge(0.7), width = 0.6, alpha = 0.85) +
+    scale_fill_manual(values = c(EU_only       = COLS$EU,
+                                  MERCOSUR_only = COLS$MERCOSUR),
+                      labels = c(EU_only = "EU (separate HMM)",
+                                 MERCOSUR_only = "MERCOSUR (separate HMM)")) +
+    labs(
+      x = "Regime", y = "Mean dwell time (years)",
+      fill = NULL
+    ) +
+    theme_paper()
+
+  save_fig(fig10, "Fig10_S_robustness_hmm", h = 4.8)
+}
 
 cat("\n05_figures.R completado.\n")
 cat("Figuras guardadas en:", FIGS, "\n")
