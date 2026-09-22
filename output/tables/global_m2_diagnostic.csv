@@ -1,0 +1,3 @@
+dv,sample,n_obs,n_countries,n_neg_gap_countries,sd_neg_gap,sd_neg_gap_lo,sd_neg_gap_hi,sd_pos_offset,sd_pos_offset_p,sd_pos_net
+Δgap_rel (pp),"Global GMFD, 1995–2024, Δgap winsorised 1–99%",4679,158,86,-13.269946678159249,-15.991490016647294,-10.548403339671204,8.925003405547361,7.913774847041886e-7,-4.3449432726118875
+"Δlog(MF/DMC) (pp, scale-free)","Global GMFD, 1995–2024, Δgap winsorised 1–99%",4521,158,86,-8.322115355553963,-9.678891931980992,-6.9653387791269346,3.412394325137975,0.021818123340087897,-4.909721030415988

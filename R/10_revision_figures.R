@@ -43,7 +43,13 @@ fig5 <- ggplot(m2, aes(state, est, colour = series, shape = sig)) +
 save_fig(fig5, "Fig5_rev_regression_coefs", h = 5.2)
 
 # --- Fig S4: forest plot de robustez --------------------------------------------
+tau_f <- file.path(TABS, "regression_tau_robustness.csv")   # generado por 11_revision_r3.R
+tau_rows <- if (file.exists(tau_f)) {
+  read_csv(tau_f, show_col_types = FALSE) %>% filter(tau != 0.2) %>%
+    mutate(spec = paste0("Tapio tolerance τ = ", tau), units = "pp")
+} else NULL
 mag <- read_csv(file.path(TABS, "regression_robustness_magnitudes.csv"), show_col_types = FALSE) %>%
+  bind_rows(tau_rows) %>%
   filter(units == "pp", term %in% c("SD", "net_EU_SD")) %>%
   mutate(term = recode(term, SD = "MERCOSUR strong decoupling",
                        net_EU_SD = "EU strong decoupling (net)"),

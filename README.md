@@ -1,9 +1,19 @@
 # Replication Archive: The Relative Material Externalisation Gap — EU and MERCOSUR (1994–2024)
 
 **Paper:** "The relative material externalisation gap: a consumption-based indicator of offshored material burdens in resource-efficiency monitoring, with evidence from the EU and MERCOSUR (1994–2024)"  
-**Journal:** *Journal of Cleaner Production* (under review)  
+**Journal:** *Journal of Cleaner Production* (revised version, September 2026)  
 **Authors:** Raimundo Elías Gómez, María Gabriela Miño  
 **Affiliation:** Consejo Nacional de Investigaciones Científicas y Técnicas (CONICET) / Facultad de Humanidades y Ciencias Sociales, Universidad Nacional de Misiones (UNaM), Argentina  
+
+---
+
+## What changed in the revision (v1.4.0)
+
+- **Indicator interpretation.** gap_rel = (MF − DMC)/MF = RTB/MF − PTB/MF: the share of the material footprint that DMC does not record (net upstream extraction embodied in trade). The companion ratio RTB/MF = 1 − DE/MF (net imported extraction) is now reported (`07_decomposition_global.R`).
+- **Small-cluster inference** for the four MERCOSUR clusters: CR2 + Satterthwaite, wild cluster restricted bootstrap (Webb weights, B = 9,999), exact randomisation inference over all C(31,4) = 31,465 assignments; robustness magnitudes with CR2 intervals (`08_small_cluster_inference.R`).
+- **HMM model selection** by leave-one-country-out cross-validation: K = 2 is selected and is now the main specification; K = 3 is a sensitivity analysis (`09_hmm_cv.R`).
+- **Global replication** on 158 countries, Tapio-tolerance robustness, country descriptives and mechanism descriptives (`07_decomposition_global.R`, `11_revision_r3.R`).
+- **Tapio nomenclature** in the recessive branch corrected to Tapio (2005): ε < 1 − τ is *weak negative decoupling* (WND) and ε > 1 + τ is *recessive decoupling* (RD). The partition is unchanged, so no estimate changed.
 
 ---
 
@@ -11,93 +21,92 @@
 
 ```
 replication_repo/
-├── README.md               ← this file
+├── README.md
 ├── R/
-│   ├── 00_setup.R          ← install packages, define paths
-│   ├── 01_data_prep.R      ← download GMFD + World Bank GDP; build panel
-│   ├── 02_tapio.R          ← Tapio (2005) taxonomy, descriptive analysis
-│   ├── 03_hmm.R            ← HMM K selection (K=2–5) + K=3 main + K=2 robustness
-│   ├── 04_gap_regression.R ← fixed-effects panel regression (fixest)
-│   ├── 05_figures.R        ← all figures (ggplot2 + patchwork)
-│   └── 06_comtrade.R       ← Fig9_comtrade_flows (paper Fig. 7): MERCOSUR→EU bilateral flows (httr2 + public API v1)
-├── data/
-│   └── processed/
-│       ├── panel_main.csv      ← 31 countries × 1994–2024; MF, DMC, GDP, gap_rel
-│       ├── panel_tapio.csv     ← panel_main + Tapio state classifications
-│       └── panel_regimes.csv   ← panel_tapio + Viterbi regime assignments
-├── output/
-│   ├── tables/             ← all CSV tables (see list below)
-│   └── figures/            ← all figures as PNG (500 dpi TIFFs not included due to size)
-└── LICENSE                 ← CC BY 4.0
+│   ├── 00_setup.R                   ← packages, run order
+│   ├── 01_data_prep.R               ← GMFD + World Bank GDP → panel_main.csv
+│   ├── 02_tapio.R                   ← Tapio (2005) classification
+│   ├── 03_hmm.R                     ← pooled HMMs, K = 2–5, robustness HMMs
+│   ├── 04_gap_regression.R          ← fixed-effects regressions (fixest), original robustness checks
+│   ├── 05_figures.R                 ← original figures
+│   ├── 06_comtrade.R                ← MERCOSUR→EU bilateral flows (UN Comtrade public API v1)
+│   ├── 07_decomposition_global.R    ← RTB/PTB decomposition, MERCOSUR RME exports, 158-country panel
+│   ├── 08_small_cluster_inference.R ← CR2, wild bootstrap, randomisation inference, magnitudes
+│   ├── 09_hmm_cv.R                  ← leave-one-country-out cross-validation of K
+│   ├── 10_revision_figures.R        ← Fig. 5 (CR2), Figs. S4–S5
+│   ├── 11_revision_r3.R             ← τ robustness, country descriptives, mechanism descriptives
+│   ├── _inference_helpers.R         ← M2 design matrix + CR2 fit (used by 08 and 11)
+│   └── _paper_theme.R               ← shared ggplot theme and export
+├── data/processed/                  ← derived panels (see below)
+├── output/tables/                   ← all CSV tables
+├── output/figures/                  ← all figures as PNG (500 dpi TIFFs not included)
+└── LICENSE
 ```
 
-**Note:** Raw GMFD data cannot be redistributed (see license at resourcepanel.org). The `data/processed/` files are derived and provided for convenience. To reproduce from scratch, run the scripts in order starting from `01_data_prep.R`, which downloads GMFD manually or via the URL in the script header, and World Bank GDP via the `WDI` R package.
+**Raw data.** The raw GMFD file (`data/raw/mfa_filled.csv`, 2024 edition, accessed 23 April 2026) cannot be redistributed; download it from resourcepanel.org. Scripts 01 and 07 need it. All other scripts run from the derived files in `data/processed/`.
+
+**Reproducing the published numbers.** `01_data_prep.R` downloads World Bank GDP through the `WDI` package; later World Bank revisions can change GDP and hence Tapio states. To reproduce the paper exactly, start from the provided `data/processed/panel_main.csv` and run scripts 02 onwards.
 
 ---
 
 ## How to reproduce
 
-### Requirements
-
-- R ≥ 4.3.0
-- Run `R/00_setup.R` first to install all required packages:
-  - `tidyverse`, `depmixS4`, `fixest`, `ggplot2`, `patchwork`, `ggrepel`, `WDI`
-
-### Steps
+Requirements: R ≥ 4.3; run `R/00_setup.R` to install `tidyverse`, `depmixS4`, `fixest`, `clubSandwich`, `patchwork`, `ggrepel`, `WDI`, `countrycode` and related packages.
 
 ```r
-source("R/00_setup.R")          # install packages, set BASE path
-source("R/01_data_prep.R")      # builds data/processed/panel_main.csv
-source("R/02_tapio.R")          # Tapio classification + tables
-source("R/03_hmm.R")            # HMM models; slow (~10 min with 30 restarts)
-source("R/04_gap_regression.R") # regression tables
-source("R/05_figures.R")        # all figures except Fig9_comtrade_flows
-source("R/06_comtrade.R")       # Fig9_comtrade_flows (paper Fig. 7; ~40 min without cache)
+source("R/00_setup.R")
+source("R/01_data_prep.R")               # optional: rebuilds panel_main.csv (see note above)
+source("R/02_tapio.R")
+source("R/03_hmm.R")                     # ~10 min (30 restarts); models cached in data/processed/*.rds
+source("R/04_gap_regression.R")
+source("R/05_figures.R")
+source("R/06_comtrade.R")                # ~40 min without cache
+source("R/07_decomposition_global.R")    # needs data/raw/mfa_filled.csv
+source("R/08_small_cluster_inference.R") # ~5 min
+source("R/09_hmm_cv.R")                  # ~15 min; CV_REUSE=1 re-summarises saved folds
+source("R/10_revision_figures.R")
+source("R/11_revision_r3.R")
 ```
 
-`06_comtrade.R` uses the UN Comtrade public API v1 (no key required). It loops 24 years × 29 HS chapters = 696 API calls and caches each response in `data/processed/comtrade_cache/`. Interrupted runs resume from cache automatically.
-
-The HMM models are cached in `data/processed/hmm_models_pooled.rds` after first run. Delete this file to re-estimate from scratch.
-
 ---
 
-## Output tables
+## Main output tables (revision)
 
-| File | Contents |
+| File | Contents (paper item) |
 |---|---|
-| `tapio_state_distribution.csv` | Tapio state frequency by bloc (n, %, CI) |
-| `tapio_country_summary.csv` | Country-level % SD+WD, median gap_rel, median elasticity |
-| `tapio_rolling_shares.csv` | Rolling 5-yr SD/END shares by bloc and year |
-| `hmm_model_selection.csv` | K=2–5 AIC/BIC/ICL/logLik (Table S1 in paper) |
-| `hmm_k2_robustness.csv` | K=2 regime shares by bloc — K-invariance check (Table S7) |
-| `hmm_emission_matrix.csv` | P(Tapio state \| regime) for K=3 pooled model |
-| `hmm_transition_matrix.csv` | Transition probabilities for K=3 pooled model |
-| `hmm_regime_summary.csv` | Regime shares + bootstrap CIs by bloc (Table 3) |
-| `hmm_robustness_summary.csv` | EU-only, MERCOSUR-only, EU-15 HMM summaries |
-| `regression_main.txt` | Formatted regression output (M1, M2, M3) |
-| `regression_coefficients.csv` | Tidy coefficient table for M1 and M2 |
-| `regression_robustness.csv` | EU-only and MERCOSUR-only sub-sample regressions |
-| `regression_gap_denominator_robustness.csv` | SD effect under DMC-normalised and absolute-Mt gap (Table S6) |
-| `fig7_quadrant_thresholds.csv` | Sample median thresholds used in Fig. 7 |
+| `regression_table2_cr2.csv` | M1–M3 with CR2 standard errors (Table 2) |
+| `regression_small_cluster_inference.csv` | CR2, wild bootstrap p-values (Table S11) |
+| `regression_randomization_inference.csv` | Exact randomisation inference (Table S11 note) |
+| `regression_robustness_magnitudes.csv` | Magnitudes and CR2 intervals across specifications (Table S10) |
+| `regression_tau_robustness.csv` | Tapio tolerance τ = 0.1, 0.2, 0.3 (Table S10) |
+| `gap_decomposition_country.csv`, `gap_decomposition_bloc.csv` | gap_rel vs RTB/MF and PTB/MF (Table S9) |
+| `mercosur_rme_exports.csv` | MERCOSUR raw-material-equivalent exports (Section 3.6) |
+| `global_m2_diagnostic.csv`, `global_gap_by_income_2021.csv` | 158-country replication (Table S12) |
+| `hmm_cv_selection.csv` | Cross-validated log-likelihood, K = 2–5 (Table S1) |
+| `hmm_k2_robustness.csv` | K = 2 regime shares by bloc (Table S7; main regime model) |
+| `hmm_regime_summary.csv` | K = 3 regime shares (Table S13; sensitivity) |
+| `gap_descriptives_country.csv` | Country descriptive statistics (Table S14) |
+| `mechanism_sd_years_growth.csv` | Growth rates in strong-decoupling years (Table S15) |
+| `comtrade_gap_correlation.csv` | Export–gap Spearman correlations (Table S16) |
 
----
+## Figures (file → paper)
 
-## Output figures
-
-| File | Figure in paper |
+| File | Paper |
 |---|---|
-| `Fig1_tapio_distribution.png` | Fig. 3: Tapio state distribution by bloc |
-| `Fig2_rolling_shares.png` | Fig. 4: Rolling 5-yr SD/END shares |
-| `Fig3_hmm_model_selection.png` | Fig. S1: HMM model selection (AIC/BIC/ICL) |
-| `Fig4_transition_heatmap.png` | Fig. S2: Regime transition probability matrix |
-| `Fig5_regime_shares.png` | Fig. 6: Regime time shares with CIs |
-| `Fig6_gap_trajectories.png` | Fig. 1: Externalisation gap trajectories |
-| `Fig7_typology_scatter.png` | Fig. 2: Country typology scatter (4 quadrants) |
-| `Fig8_regression_coefs.png` | Fig. 5: Regression coefficient plot |
-| `Fig9_comtrade_flows.png` | Fig. 7: MERCOSUR→EU-27 raw material exports |
-| `Fig10_S_robustness_hmm.png` | Fig. S3: Robustness HMMs comparison |
+| `Fig6_gap_trajectories.png` | Fig. 1 |
+| `Fig7_typology_scatter.png` | Fig. 2 |
+| `Fig1_tapio_distribution.png` | Fig. 3 |
+| `Fig2_rolling_shares.png` | Fig. 4 |
+| `Fig5_rev_regression_coefs.png` | Fig. 5 |
+| `Fig9_comtrade_flows.png` | Fig. 6 |
+| `Fig3_hmm_model_selection.png` | Fig. S1 |
+| `Fig4_transition_heatmap.png` | Fig. S2 |
+| `Fig10_S_robustness_hmm.png` | Fig. S3 |
+| `FigS5_global_gap.png` | Fig. S4 |
+| `FigS4_robustness_forest.png` | Fig. S5 |
+| `Fig5_regime_shares.png` | Fig. S6 |
 
-Figures carry no embedded titles (Elsevier convention: the caption, including the title, lives in the manuscript). File names keep the original script numbering; the right column gives the figure number in the submitted paper.
+`Fig8_regression_coefs.png` is the original-submission version of Fig. 5 (conventional clustered intervals), kept for reference.
 
 ---
 
@@ -109,12 +118,6 @@ Figures carry no embedded titles (Elsevier convention: the caption, including th
 | World Bank GDP (NY.GDP.MKTP.KD) | World Development Indicators | `WDI::WDI()` R package |
 | UN Comtrade bilateral flows | UN Statistics Division | https://comtradeapi.un.org/public/v1 (free, no key required) |
 
----
-
 ## License
 
-Code: MIT License  
-Data (processed panel): CC BY 4.0  
-Figures: CC BY 4.0  
-
-If using this archive, please cite the published paper.
+Code: MIT License. Data (processed panels) and figures: CC BY 4.0. If using this archive, please cite the published paper.

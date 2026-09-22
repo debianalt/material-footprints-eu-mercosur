@@ -1,0 +1,3 @@
+statistic,observed,n_valid_assignments,rank_extreme,p_one_sided,p_two_sided
+SD coefficient of the 4-country group,-11.51653580671408,31465,288,0.00915302717304942,0.00915302717304942
+SD offset (other 27 − group),9.81334637959538,31465,279,0.008866995073891626,0.008866995073891626
