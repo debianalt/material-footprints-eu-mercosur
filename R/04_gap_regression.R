@@ -19,7 +19,7 @@ RAW  <- file.path(BASE, "data/raw")
 
 panel_reg <- read_csv(file.path(PROC, "panel_regimes.csv"), show_col_types = FALSE)
 
-TAPIO_LEVELS <- c("SD", "WD", "EC", "END", "RD", "RC", "RND", "SND")
+TAPIO_LEVELS <- c("SD", "WD", "EC", "END", "WND", "RC", "RD", "SND")
 
 # -----------------------------------------------------------------------------
 # 1. Construir variable dependiente y controles
@@ -74,7 +74,7 @@ m2 <- feols(
 # M3: indicador compuesto de orientación eficiente (SD + WD + EC)
 # NB: definición alineada con el manuscrito §2.5 / Tabla 5
 # ("efficiency-oriented = SD, WD, EC"). La definición previa
-# (SD, RD, RC, RND) agrupaba estados recesivos y era incoherente
+# (SD, WND, RC, RD) agrupaba estados recesivos y era incoherente
 # con el texto; corregida aquí para consistencia (espíritu de R3.3).
 panel_reg <- panel_reg %>%
   mutate(env_plus = as.integer(tapio %in% c("SD", "WD", "EC")))
@@ -176,10 +176,14 @@ write_csv(gap_denominator_robustness,
 # Objeción metodológica clásica: ε = g_MF / g_GDP explota cuando g_GDP → 0,
 # lo que desestabiliza la clasificación de Tapio. Respuesta en dos partes:
 #
-# (1) ARGUMENTO DEFINICIONAL (decisivo): SD, SND, RD, RC y RND se definen por
-#     el SIGNO de g_GDP y g_MF, no por el umbral del cociente ε. Sólo las
-#     fronteras WD/EC/END usan ε. Por construcción, la inestabilidad de ε
-#     cerca de g_GDP≈0 NO puede afectar al resultado SD que sostiene el paper.
+# (1) ARGUMENTO DEFINICIONAL (decisivo): SD y SND se definen SÓLO por el SIGNO
+#     de g_GDP y g_MF, no por el umbral del cociente ε. Por construcción, la
+#     inestabilidad de ε cerca de g_GDP≈0 NO puede afectar al resultado SD que
+#     sostiene el paper.
+#     CORREGIDO 2026-07-16: antes este conjunto incluía RD/RC/RND (→ 45.8%), pero
+#     esos tres estados SÍ se definen por ε (ver Tabla 1 / 02_tapio.R); los únicos
+#     sign-defined son SD y SND. El argumento sobre SD — el que sostiene el paper —
+#     no cambia; sólo se acota el conjunto y su porcentaje.
 # (2) CONFIRMACIÓN EMPÍRICA: re-estimar M2 excluyendo los años con |g_GDP|
 #     muy pequeño y verificar que el coeficiente SD de MERCOSUR es estable.
 # -----------------------------------------------------------------------------
@@ -187,8 +191,8 @@ write_csv(gap_denominator_robustness,
 cat("\n=== Robustez: elasticidad de Tapio cerca de g_GDP ≈ 0 ===\n")
 
 # Estados basados en signo (inmunes a la inestabilidad de ε) vs. basados en ε
-SIGN_BASED <- c("SD", "SND", "RD", "RC", "RND")
-RATIO_BASED <- c("WD", "EC", "END")
+SIGN_BASED  <- c("SD", "SND")
+RATIO_BASED <- c("WD", "EC", "END", "WND", "RC", "RD")
 n_total   <- nrow(panel_reg)
 n_signbsd <- sum(panel_reg$tapio %in% SIGN_BASED)
 cat(sprintf("Observaciones en estados basados en signo (inmunes a ε): %d/%d (%.1f%%)\n",

@@ -28,7 +28,7 @@ set.seed(2024)
 
 panel_tapio <- read_csv(file.path(PROC, "panel_tapio.csv"), show_col_types = FALSE)
 
-TAPIO_LEVELS <- c("SD", "WD", "EC", "END", "RD", "RC", "RND", "SND")
+TAPIO_LEVELS <- c("SD", "WD", "EC", "END", "WND", "RC", "RD", "SND")
 N_RESTARTS   <- 30
 EM_MAXIT     <- 500
 EM_TOL       <- 1e-8

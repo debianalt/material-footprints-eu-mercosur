@@ -8,7 +8,7 @@
 # --- Instalar paquetes faltantes ---
 pkgs_needed <- c("tidyverse", "WDI", "depmixS4", "fixest", "countrycode",
                  "httr2", "zoo", "ggrepel", "broom", "patchwork",
-                 "scales", "writexl")
+                 "scales", "writexl", "clubSandwich")
 
 pkgs_missing <- pkgs_needed[!pkgs_needed %in% installed.packages()[, 1]]
 
@@ -50,7 +50,12 @@ cat("2. source('R/02_tapio.R')          # clasificacion Tapio\n")
 cat("3. source('R/03_hmm.R')            # HMM + seleccion K  (aprox. 10-20 min)\n")
 cat("4. source('R/04_gap_regression.R') # regresion de panel\n")
 cat("5. source('R/05_figures.R')        # todas las figuras TIFF 300dpi\n")
-cat("6. source('R/06_comtrade.R')       # Fig 8: flujos bilaterales (~40 min)\n\n")
+cat("6. source('R/06_comtrade.R')       # Fig 8: flujos bilaterales (~40 min)\n")
+cat("--- revisión JCP (2026-09) ---\n")
+cat("7. source('R/07_decomposition_global.R')    # descomposición RTB/PTB + panel global\n")
+cat("8. source('R/08_small_cluster_inference.R') # CR2, wild bootstrap, aleatorización (~5 min)\n")
+cat("9. source('R/09_hmm_cv.R')                  # CV leave-one-country-out del HMM (~15 min)\n")
+cat("10. source('R/10_revision_figures.R')       # Fig 5 (CR2), Fig S4, Fig S5\n\n")
 cat("Outputs:\n")
 cat("  output/tables/  -> tablas CSV para importar en Word\n")
 cat("  output/figures/ -> figuras TIFF 300dpi + PNG preview\n")

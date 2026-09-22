@@ -29,16 +29,21 @@ COLS <- list(
   neutral  = "#969696"
 )
 
+# Escala RdYlGn ordenada por "bondad" del estado. Tras el rename de la rama recesiva
+# (2026-07-16) los colores siguen al ESTADO, no a la etiqueta previa: RD (ε>1+τ, el MF cae
+# más rápido que el PIB → intensidad material mejorando) toma el verde claro, y WND (ε<1-τ,
+# el MF cae más lento → intensidad empeorando) toma el naranja. Antes del rename estaban
+# asignados al revés, heredando la inversión de valencia de la nomenclatura vieja.
 TAPIO_COLS <- c(
   "SD"  = "#1A9850", "WD"  = "#74C476", "EC"  = "#FEE08B",
-  "END" = "#D73027", "RD"  = "#A6D96A", "RC"  = "#FDAE61",
-  "RND" = "#F46D43", "SND" = "#A50026"
+  "END" = "#D73027", "WND" = "#F46D43", "RC"  = "#FDAE61",
+  "RD"  = "#A6D96A", "SND" = "#A50026"
 )
 
-TAPIO_LEVELS <- c("SD", "WD", "EC", "END", "RD", "RC", "RND", "SND")
+TAPIO_LEVELS <- c("SD", "WD", "EC", "END", "WND", "RC", "RD", "SND")
 TAPIO_LABELS <- c("Strong\nDecoupling", "Weak\nDecoupling", "Expansive\nCoupling",
-                  "Expansive Neg.\nDecoupling", "Recessive\nDecoupling",
-                  "Recessive\nCoupling", "Recessive Neg.\nDecoupling",
+                  "Expansive Neg.\nDecoupling", "Weak Neg.\nDecoupling",
+                  "Recessive\nCoupling", "Recessive\nDecoupling",
                   "Strong Neg.\nDecoupling")
 
 # save_fig() provisto por _paper_theme.R (ancho fijo 190mm, TIFF+PNG 300dpi)
@@ -244,7 +249,7 @@ fig7 <- cty_summ %>%
   scale_color_manual(values = c(EU = COLS$EU, MERCOSUR = COLS$MERCOSUR)) +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   labs(
-    x = "Time in efficiency-oriented regimes (SD+WD), % of years 1995–2024",
+    x = "Time in decoupling states (SD+WD), % of years 1995–2024",
     y = "Median externalisation gap [(MF−DMC)/MF]",
     color = NULL
   ) +
@@ -273,7 +278,8 @@ fig8_data <- reg_coefs %>%
   filter(model == "M2_interaction") %>%
   filter(str_detect(term, "tapio_f")) %>%
   mutate(
-    state      = str_extract(term, "SD|WD|EC|END|RD|RC|RND|SND"),
+    # alternativas largas primero: SND/WND/END deben ganar sobre SD/WD/RD/EC
+    state      = str_extract(term, "SND|WND|END|SD|WD|EC|RC|RD"),
     state      = factor(state, levels = TAPIO_LEVELS),
     series     = if_else(str_detect(term, "eu_dummy"),
                          "EU (offset)", "MERCOSUR (baseline)"),

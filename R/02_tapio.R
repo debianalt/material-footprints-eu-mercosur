@@ -20,15 +20,21 @@ panel <- read_csv(file.path(PROC, "panel_main.csv"), show_col_types = FALSE)
 #    Fuente: Tapio (2005), implementada exactamente como en Pothen & Welsch
 #    (2019) y el análisis original.
 #
-#    Los 8 estados del cuadro de Tapio:
+#    Los 8 estados del cuadro de Tapio (nomenclatura canónica de Tapio 2005):
 #    SD  = Strong Decoupling       (gGDP > 0, gMF < 0)
 #    WD  = Weak Decoupling         (gGDP > 0, gMF >= 0, ε < 1-τ)
 #    EC  = Expansive Coupling      (gGDP > 0, |ε-1| ≤ τ)
 #    END = Expansive Neg. Decoupl. (gGDP > 0, ε > 1+τ)
 #    SND = Strong Neg. Decoupling  (gGDP < 0, gMF > 0)
-#    RD  = Recessive Decoupling    (gGDP < 0, gMF ≤ 0, ε < 1-τ)
+#    RD  = Recessive Decoupling    (gGDP < 0, gMF ≤ 0, ε > 1+τ)  MF cae MÁS rápido que el PIB
 #    RC  = Recessive Coupling      (gGDP < 0, |ε-1| ≤ τ)
-#    RND = Recessive Neg. Decoupl. (gGDP < 0, gMF ≤ 0, ε > 1+τ) [WAS missing in JS: e < 0.8 = RD]
+#    WND = Weak Neg. Decoupling    (gGDP < 0, gMF ≤ 0, ε < 1-τ)  MF cae MÁS LENTO que el PIB
+#
+#    NOTA (2026-07-16): corregida la nomenclatura de la rama recesiva. Hasta esta fecha
+#    el código llamaba "RD" a ε<1-τ y "RND" a ε>1+τ — exactamente al revés de Tapio (2005),
+#    y "recessive negative decoupling" no existe en su taxonomía (el 8º estado es weak
+#    negative decoupling). La PARTICIÓN es idéntica: sólo cambian las etiquetas, de modo
+#    que ningún coeficiente, régimen ni distribución se ve afectado.
 # -----------------------------------------------------------------------------
 
 TAU <- 0.2
@@ -39,7 +45,7 @@ tapio_classify <- function(g_mf, g_gdp, tau = TAU) {
   if (!is.finite(g_mf) || !is.finite(g_gdp)) return(NA_character_)
 
   if (g_gdp == 0) {
-    return(if (g_mf > 0) "END" else "RD")
+    return(if (g_mf > 0) "END" else "WND")
   }
 
   e <- g_mf / g_gdp
@@ -51,15 +57,17 @@ tapio_classify <- function(g_mf, g_gdp, tau = TAU) {
     return("END")
   } else {
     if (g_mf > 0)             return("SND")
-    if (e < 1 - tau)          return("RD")
+    if (e < 1 - tau)          return("WND")
     if (abs(e - 1) <= tau)    return("RC")
-    return("RND")
+    return("RD")
   }
 }
 tapio_classify <- Vectorize(tapio_classify)
 
 # Estado de referencia para regresiones (el más neutro) = "EC"
-TAPIO_LEVELS <- c("SD", "WD", "EC", "END", "RD", "RC", "RND", "SND")
+# El ORDEN posicional se preserva respecto de la versión previa al rename
+# (posición 5 = ε<1-τ, posición 7 = ε>1+τ) para no alterar la matriz de emisión del HMM.
+TAPIO_LEVELS <- c("SD", "WD", "EC", "END", "WND", "RC", "RD", "SND")
 
 # -----------------------------------------------------------------------------
 # 2. Calcular tasas de crecimiento y clasificar
