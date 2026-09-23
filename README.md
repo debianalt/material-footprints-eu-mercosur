@@ -12,7 +12,7 @@
 - **Indicator interpretation.** gap_rel = (MF − DMC)/MF = RTB/MF − PTB/MF: the share of the material footprint that DMC does not record (net upstream extraction embodied in trade). The companion ratio RTB/MF = 1 − DE/MF (net imported extraction) is now reported (`07_decomposition_global.R`).
 - **Small-cluster inference** for the four MERCOSUR clusters: CR2 + Satterthwaite, wild cluster restricted bootstrap (Webb weights, B = 9,999), exact randomisation inference over all C(31,4) = 31,465 assignments; robustness magnitudes with CR2 intervals (`08_small_cluster_inference.R`).
 - **HMM model selection** by leave-one-country-out cross-validation: K = 2 is selected and is now the main specification; K = 3 is a sensitivity analysis (`09_hmm_cv.R`).
-- **Global replication** on 158 countries, Tapio-tolerance robustness, country descriptives and mechanism descriptives (`07_decomposition_global.R`, `11_revision_r3.R`).
+- **Global replication** on 158 countries (with alternative groupings, unwinsorised outcomes and a DMC placebo), Tapio-tolerance robustness, country descriptives and mechanism descriptives (`07_decomposition_global.R`, `11_revision_r3.R`).
 - **Tapio nomenclature** in the recessive branch corrected to Tapio (2005): ε < 1 − τ is *weak negative decoupling* (WND) and ε > 1 + τ is *recessive decoupling* (RD). The partition is unchanged, so no estimate changed.
 
 ---
@@ -35,6 +35,7 @@ replication_repo/
 │   ├── 09_hmm_cv.R                  ← leave-one-country-out cross-validation of K
 │   ├── 10_revision_figures.R        ← Fig. 5 (CR2), Figs. S4–S5
 │   ├── 11_revision_r3.R             ← τ robustness, country descriptives, mechanism descriptives
+│   ├── 12_audit_checks.R            ← DMC placebo, reference/outlier checks, country-label permutation tests, K=2 bootstrap
 │   ├── _inference_helpers.R         ← M2 design matrix + CR2 fit (used by 08 and 11)
 │   └── _paper_theme.R               ← shared ggplot theme and export
 ├── data/processed/                  ← derived panels (see below)
@@ -66,6 +67,7 @@ source("R/08_small_cluster_inference.R") # ~5 min
 source("R/09_hmm_cv.R")                  # ~15 min; CV_REUSE=1 re-summarises saved folds
 source("R/10_revision_figures.R")
 source("R/11_revision_r3.R")
+source("R/12_audit_checks.R")          # ~5 min (31,465 permutations)
 ```
 
 ---
@@ -88,6 +90,9 @@ source("R/11_revision_r3.R")
 | `gap_descriptives_country.csv` | Country descriptive statistics (Table S14) |
 | `mechanism_sd_years_growth.csv` | Growth rates in strong-decoupling years (Table S15) |
 | `comtrade_gap_correlation.csv` | Export–gap Spearman correlations (Table S16) |
+| `regression_audit_checks.csv` | DMC placebo, all-other-states reference, outlier and winsorised checks (Table S10) |
+| `bloc_permutation_tests.csv` | Country-label permutation tests for bloc differences (Sections 3.3, 3.5) |
+| `hmm_k2_bootstrap.csv` | K = 2 bloc shares with within-bloc country bootstrap, B = 2,000 (Table S7) |
 
 ## Figures (file → paper)
 

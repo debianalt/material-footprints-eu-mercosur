@@ -159,54 +159,50 @@ source_tapio <- function(g_mf, g_gdp, tau = 0.2) {
   out[dn & g_mf <= 0 & e > 1 + tau] <- "RD"
   out
 }
+# Ambas variables dependientes se calculan ANTES de filtrar (corrección de auditoría:
+# antes Δlog(MF/DMC) se computaba tras el filtro y perdía el primer año / saltaba huecos).
+# Grupos: (a) signo de la mediana de gap_rel 1994–2021 (años con identidades exactas);
+#         (b) signo de la mediana de RTB/MF en la primera década (1994–2003), pre-muestra.
 greg <- glob %>%
   filter(year >= 1994) %>%
   group_by(iso3) %>% arrange(year) %>%
-  mutate(g_mf = MF / lag(MF) - 1, g_gdp = GDP / lag(GDP) - 1,
+  mutate(g_mf = MF / lag(MF) - 1, g_dmc = DMC / lag(DMC) - 1, g_gdp = GDP / lag(GDP) - 1,
          d_gap = (gap_rel - lag(gap_rel)) * 100,
+         d_lratio = (log(MF / lag(MF)) - log(DMC / lag(DMC))) * 100,
          tapio = source_tapio(g_mf, g_gdp),
-         neg_gap = as.integer(median(gap_rel) < 0)) %>%
+         tapio_dmc = source_tapio(g_dmc, g_gdp),
+         neg_gap = as.integer(median(gap_rel[year <= 2021]) < 0),
+         neg_rtb_early = as.integer(median(rtb_sh[year <= 2003], na.rm = TRUE) < 0)) %>%
   ungroup() %>%
-  filter(!is.na(d_gap), !is.na(tapio), is.finite(d_gap)) %>%
-  mutate(tapio_f = factor(tapio, levels = c("SD","WD","EC","END","WND","RC","RD","SND")),
-         pos_gap = 1L - neg_gap)
-# winsorizar Δgap al 1–99% (economías diminutas con gap volátil)
-q <- quantile(greg$d_gap, c(.01, .99))
-greg <- greg %>% mutate(d_gap_w = pmin(pmax(d_gap, q[1]), q[2]))
+  filter(!is.na(d_gap), !is.na(d_lratio), !is.na(tapio), is.finite(d_gap), is.finite(d_lratio)) %>%
+  mutate(pos_gap = 1L - neg_gap, pos_rtb_early = 1L - neg_rtb_early)
+wz <- function(x) { q <- quantile(x, c(.01, .99), na.rm = TRUE); pmin(pmax(x, q[1]), q[2]) }
+greg <- greg %>% mutate(d_gap_w = wz(d_gap), d_lratio_w = wz(d_lratio))
 
-mg <- feols(d_gap_w ~ i(tapio_f, ref = "EC") + i(tapio_f, pos_gap, ref = "EC") | iso3 + year,
-            cluster = ~iso3, data = greg)
-print(summary(mg))
-tg <- broom::tidy(mg, conf.int = TRUE)
-sd_neg <- tg %>% filter(term == "tapio_f::SD")
-sd_off <- tg %>% filter(term == "tapio_f::SD:pos_gap")
-glob_diag <- tibble(
-  sample = "Global GMFD, 1995–2024, Δgap winsorised 1–99%",
-  n_obs = nobs(mg), n_countries = n_distinct(greg$iso3),
-  n_neg_gap_countries = n_distinct(greg$iso3[greg$neg_gap == 1]),
-  sd_neg_gap = sd_neg$estimate, sd_neg_gap_lo = sd_neg$conf.low, sd_neg_gap_hi = sd_neg$conf.high,
-  sd_pos_offset = sd_off$estimate, sd_pos_offset_p = sd_off$p.value,
-  sd_pos_net = sd_neg$estimate + sd_off$estimate)
-
-# Variante scale-free: Δlog(MF/DMC) elimina el multiplicador DMC/MF
-# (Δgap ≈ (DMC/MF)·(g_MF − g_DMC)), mayor en países con gap negativo.
-greg <- greg %>% group_by(iso3) %>% arrange(year) %>%
-  mutate(d_lratio = (log(MF / lag(MF)) - log(DMC / lag(DMC))) * 100) %>% ungroup()
-ql <- quantile(greg$d_lratio, c(.01, .99), na.rm = TRUE)
-greg <- greg %>% mutate(d_lratio_w = pmin(pmax(d_lratio, ql[1]), ql[2]))
-mgl <- feols(d_lratio_w ~ i(tapio_f, ref = "EC") + i(tapio_f, pos_gap, ref = "EC") | iso3 + year,
-             cluster = ~iso3, data = greg)
-tl <- broom::tidy(mgl, conf.int = TRUE)
-sl <- tl %>% filter(term == "tapio_f::SD"); ol <- tl %>% filter(term == "tapio_f::SD:pos_gap")
+run_global <- function(dv, grp, state = "tapio", label) {
+  dd <- greg %>% filter(!is.na(.data[[grp]]), !is.na(.data[[state]])) %>%
+    mutate(tapio_f = factor(.data[[state]], levels = c("SD","WD","EC","END","WND","RC","RD","SND")),
+           pos = .data[[grp]])
+  m <- feols(as.formula(paste0(dv, " ~ i(tapio_f, ref = 'EC') + i(tapio_f, pos, ref = 'EC') | iso3 + year")),
+             cluster = ~iso3, data = dd)
+  tt <- broom::tidy(m, conf.int = TRUE)
+  a <- tt %>% filter(term == "tapio_f::SD"); o <- tt %>% filter(term == "tapio_f::SD:pos")
+  tibble(spec = label, dv = dv, n_obs = nobs(m), n_countries = n_distinct(dd$iso3),
+         n_neg_countries = n_distinct(dd$iso3[dd$pos == 0]),
+         sd_neg_gap = a$estimate, sd_neg_gap_lo = a$conf.low, sd_neg_gap_hi = a$conf.high,
+         sd_pos_offset = o$estimate, sd_pos_offset_p = o$p.value,
+         sd_pos_net = a$estimate + o$estimate)
+}
 glob_diag <- bind_rows(
-  glob_diag %>% mutate(dv = "Δgap_rel (pp)", .before = 1),
-  tibble(dv = "Δlog(MF/DMC) (pp, scale-free)",
-         sample = glob_diag$sample, n_obs = nobs(mgl), n_countries = glob_diag$n_countries,
-         n_neg_gap_countries = glob_diag$n_neg_gap_countries,
-         sd_neg_gap = sl$estimate, sd_neg_gap_lo = sl$conf.low, sd_neg_gap_hi = sl$conf.high,
-         sd_pos_offset = ol$estimate, sd_pos_offset_p = ol$p.value,
-         sd_pos_net = sl$estimate + ol$estimate))
-print(glob_diag, width = 200)
+  run_global("d_gap_w",    "pos_gap", label = "Δgap_rel, winsorised 1–99%; group: median gap 1994–2021"),
+  run_global("d_gap",      "pos_gap", label = "Δgap_rel, not winsorised; group: median gap 1994–2021"),
+  run_global("d_lratio_w", "pos_gap", label = "Δlog(MF/DMC), winsorised; group: median gap 1994–2021"),
+  run_global("d_lratio",   "pos_gap", label = "Δlog(MF/DMC), not winsorised; group: median gap 1994–2021"),
+  run_global("d_gap_w",    "pos_rtb_early", label = "Δgap_rel, winsorised; group: median RTB/MF 1994–2003"),
+  run_global("d_lratio_w", "pos_rtb_early", label = "Δlog(MF/DMC), winsorised; group: median RTB/MF 1994–2003"),
+  run_global("d_gap_w",    "pos_gap", state = "tapio_dmc",
+             label = "Δgap_rel, winsorised; Tapio classified on DMC (placebo)"))
+print(glob_diag, width = 250)
 write_csv(glob_diag, file.path(TABS, "global_m2_diagnostic.csv"))
 
 cat("\n07_decomposition_global.R completado.\n")

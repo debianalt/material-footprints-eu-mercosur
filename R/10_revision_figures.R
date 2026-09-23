@@ -48,8 +48,16 @@ tau_rows <- if (file.exists(tau_f)) {
   read_csv(tau_f, show_col_types = FALSE) %>% filter(tau != 0.2) %>%
     mutate(spec = paste0("Tapio tolerance τ = ", tau), units = "pp")
 } else NULL
+aud_f <- file.path(TABS, "regression_audit_checks.csv")     # generado por 12_audit_checks.R
+aud_rows <- if (file.exists(aud_f)) {
+  read_csv(aud_f, show_col_types = FALSE) %>% rename(spec = check) %>% mutate(units = "pp") %>%
+    mutate(lo = if_else(is.na(lo), est - qt(.975, df_satt) * se, lo),
+           hi = if_else(is.na(hi), est + qt(.975, df_satt) * se, hi))
+} else NULL
 mag <- read_csv(file.path(TABS, "regression_robustness_magnitudes.csv"), show_col_types = FALSE) %>%
-  bind_rows(tau_rows) %>%
+  bind_rows(tau_rows, aud_rows) %>%
+  mutate(spec = str_replace(spec, fixed("(scale-free)"), "(multiplier-free)"),
+         spec = str_replace(spec, fixed("Years ≤ 2021 (GMFD identities exact)"), "Changes 1996–2021")) %>%
   filter(units == "pp", term %in% c("SD", "net_EU_SD")) %>%
   mutate(term = recode(term, SD = "MERCOSUR strong decoupling",
                        net_EU_SD = "EU strong decoupling (net)"),
@@ -61,7 +69,7 @@ figS4 <- ggplot(mag, aes(est, spec, colour = term)) +
                                  "EU strong decoupling (net)" = COLS$EU)) +
   labs(x = "Coefficient (pp) with 95% CR2 (Satterthwaite) interval", y = NULL, colour = NULL) +
   theme_paper()
-save_fig(figS4, "FigS4_robustness_forest", h = 6.2)
+save_fig(figS4, "FigS4_robustness_forest", h = 7.4)
 
 # --- Fig S5: global -------------------------------------------------------------
 gp <- read_csv(file.path(PROC, "global_gap_panel.csv"), show_col_types = FALSE) %>%
