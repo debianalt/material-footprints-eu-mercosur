@@ -13,6 +13,7 @@
 - **Small-cluster inference** for the four MERCOSUR clusters: CR2 + Satterthwaite, wild cluster restricted bootstrap (Webb weights, B = 9,999), exact randomisation inference over all C(31,4) = 31,465 assignments; robustness magnitudes with CR2 intervals (`08_small_cluster_inference.R`).
 - **HMM model selection** by leave-one-country-out cross-validation: K = 2 is selected and is now the main specification; K = 3 is a sensitivity analysis (`09_hmm_cv.R`).
 - **Global replication** on 158 countries (with alternative groupings, unwinsorised outcomes and a DMC placebo), Tapio-tolerance robustness, country descriptives and mechanism descriptives (`07_decomposition_global.R`, `11_revision_r3.R`).
+- **Bound on the mechanical component** (second revision): DMC/MF multiplier medians and the gap change had DMC stayed at its previous-year level, with the DMC response as remainder (`13_revision_r3_round2.R`).
 - **Tapio nomenclature** in the recessive branch corrected to Tapio (2005): ε < 1 − τ is *weak negative decoupling* (WND) and ε > 1 + τ is *recessive decoupling* (RD). The partition is unchanged, so no estimate changed.
 
 ---
@@ -36,6 +37,7 @@ replication_repo/
 │   ├── 10_revision_figures.R        ← Fig. 5 (CR2), Figs. S4–S5
 │   ├── 11_revision_r3.R             ← τ robustness, country descriptives, mechanism descriptives
 │   ├── 12_audit_checks.R            ← DMC placebo, reference/outlier checks, country-label permutation tests, K=2 bootstrap
+│   ├── 13_revision_r3_round2.R      ← mechanical-component bound: DMC/MF multiplier, DMC-held-fixed counterfactual
 │   ├── _inference_helpers.R         ← M2 design matrix + CR2 fit (used by 08 and 11)
 │   └── _paper_theme.R               ← shared ggplot theme and export
 ├── data/processed/                  ← derived panels (see below)
@@ -68,6 +70,7 @@ source("R/09_hmm_cv.R")                  # ~15 min; CV_REUSE=1 re-summarises sav
 source("R/10_revision_figures.R")
 source("R/11_revision_r3.R")
 source("R/12_audit_checks.R")          # ~5 min (31,465 permutations)
+source("R/13_revision_r3_round2.R")
 ```
 
 ---
