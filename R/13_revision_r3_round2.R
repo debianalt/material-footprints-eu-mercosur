@@ -81,3 +81,75 @@ med <- d %>% group_by(iso3) %>% arrange(year) %>% ungroup() %>%
   mutate(scenario_dmc_unchanged = -r_lag * (-g_mf_pct / 100) / (1 + g_mf_pct / 100) * 100)
 print(med)
 write_csv(med, file.path(TABS, "mechanical_scenario_medians.csv"))
+
+# =============================================================================
+# Ampliación tras la auditoría de la ronda 2 (2026-11-16)
+#   La descomposición aditiva en pp asigna toda la diferencia entre bloques al
+#   contrafáctico (escala: multiplicador DMC/MF y magnitud de la caída del MF).
+#   La lectura sin multiplicador es la descomposición exacta en log:
+#     100·Δlog(MF/DMC) = 100·ΔlogMF + (−100·ΔlogDMC)
+#   segundo término = cuánto NO baja el DMC (la "respuesta" del DMC con signo).
+# =============================================================================
+suppressMessages(library(fixest))
+
+# --- (4) dos bloques, en log -----------------------------------------------------
+dl <- pc %>% group_by(iso3) %>% arrange(year) %>%
+  mutate(d_lr   = 100 * (log(mf_mt / lag(mf_mt)) - log(dmc_mt / lag(dmc_mt))),
+         d_lmf  = 100 * log(mf_mt / lag(mf_mt)),
+         d_ldmc = -100 * log(dmc_mt / lag(dmc_mt)),
+         d_gap_rel = (gap_rel - lag(gap_rel)) * 100) %>% ungroup() %>%
+  filter(!is.na(d_gap_rel), !is.na(tapio)) %>% mutate(eu = as.integer(bloc == "EU"))
+stopifnot(nrow(dl) == 899, all(abs(dl$d_lr - dl$d_lmf - dl$d_ldmc) < 1e-9))
+runl <- function(dd, sample) {
+  map_dfr(c(log_ratio = "d_lr", mf_decline = "d_lmf", dmc_not_falling = "d_ldmc"),
+          ~ fit_cr2(dd[[.x]], dd), .id = "component") %>% mutate(sample = sample, .before = 1)
+}
+ld <- bind_rows(runl(dl, "all"), runl(dl %>% filter(!(iso3 == "URY" & year == 2014)), "excl. URY 2014"))
+b <- ld %>% filter(sample == "all", component == "log_ratio", term == "SD")
+stopifnot(abs(b$est - (-7.4252)) < 1e-3)          # = Tabla S10, fila log ratio
+print(ld, n = Inf, width = Inf)
+write_csv(ld, file.path(TABS, "log_decomposition.csv"))
+
+# --- (5) global (158 países), pp y log ---------------------------------------------
+gp <- read_csv(file.path(PROC, "global_reg_panel.csv"), show_col_types = FALSE) %>%
+  mutate(d_mech  = 100 * (DMC_lag / MF_lag - DMC_lag / MF),
+         d_rest  = d_gap - d_mech,
+         d_lmf   = 100 * log(MF / MF_lag),
+         d_ldmc  = -100 * log(DMC / DMC_lag),
+         tapio_f = factor(tapio, levels = TAPIO_LEVELS))
+stopifnot(all(abs(gp$d_lratio - gp$d_lmf - gp$d_ldmc) < 1e-8),
+          all(abs(gp$d_gap - gp$d_mech - gp$d_rest) < 1e-8))
+run_g <- function(dv, grp) {
+  dd <- gp %>% filter(!is.na(.data[[grp]])) %>% mutate(pos = .data[[grp]])
+  m <- feols(as.formula(paste0(dv, " ~ i(tapio_f, ref = 'EC') + i(tapio_f, pos, ref = 'EC') | iso3 + year")),
+             cluster = ~iso3, data = dd)
+  tt <- broom::tidy(m, conf.int = TRUE)
+  a <- tt %>% filter(term == "tapio_f::SD"); o <- tt %>% filter(term == "tapio_f::SD:pos")
+  tibble(grouping = grp, dv = dv, n = nobs(m), countries = n_distinct(dd$iso3),
+         neg_sd = a$estimate, neg_lo = a$conf.low, neg_hi = a$conf.high,
+         pos_minus_neg = o$estimate, pos_minus_neg_p = o$p.value, pos_net = a$estimate + o$estimate)
+}
+gl <- crossing(grp = c("pos_gap", "pos_rtb_early"),
+               dv = c("d_gap", "d_mech", "d_rest", "d_lratio", "d_lmf", "d_ldmc")) %>%
+  pmap_dfr(function(grp, dv) run_g(dv, grp))
+chk <- gl %>% filter(grouping == "pos_gap", dv == "d_gap")
+stopifnot(abs(chk$neg_sd - (-14.48)) < 0.01)      # = Tabla S12, Δgap_rel no winsorizado
+print(gl, n = Inf, width = Inf)
+write_csv(gl, file.path(TABS, "global_mechanical_bound.csv"))
+
+# --- (6) conteos de estados en MERCOSUR (panel de regresión) ------------------------
+cnt <- d %>% filter(bloc == "MERCOSUR", tapio %in% c("SD", "EC")) %>%
+  count(iso3, tapio) %>% pivot_wider(names_from = tapio, values_from = n, values_fill = 0)
+print(cnt)
+write_csv(cnt, file.path(TABS, "mercosur_state_counts.csv"))
+
+# --- (7) orden inverso de la descomposición en pp (MF movido sobre DMC_t) -----------
+d_rev <- pc %>% group_by(iso3) %>% arrange(year) %>%
+  mutate(d_gap_rel = (gap_rel - lag(gap_rel)) * 100,
+         d_mech_rev = (dmc_mt / lag(mf_mt) - dmc_mt / mf_mt) * 100) %>% ungroup() %>%
+  filter(!is.na(d_gap_rel), !is.na(tapio)) %>% mutate(eu = as.integer(bloc == "EU"))
+rev <- fit_cr2(d_rev$d_mech_rev, d_rev) %>%
+  left_join(mb %>% filter(sample == "all", component == "baseline") %>% select(term, base = est), by = "term") %>%
+  mutate(offset_share = (base - est) / -est)
+print(rev)
+write_csv(rev, file.path(TABS, "mechanical_bound_reverse_order.csv"))

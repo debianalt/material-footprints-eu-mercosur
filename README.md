@@ -13,7 +13,7 @@
 - **Small-cluster inference** for the four MERCOSUR clusters: CR2 + Satterthwaite, wild cluster restricted bootstrap (Webb weights, B = 9,999), exact randomisation inference over all C(31,4) = 31,465 assignments; robustness magnitudes with CR2 intervals (`08_small_cluster_inference.R`).
 - **HMM model selection** by leave-one-country-out cross-validation: K = 2 is selected and is now the main specification; K = 3 is a sensitivity analysis (`09_hmm_cv.R`).
 - **Global replication** on 158 countries (with alternative groupings, unwinsorised outcomes and a DMC placebo), Tapio-tolerance robustness, country descriptives and mechanism descriptives (`07_decomposition_global.R`, `11_revision_r3.R`).
-- **Bound on the mechanical component** (second revision): DMC/MF multiplier medians and the gap change had DMC stayed at its previous-year level, with the DMC response as remainder (`13_revision_r3_round2.R`).
+- **Mechanical component** (second revision): DMC/MF multiplier medians; the gap change had DMC stayed at its previous-year level, with the DMC response as remainder; and the exact log decomposition 100·Δlog(MF/DMC) = 100·ΔlogMF − 100·ΔlogDMC, for the two-bloc panel (CR2) and the 158-country panel (`13_revision_r3_round2.R`). In percentage points the bloc contrast lies in the counterfactual; net of the multiplier, the DMC term accounts for about half to two-thirds of the global contrast (p = 0.07–0.11) and is not detectable in the two-bloc panel.
 - **Tapio nomenclature** in the recessive branch corrected to Tapio (2005): ε < 1 − τ is *weak negative decoupling* (WND) and ε > 1 + τ is *recessive decoupling* (RD). The partition is unchanged, so no estimate changed.
 
 ---
@@ -37,7 +37,7 @@ replication_repo/
 │   ├── 10_revision_figures.R        ← Fig. 5 (CR2), Figs. S4–S5
 │   ├── 11_revision_r3.R             ← τ robustness, country descriptives, mechanism descriptives
 │   ├── 12_audit_checks.R            ← DMC placebo, reference/outlier checks, country-label permutation tests, K=2 bootstrap
-│   ├── 13_revision_r3_round2.R      ← mechanical-component bound: DMC/MF multiplier, DMC-held-fixed counterfactual
+│   ├── 13_revision_r3_round2.R      ← mechanical component: DMC/MF multiplier, DMC-held-fixed counterfactual, log decomposition (two-bloc and global)
 │   ├── _inference_helpers.R         ← M2 design matrix + CR2 fit (used by 08 and 11)
 │   └── _paper_theme.R               ← shared ggplot theme and export
 ├── data/processed/                  ← derived panels (see below)
@@ -46,7 +46,7 @@ replication_repo/
 └── LICENSE
 ```
 
-**Raw data.** The raw GMFD file (`data/raw/mfa_filled.csv`, 2024 edition, accessed 23 April 2026) cannot be redistributed; download it from resourcepanel.org. Scripts 01 and 07 need it. All other scripts run from the derived files in `data/processed/`.
+**Raw data.** The raw GMFD file (`data/raw/mfa_filled.csv`, 2024 edition, accessed 23 April 2026) cannot be redistributed; download it from resourcepanel.org. Scripts 01 and 07 need it. All other scripts run from the derived files in `data/processed/` (07 writes `global_reg_panel.csv`, which 13 reads; it is included).
 
 **Reproducing the published numbers.** `01_data_prep.R` downloads World Bank GDP through the `WDI` package; later World Bank revisions can change GDP and hence Tapio states. To reproduce the paper exactly, start from the provided `data/processed/panel_main.csv` and run scripts 02 onwards.
 
@@ -93,7 +93,11 @@ source("R/13_revision_r3_round2.R")
 | `gap_descriptives_country.csv` | Country descriptive statistics (Table S14) |
 | `mechanism_sd_years_growth.csv` | Growth rates in strong-decoupling years (Table S15) |
 | `comtrade_gap_correlation.csv` | Export–gap Spearman correlations (Table S16) |
-| `regression_audit_checks.csv` | DMC placebo, all-other-states reference, outlier and winsorised checks (Table S10) |
+| `regression_audit_checks.csv` | DMC mirror check, all-other-states reference, outlier and winsorised checks (Table S10) |
+| `mechanical_bound.csv`, `mechanical_bound_reverse_order.csv`, `dmc_mf_multiplier.csv`, `mechanical_scenario_medians.csv` | Mechanical counterfactual and DMC response, multiplier medians, median scenario (Table S10, Section 4.4) |
+| `log_decomposition.csv` | Exact log decomposition, two-bloc panel (Table S10) |
+| `global_mechanical_bound.csv` | Counterfactual and log decompositions, 158 countries (Table S12) |
+| `mercosur_state_counts.csv` | MERCOSUR strong-decoupling and expansive-coupling years by country (Table S10 note) |
 | `bloc_permutation_tests.csv` | Country-label permutation tests for bloc differences (Sections 3.3, 3.5) |
 | `hmm_k2_bootstrap.csv` | K = 2 bloc shares with within-bloc country bootstrap, B = 2,000 (Table S7) |
 

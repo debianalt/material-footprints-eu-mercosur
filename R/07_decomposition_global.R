@@ -167,6 +167,7 @@ greg <- glob %>%
   filter(year >= 1994) %>%
   group_by(iso3) %>% arrange(year) %>%
   mutate(g_mf = MF / lag(MF) - 1, g_dmc = DMC / lag(DMC) - 1, g_gdp = GDP / lag(GDP) - 1,
+         MF_lag = lag(MF), DMC_lag = lag(DMC),
          d_gap = (gap_rel - lag(gap_rel)) * 100,
          d_lratio = (log(MF / lag(MF)) - log(DMC / lag(DMC))) * 100,
          tapio = source_tapio(g_mf, g_gdp),
@@ -204,5 +205,12 @@ glob_diag <- bind_rows(
              label = "Δgap_rel, winsorised; Tapio classified on DMC (placebo)"))
 print(glob_diag, width = 250)
 write_csv(glob_diag, file.path(TABS, "global_m2_diagnostic.csv"))
+
+# Panel de la regresión global, para las descomposiciones de 13_revision_r3_round2.R
+# (ronda 2: contrafáctico mecánico y descomposición exacta en log del contraste global).
+greg %>%
+  select(iso3, year, tapio, tapio_dmc, pos_gap, pos_rtb_early, MF, DMC, MF_lag, DMC_lag,
+         d_gap, d_lratio) %>%
+  write_csv(file.path(PROC, "global_reg_panel.csv"))
 
 cat("\n07_decomposition_global.R completado.\n")
